@@ -7,6 +7,14 @@ import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
+import UserInput from './screens/UserInput';
+import UserInputGoals from './screens/UserInputGoals';
+import WeightInputScreen from './screens/WeightInputScreen';
+import AgeInputScreen from './screens/AgeInputScreen';
+import HeightInputScreen from './screens/HeightInputScreen';
+import GoalInputScreen from './screens/GoalInputScreen';
+import MealPlanInputScreen from './screens/MealPlanInputScreen';
+
 const Stack = createStackNavigator();
 
 export default function App(props) {
@@ -21,6 +29,13 @@ export default function App(props) {
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
+            <Stack.Screen name="UserInput" component={UserInput} />
+            <Stack.Screen name="UserInputGoals" component={UserInputGoals} />
+            <Stack.Screen name="WeightInputScreen" component={WeightInputScreen} />
+            <Stack.Screen name="AgeInputScreen" component={AgeInputScreen} />
+            <Stack.Screen name="HeightInputScreen" component={HeightInputScreen} />
+            <Stack.Screen name="GoalInputScreen" component={GoalInputScreen} />
+            <Stack.Screen name="MealPlanInputScreen" component={MealPlanInputScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
