@@ -24,41 +24,17 @@ class GoalInputScreen extends React.Component {
 	render() {
 		return(
 			<View>
-			<Text>Goal Input Screen</Text>
-			<form onSubmit = {this.handleSubmit}>
-				<label>
-					Weight Gain:
-					<input
-						type="radio"
-						id="goal"
-						name="goal"
-						value="Weight Gain"
-						onChange={this.handleChange}
-					/>
-				</label>
-				<label>
-					Weight Loss:
-					<input
-						type="radio"
-						id="goal"
-						name="goal"
-						value="Weight Loss"
-						onChange={this.handleChange}
-					/>
-				</label>
-				<label>
-					Maintain Weight:
-					<input
-						type="radio"
-						id="goal"
-						name="goal"
-						value="Maintain Weight"
-						onChange={this.handleChange}
-					/>
-				</label>
-				<input type="submit" value="Submit"/>
-			</form>
-		</View>
+				<Text>Goal Input Screen</Text>
+				<Button
+					title="Weight Gain"
+				/>
+				<Button
+					title="Weight Loss"
+				/>
+				<Button
+					title="Maintain Weight"
+				/>
+			</View>
 		);
 	}
 }

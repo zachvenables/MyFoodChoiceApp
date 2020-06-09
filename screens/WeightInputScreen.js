@@ -1,9 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Fragment, TextInput, Button, Text, View } from 'react-native';
 
-//import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-
+//import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 class WeightInputScreen extends React.Component {
 	constructor(props) {
@@ -20,24 +19,21 @@ class WeightInputScreen extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		alert('submission is: ' + this.state.value);
+		alert('Button Pressed');
 	}
 
 	render() {
 		return(
-			<View>
-			<Text>Weight Input Screen</Text>
-			<form onSubmit = {this.handleSubmit}>
-				<label>
-					Weight:
-					<input
-						type="number"
-						value={this.state.value}
-						onChange={this.handleChange}
-					/>
-				</label>
-				<input type="submit" value="Submit"/>
-			</form>
+		<View>
+			<Text>Input Weight</Text>
+			<TextInput
+				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+				keyboardType="numeric"
+			/>
+			<Button
+				title="enter"
+				onPress={ this.handleSubmit }
+			/>
 		</View>
 		);
 	}

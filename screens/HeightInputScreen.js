@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Fragment, TextInput, Button, Text, View } from 'react-native';
 
 
 class HeightInputScreen extends React.Component {
@@ -24,19 +24,16 @@ class HeightInputScreen extends React.Component {
 	render() {
 		return(
 			<View>
-			<Text>Height Input Screen</Text>
-			<form onSubmit = {this.handleSubmit}>
-				<label>
-					Height:
-					<input
-						type="number"
-						value={this.state.value}
-						onChange={this.handleChange}
-					/>
-				</label>
-				<input type="submit" value="Submit"/>
-			</form>
-		</View>
+				<Text>Input Weight</Text>
+				<TextInput
+					style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+					keyboardType="numeric"
+				/>
+				<Button
+					title="enter"
+					onPress={ this.handleSubmit }
+				/>
+			</View>
 		);
 	}
 }

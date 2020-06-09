@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 
 
-class MealPlanInputScreen extends React.Component {
+class RestrictionInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
 		this.state = {value: ''};
@@ -24,28 +24,37 @@ class MealPlanInputScreen extends React.Component {
 	render() {
 		return(
 			<View>
-				<Text>Select Your Meal Plan</Text>
+				<Text>Select Dietary Restrictions:</Text>
 				<Button
-					title="Gray10"
+					title="Gluten"
 				/>
 				<Button
-					title="Scarlet14"
+					title="ShellFish"
 				/>
 				<Button
-					title="Unlimited"
+					title="Eggs"
 				/>
 				<Button
-					title="DecliningBalance"
+					title="Fish"
 				/>
 				<Button
-					title="Carmen1"
+					title="Peanuts"
 				/>
 				<Button
-					title="Carmen2"
+					title="Soy"
+				/>
+				<Button
+					title="TreeNuts"
+				/>
+				<Button
+					title="Vegetarian"
+				/>
+				<Button
+					title="Vegan"
 				/>
 			</View>
 		);
 	}
 }
 
-export default MealPlanInputScreen;
+export default RestrictionInputScreen;

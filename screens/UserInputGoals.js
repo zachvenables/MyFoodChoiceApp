@@ -28,7 +28,7 @@ export default function UserInputScreen( { navigation } ){
 				title='Meal Plan'
 			/>
 			<Button
-				//onPress={() => navigation.navigate('RestrictionsInputScreen')}
+				onPress={() => navigation.navigate('RestrictionInputScreen')}
 				title='Restrictions'
 			/>
 		</View>
