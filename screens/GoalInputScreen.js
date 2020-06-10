@@ -6,19 +6,30 @@ import { Button, Text, View } from 'react-native';
 class GoalInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
-		this.state = {value: ''};
+		this.value;
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleWeightGain = this.handleWeightGain.bind(this);
+		this.handleWeightLoss = this.handleWeightLoss.bind(this);
+		this.handleWeightMaintain = this.handleWeightMaintain.bind(this);
 	}
 
-	handleChange(event) {
-		this.setState({value: event.target.value});
-	}
-
-	handleSubmit(event) {
+	handleWeightGain(event) {
 		event.preventDefault();
-		alert('submission is: ' + this.state.value);
+		this.value = "Weight Gain";
+		alert("Button pressed is Weight Gain");
+
+	}
+
+	handleWeightLoss(event) {
+		event.preventDefault();
+		this.value = "Weight Loss";
+		alert("Button pressed is Weight Loss");
+	}
+
+	handleWeightMaintain(event) {
+		event.preventDefault();
+		this.value = "Weight Maintain";
+		alert("Button pressed is Weight Maintain");
 	}
 
 	render() {
@@ -27,12 +38,16 @@ class GoalInputScreen extends React.Component {
 				<Text>Goal Input Screen</Text>
 				<Button
 					title="Weight Gain"
+					onPress = { this.handleWeightGain }
+
 				/>
 				<Button
 					title="Weight Loss"
+					onPress = { this.handleWeightLoss }
 				/>
 				<Button
 					title="Maintain Weight"
+					onPress = { this.handleWeightMaintain }
 				/>
 			</View>
 		);
