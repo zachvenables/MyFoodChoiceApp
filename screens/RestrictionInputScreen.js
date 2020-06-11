@@ -23,44 +23,71 @@ class RestrictionInputScreen extends React.Component {
 		this.state = new RestrictionTracker();
 
 		this.handlePress = this.handlePress.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
 	}
 
 
 	handlePress(restriction) {
-		//event.preventDefault();
-
 		switch(restriction){
 			case "Gluten":
-				
+				this.Gluten = !this.Gluten
 				break;
 			case "ShellFish":
-				
+				this.ShellFish = !this.ShellFish
 				break;
 			case "Eggs":
-				
+				this.Eggs = !this.Eggs
 				break;
 			case "Fish":
-				
+				this.Peanuts = !this.Peanuts
 				break;
 			case "Peanuts":
-				
+				this.Peanuts = !this.Peanuts
 				break;
 			case "Soy":
-				
+				this.Soy = !this.Soy
 				break;
 			case "TreeNuts":
-				
+				this.TreeNuts = !this.TreeNuts
 				break;
 			case "Vegetarian":
-				
+				this.Vegetarian = !this.Vegetarian
 				break;
 			case "Vegan":
-				
+				this.Vegan = !this.Vegan
 				break;
+			default:
+				alert("Something didn't work right");
 		}
 
 		alert('Added restriction: ' + restriction);
+	}
+
+	handleSubmit(event){
+		event.preventDefault();
+		var message = ""
+
+		message += "Gluten: ";
+		if(this.Gluten){message += "Selected"}
+		message += "\nShellFish: ";
+		if(this.ShellFish){message += "Selected"}
+		message += "\nEggs: ";
+		if(this.Eggs){message += "Selected"}
+		message += "\nFish: ";
+		if(this.Fish){message += "Selected"}
+		message += "\nPeanuts: ";
+		if(this.Peanuts){message += "Selected"}
+		message += "\nSoy: ";
+		if(this.Soy){message += "Selected"}
+		message += "\nTreeNuts: ";
+		if(this.TreeNuts){message += "Selected"}
+		message += "\nVegetarian: ";
+		if(this.Vegetarian){message += "Selected"}
+		message += "\nVegan: ";
+		if(this.Vegan){message += "Selected"}
+
+		alert(message);
 	}
 
 	render() {
@@ -105,6 +132,7 @@ class RestrictionInputScreen extends React.Component {
 				/>
 				<Button 
 					title="Submit"
+					onPress = { this.handleSubmit }
 				/>
 			</View>
 		);

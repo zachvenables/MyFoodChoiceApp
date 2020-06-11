@@ -15,7 +15,7 @@ class WeightInputScreen extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleChange= (text) => {
+	handleChange = (text) => {
 		this.value = text;
 	}
 
