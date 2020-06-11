@@ -2,6 +2,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Button, Text, View, TouchableHighlight } from 'react-native';
 
+//Class used to track which restriction selections have been made
+//-Venables
 class RestrictionTracker {
 	constructor(props){
 		this.Gluten = false;
@@ -16,7 +18,8 @@ class RestrictionTracker {
 	}
 }
 
-
+//Class for all restriction input functionality
+//-Venables
 class RestrictionInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
@@ -27,7 +30,8 @@ class RestrictionInputScreen extends React.Component {
 
 	}
 
-
+	//Uses different cases based on button type
+	//-Venables
 	handlePress(restriction) {
 		switch(restriction){
 			case "Gluten":
@@ -64,6 +68,9 @@ class RestrictionInputScreen extends React.Component {
 		alert('Added restriction: ' + restriction);
 	}
 
+	//Logs the selections that have been made and then outputs them to the screen
+	//Primarily for testing
+	//-Venables
 	handleSubmit(event){
 		event.preventDefault();
 		var message = ""

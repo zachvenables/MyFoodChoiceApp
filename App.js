@@ -7,6 +7,8 @@ import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
+//Screens for entire app
+//-Venables
 import UserInput from './screens/UserInput';
 import UserInputGoals from './screens/UserInputGoals';
 import WeightInputScreen from './screens/WeightInputScreen';
@@ -18,6 +20,9 @@ import RestrictionInputScreen from './screens/RestrictionInputScreen';
 
 const Stack = createStackNavigator();
 
+
+//Creates Navigator and navigates to home screen.  All navigation afterwards is dependent on current screen.
+//-Venables
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
 

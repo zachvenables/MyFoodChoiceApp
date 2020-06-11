@@ -15,10 +15,14 @@ class WeightInputScreen extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	//Used when the text in the box is changed.  Updates to reflect value in the box
+	//-Venables
 	handleChange = (text) => {
 		this.value = text;
 	}
 
+	//When the enter button is pressed, alerts the value to the screen
+	//-Venables
 	handleSubmit(event) {
 		event.preventDefault();
 		//var val = value

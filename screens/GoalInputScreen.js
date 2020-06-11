@@ -2,7 +2,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 
-
+//Deals with the goal inputs from the user
+//-Venables
 class GoalInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
@@ -13,19 +14,22 @@ class GoalInputScreen extends React.Component {
 		this.handleWeightMaintain = this.handleWeightMaintain.bind(this);
 	}
 
+	//when the weight gain selection is made
+	//-Venables
 	handleWeightGain(event) {
 		event.preventDefault();
 		this.value = "Weight Gain";
 		alert("Button pressed is Weight Gain");
-
 	}
 
+	//-Venables
 	handleWeightLoss(event) {
 		event.preventDefault();
 		this.value = "Weight Loss";
 		alert("Button pressed is Weight Loss");
 	}
 
+	//-Venables
 	handleWeightMaintain(event) {
 		event.preventDefault();
 		this.value = "Weight Maintain";

@@ -2,7 +2,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Fragment, TextInput, Button, Text, View } from 'react-native';
 
-
+//Class for taking heigh input
+//-Venables
 class HeightInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
@@ -13,10 +14,14 @@ class HeightInputScreen extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	//When text is changed, updates the value for the class.
+	//-Venables
 	handleChange= (text) => {
 		this.value = text
 	}
 
+	//handles the button press for entering the data, alerts the user of the value
+	//-Venables
 	handleSubmit(event) {
 		event.preventDefault();
 		//var val = value

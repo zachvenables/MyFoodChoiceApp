@@ -2,7 +2,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Fragment, TextInput, Button, Text, View } from 'react-native';
 
-
+//handles screen for user age input
+//-Venables
 class AgeInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
@@ -13,10 +14,14 @@ class AgeInputScreen extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	//When the text bos value changes, updates the class value
+	//-Venables
 	handleChange = (text) => {
 		this.value = text
 	}
 
+	//handles button press, alerts the user. primarily for testing
+	//-Venables
 	handleSubmit(event) {
 		event.preventDefault();
 		//var val = value

@@ -2,7 +2,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 
-
+//navigates to each respective input screen
+//-Venables
 export default function UserInputScreen( { navigation } ){
 	return(
 		<View>
