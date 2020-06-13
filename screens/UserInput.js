@@ -4,7 +4,7 @@ import { Button, Text, View } from 'react-native';
 
 
 class RestrictionTracker {
-	constructor(props){
+	constructor(){
 		this.Gluten = false;
 		this.ShellFish = false;
 		this.Eggs = false;
@@ -14,6 +14,16 @@ class RestrictionTracker {
 		this.TreeNuts = false;
 		this.Vegetarian = false;
 		this.Vegan = false;
+	}
+}
+
+class MealPlan {
+	constructor(){
+		this.type = 'none'
+		this.WeeklyTraditionalVisits = 0;
+		this.TraditionalVisitExchange = false;
+		this.DiningDollars = 0.0;
+		this.BuckIDCash = 0.0;
 	}
 }
 
@@ -31,14 +41,14 @@ export default function UserInputScreen( { route, navigation } ){
 					height: 0,
 					age: 0,
 					goals: "none",
-					mealPlan: "none",
-					restrictions: "none",
+					mealPlan: new MealPlan(),
+					restrictions: new RestrictionTraker(),
 				  })}
 				title='yes'
 			/>
 
 			<Button
-				onPress={ () => navigation.navigate('UserInputNoGoals', {mealPlan: "none", restrictions: new RestrictionTracker()})}
+				onPress={ () => navigation.navigate('UserInputNoGoals', {mealPlan: new MealPlan(), restrictions: new RestrictionTracker()})}
 				title='no'
 			/>
 		</View>

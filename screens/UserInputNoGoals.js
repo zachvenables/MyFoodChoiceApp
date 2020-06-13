@@ -7,7 +7,11 @@ import { Button, Text, View } from 'react-native';
 export default function UserInputNoGoals( {route, navigation } ){
 	var {mealPlan, restrictions} = route.params;
 	alert(
-		'mealPlan: ' + mealPlan + '\n'
+		'mealPlan: ' + mealPlan.type + '\n'
+		+ 'TradVisits: ' + mealPlan.WeeklyTraditionalVisits + '\n'
+		+ 'TradVisitExch: ' + mealPlan.TraditionalVisitExchange + '\n'
+		+ 'DiningDollars: ' + mealPlan.DiningDollars + '\n'
+		+ 'BuckIDCash: ' + mealPlan.BuckIDCash + '\n'
 		+ 'gluten: ' + restrictions.Gluten + '\n'
 		+ 'shellfish: ' + restrictions.ShellFish + '\n'
 		+ 'eggs: ' + restrictions.Eggs + '\n'
