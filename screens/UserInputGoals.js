@@ -4,7 +4,17 @@ import { Button, Text, View } from 'react-native';
 
 //navigates to each respective input screen
 //-Venables
-export default function UserInputScreen( { navigation } ){
+export default function UserInputScreen( {route, navigation } ){
+	var {weight, age, height, goals, mealPlan, restrictions} = route.params;
+	alert(
+		'weight: ' + weight + '\n'
+		+ 'age: ' + age + '\n'
+		+ 'height: ' + height + '\n'
+		+ 'goals: ' + goals + '\n'
+		+ 'mealPlan: ' + mealPlan + '\n'
+		+ 'restrictions: ' + restrictions + '\n'
+	);
+	
 	return(
 		<View>
 			<Text>Please enter the following information about yourself:</Text>

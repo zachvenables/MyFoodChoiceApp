@@ -34,6 +34,7 @@ class AgeInputScreen extends React.Component {
 	}
 
 	render() {
+		alert('new' + this.props.route.params);
 		return(
 			<View>
 				<Text>Input Age</Text>

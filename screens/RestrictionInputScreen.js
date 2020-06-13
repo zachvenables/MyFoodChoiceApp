@@ -35,31 +35,31 @@ class RestrictionInputScreen extends React.Component {
 	handlePress(restriction) {
 		switch(restriction){
 			case "Gluten":
-				this.Gluten = !this.Gluten
+				this.state.Gluten = !this.state.Gluten
 				break;
 			case "ShellFish":
-				this.ShellFish = !this.ShellFish
+				this.state.ShellFish = !this.state.ShellFish
 				break;
 			case "Eggs":
-				this.Eggs = !this.Eggs
+				this.state.Eggs = !this.state.Eggs
 				break;
 			case "Fish":
-				this.Peanuts = !this.Peanuts
+				this.state.Peanuts = !this.state.Peanuts
 				break;
 			case "Peanuts":
-				this.Peanuts = !this.Peanuts
+				this.state.Peanuts = !this.state.Peanuts
 				break;
 			case "Soy":
-				this.Soy = !this.Soy
+				this.state.Soy = !this.state.Soy
 				break;
 			case "TreeNuts":
-				this.TreeNuts = !this.TreeNuts
+				this.state.TreeNuts = !this.state.TreeNuts
 				break;
 			case "Vegetarian":
-				this.Vegetarian = !this.Vegetarian
+				this.state.Vegetarian = !this.state.Vegetarian
 				break;
 			case "Vegan":
-				this.Vegan = !this.Vegan
+				this.state.Vegan = !this.state.Vegan
 				break;
 			default:
 				alert("Something didn't work right");
@@ -98,6 +98,8 @@ class RestrictionInputScreen extends React.Component {
 	}
 
 	render() {
+		var {mealPlan, restrictions} = this.props.route.params;
+
 		return(
 			<View>
 				<Text>Select Dietary Restrictions:</Text>
@@ -139,7 +141,7 @@ class RestrictionInputScreen extends React.Component {
 				/>
 				<Button 
 					title="Submit"
-					onPress = { this.handleSubmit }
+					onPress = { e=> { e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', { mealPlan,  restrictions: this.state}) }}
 				/>
 			</View>
 		);

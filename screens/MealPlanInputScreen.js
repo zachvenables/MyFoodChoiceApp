@@ -22,12 +22,13 @@ class MealPlanInputScreen extends React.Component {
 	//Place holder for later functionality.
 	//-Venables
 	handlePress(plan) {
-		//event.preventDefault();
 		this.value = plan;
 		alert('submission is: ' + plan);
 	}
 
 	render() {
+		var {mealPlan, restrictions} = this.props.route.params;
+
 		return(
 			<View>
 				<Text>Select Your Meal Plan</Text>
@@ -53,7 +54,11 @@ class MealPlanInputScreen extends React.Component {
 				/>
 				<Button
 					title="Carmen2"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen2")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen2") } }
+				/>
+				<Button
+					title="Done"
+					onPress = { e=> {e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', {mealPlan: this.value, restrictions}) }}
 				/>
 			</View>
 		);

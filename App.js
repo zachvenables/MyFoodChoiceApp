@@ -17,6 +17,7 @@ import HeightInputScreen from './screens/HeightInputScreen';
 import GoalInputScreen from './screens/GoalInputScreen';
 import MealPlanInputScreen from './screens/MealPlanInputScreen';
 import RestrictionInputScreen from './screens/RestrictionInputScreen';
+import UserInputNoGoals from './screens/UserInputNoGoals';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const Stack = createStackNavigator();
 //-Venables
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
+  
 
   if (!isLoadingComplete) {
     return null;
@@ -43,6 +45,7 @@ export default function App(props) {
             <Stack.Screen name="GoalInputScreen" component={GoalInputScreen} />
             <Stack.Screen name="MealPlanInputScreen" component={MealPlanInputScreen} />
             <Stack.Screen name="RestrictionInputScreen" component={RestrictionInputScreen} />
+            <Stack.Screen name="UserInputNoGoals" component={UserInputNoGoals} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
