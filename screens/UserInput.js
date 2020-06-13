@@ -2,7 +2,8 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 
-
+//class for storing restriction info
+//-Venables
 class RestrictionTracker {
 	constructor(){
 		this.Gluten = false;
@@ -17,14 +18,29 @@ class RestrictionTracker {
 	}
 }
 
+//class for storing meal plan info
+//-Venables
 class MealPlan {
+	//builds a default mealplan that has placeholder values
 	constructor(){
 		this.type = 'none'
-		this.WeeklyTraditionalVisits = 0;
+		this.WeeklyTraditionalVisits = -1;
 		this.TraditionalVisitExchange = false;
-		this.DiningDollars = 0.0;
-		this.BuckIDCash = 0.0;
+		this.DiningDollars = -1.0;
+		this.BuckIDCash = -1.0;
 	}
+}
+
+class User{
+	constructor(){
+		this.weight = 0;
+		this.height = 0;
+		this.age = 0;
+		this.goals = 'none';
+		this.mealPlan = new MealPlan();
+		this.restrictions = new RestrictionTracker();
+	}
+	
 }
 
 
@@ -36,19 +52,12 @@ export default function UserInputScreen( { route, navigation } ){
 		<View>
 			<Text>Would you like to meet weight management Goals?</Text>
 			<Button
-				onPress={() => navigation.navigate('UserInputGoals', {
-					weight: 0,
-					height: 0,
-					age: 0,
-					goals: "none",
-					mealPlan: new MealPlan(),
-					restrictions: new RestrictionTraker(),
-				  })}
+				onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
 				title='yes'
 			/>
 
 			<Button
-				onPress={ () => navigation.navigate('UserInputNoGoals', {mealPlan: new MealPlan(), restrictions: new RestrictionTracker()})}
+				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
 				title='no'
 			/>
 		</View>

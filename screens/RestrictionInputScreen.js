@@ -23,47 +23,49 @@ class RestrictionTracker {
 class RestrictionInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
-		this.state = new RestrictionTracker();
+		this.value;
 
 		this.handlePress = this.handlePress.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		//this.handleSubmit = this.handleSubmit.bind(this);
 
 	}
 
-	//Uses different cases based on button type
+	//Uses different cases based on button type, has toggle properties
 	//-Venables
-	handlePress(restriction) {
+	handlePress(restriction, user) {
 		switch(restriction){
 			case "Gluten":
-				this.state.Gluten = !this.state.Gluten
+				user.restrictions.Gluten = !user.restrictions.Gluten
 				break;
 			case "ShellFish":
-				this.state.ShellFish = !this.state.ShellFish
+				user.restrictions.ShellFish = !user.restrictions.ShellFish
 				break;
 			case "Eggs":
-				this.state.Eggs = !this.state.Eggs
+				user.restrictions.Eggs = !user.restrictions.Eggs
 				break;
 			case "Fish":
-				this.state.Peanuts = !this.state.Peanuts
+				user.restrictions.Peanuts = !user.restrictions.Peanuts
 				break;
 			case "Peanuts":
-				this.state.Peanuts = !this.state.Peanuts
+				user.restrictions.Peanuts = !user.restrictions.Peanuts
 				break;
 			case "Soy":
-				this.state.Soy = !this.state.Soy
+				user.restrictions.Soy = !user.restrictions.Soy
 				break;
 			case "TreeNuts":
-				this.state.TreeNuts = !this.state.TreeNuts
+				user.restrictions.TreeNuts = !user.restrictions.TreeNuts
 				break;
 			case "Vegetarian":
-				this.state.Vegetarian = !this.state.Vegetarian
+				user.restrictions.Vegetarian = !user.restrictions.Vegetarian
 				break;
 			case "Vegan":
-				this.state.Vegan = !this.state.Vegan
+				user.restrictions.Vegan = !user.restrictions.Vegan
 				break;
 			default:
 				alert("Something didn't work right");
 		}
+		
+		this.value = user;
 
 		alert('Added restriction: ' + restriction);
 	}
@@ -71,6 +73,7 @@ class RestrictionInputScreen extends React.Component {
 	//Logs the selections that have been made and then outputs them to the screen
 	//Primarily for testing
 	//-Venables
+	/*
 	handleSubmit(event){
 		event.preventDefault();
 		var message = ""
@@ -95,53 +98,53 @@ class RestrictionInputScreen extends React.Component {
 		if(this.Vegan){message += "Selected"}
 
 		alert(message);
-	}
+	}*/
 
 	render() {
-		var {mealPlan, restrictions} = this.props.route.params;
-
+		var { user } = this.props.route.params;
+		
 		return(
 			<View>
 				<Text>Select Dietary Restrictions:</Text>
 				<Button
 					title="Gluten"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Gluten")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Gluten", user)} }
 				/>
 				<Button
 					title="ShellFish"
-					onPress = {e=> { e.preventDefault(); this.handlePress("ShellFish")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("ShellFish", user)} }
 				/>
 				<Button
 					title="Eggs"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Eggs")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Eggs", user)} }
 				/>
 				<Button
 					title="Fish"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Fish")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Fish", user)} }
 				/>
 				<Button
 					title="Peanuts"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Peanuts")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Peanuts", user)} }
 				/>
 				<Button
 					title="Soy"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Soy")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Soy", user)} }
 				/>
 				<Button
 					title="TreeNuts"
-					onPress = {e=> { e.preventDefault(); this.handlePress("TreeNuts")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("TreeNuts", user)} }
 				/>
 				<Button
 					title="Vegetarian"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Vegetarian")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Vegetarian", user)} }
 				/>
 				<Button
 					title="Vegan"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan")} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan", user)} }
 				/>
 				<Button 
 					title="Submit"
-					onPress = { e=> { e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', { mealPlan,  restrictions: this.state}) }}
+					onPress = { e=> { e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', {user: this.value}) }}
 				/>
 			</View>
 		);

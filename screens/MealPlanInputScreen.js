@@ -7,6 +7,7 @@ import { Button, Text, View } from 'react-native';
 class MealPlanInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
+		this.mealPlan;
 		this.value;
 
 		this.handleChange = this.handleChange.bind(this);
@@ -18,88 +19,87 @@ class MealPlanInputScreen extends React.Component {
 		this.setState({value: event.target.value});
 	}
 
-	//Default event is handled in the xml.  Alerts user based on which selection is made. 
-	//Place holder for later functionality.
+	//fills appropraite meal plan info for each class
 	//-Venables
-	handlePress(newPlan, mealPlan) {
-		mealPlan.type = newPlan;
+	handlePress(newPlan, user) {
+		user.mealPlan.type = newPlan;
 		switch(newPlan){
 			case "Gray10":
-				mealPlan.WeeklyTraditionalVisits = 10;
-				mealPlan.TraditionalVisitExchange = true;
-				mealPlan.DiningDollars = 200.0;
-				mealPlan.BuckIDCash = 150.0;
+				user.mealPlan.WeeklyTraditionalVisits = 10;
+				user.mealPlan.TraditionalVisitExchange = true;
+				user.mealPlan.DiningDollars = 200.0;
+				user.mealPlan.BuckIDCash = 150.0;
 				break;
 			case "Scarlet14":
-				mealPlan.WeeklyTraditionalVisits = 14;
-				mealPlan.TraditionalVisitExchange = true;
-				mealPlan.DiningDollars = 200.0;
-				mealPlan.BuckIDCash = 150.0;
+				user.mealPlan.WeeklyTraditionalVisits = 14;
+				user.mealPlan.TraditionalVisitExchange = true;
+				user.mealPlan.DiningDollars = 200.0;
+				user.mealPlan.BuckIDCash = 150.0;
 				break;
 			case "Unlimited":
-				mealPlan.WeeklyTraditionalVisits = 999;
-				mealPlan.TraditionalVisitExchange = false;
-				mealPlan.DiningDollars = 100.0;
-				mealPlan.BuckIDCash = 0.0;
+				user.mealPlan.WeeklyTraditionalVisits = 999;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 100.0;
+				user.mealPlan.BuckIDCash = 0.0;
 				break;
 			case "DecliningBalance":
-				mealPlan.WeeklyTraditionalVisits = 0;
-				mealPlan.TraditionalVisitExchange = false;
-				mealPlan.DiningDollars = 1399.0;
-				mealPlan.BuckIDCash = 0.0;
+				user.mealPlan.WeeklyTraditionalVisits = 0;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 1399.0;
+				user.mealPlan.BuckIDCash = 0.0;
 				break;
 			case "Carmen1":
-				mealPlan.WeeklyTraditionalVisits = 0;
-				mealPlan.TraditionalVisitExchange = false;
-				mealPlan.DiningDollars = 284.0;
-				mealPlan.BuckIDCash = 0.0;
+				user.mealPlan.WeeklyTraditionalVisits = 0;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 284.0;
+				user.mealPlan.BuckIDCash = 0.0;
 				break;
 			case "Carmen2":
-				mealPlan.WeeklyTraditionalVisits = 0;
-				mealPlan.TraditionalVisitExchange = false;
-				mealPlan.DiningDollars = 0.0;
-				mealPlan.BuckIDCash = 150.0;
+				user.mealPlan.WeeklyTraditionalVisits = 0;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 0.0;
+				user.mealPlan.BuckIDCash = 150.0;
 				break;
 			default:
 				alert("Something didn't work right");
 		}
-
-		this.value = mealPlan;
+		
+		this.value = user;
 	}
 
 	render() {
-		var {mealPlan, restrictions} = this.props.route.params;
-
+		var { user } = this.props.route.params;
+	
 		return(
 			<View>
 				<Text>Select Your Meal Plan</Text>
 				<Button
 					title="Gray10"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Gray10", mealPlan)} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Gray10", user)} }
 				/>
 				<Button
 					title="Scarlet14"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Scarlet14", mealPlan)} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Scarlet14", user)} }
 				/>
 				<Button
 					title="Unlimited"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Unlimited", mealPlan)} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Unlimited", user)} }
 				/>
 				<Button
 					title="DecliningBalance"
-					onPress = {e=> { e.preventDefault(); this.handlePress("DecliningBalance", mealPlan)} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("DecliningBalance", user)} }
 				/>
 				<Button
 					title="Carmen1"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen1", mealPlan)} }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen1", user)} }
 				/>
 				<Button
 					title="Carmen2"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen2", mealPlan) } }
+					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen2", user) } }
 				/>
 				<Button
 					title="Done"
-					onPress = { e=> {e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', {mealPlan: this.value, restrictions}) }}
+					onPress = { e=> {e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', {user: this.value}) }}
 				/>
 			</View>
 		);
