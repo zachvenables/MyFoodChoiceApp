@@ -21,6 +21,10 @@ export default function UserInputNoGoals( {route, navigation } ){
 		+ 'treenuts: ' + user.restrictions.TreeNuts + '\n'
 		+ 'vegetarian: ' + user.restrictions.Vegetarian + '\n'
 		+ 'vegan: ' + user.restrictions.Vegan + '\n'
+		+ 'age: ' + user.age + '\n'
+		+ 'weight: ' + user.weight + '\n'
+		+ 'height: ' + user.height + '\n'
+		+ 'goals: ' + user.goals + '\n'
 	);
 	
 	return(

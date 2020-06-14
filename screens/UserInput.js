@@ -31,6 +31,8 @@ class MealPlan {
 	}
 }
 
+//User class structure
+//-Venables
 class User{
 	constructor(){
 		this.weight = 0;

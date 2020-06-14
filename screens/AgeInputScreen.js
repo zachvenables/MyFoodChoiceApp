@@ -7,7 +7,7 @@ import { Fragment, TextInput, Button, Text, View } from 'react-native';
 class AgeInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
-		//this.state = {value: ''};
+		this.state;
 		this.value;
 
 		this.handleChange = this.handleChange.bind(this);
@@ -22,19 +22,24 @@ class AgeInputScreen extends React.Component {
 
 	//handles button press, alerts the user. primarily for testing
 	//-Venables
-	handleSubmit(event) {
-		event.preventDefault();
-		//var val = value
+	handleSubmit(user) {
+		
+		
 		if(isNaN(this.value)){
 			alert('Please only enter whole numeric values.');
 		}
 		else{
-			alert('Button Pressed ' + this.value);
+			user.age = this.value;
+			this.state = user;
+			this.props.navigation.navigate('UserInputGoals', { user: this.state });
 		}
 	}
 
+
+
 	render() {
-		alert('new' + this.props.route.params);
+		var { user } = this.props.route.params;
+
 		return(
 			<View>
 				<Text>Input Age</Text>
@@ -45,7 +50,7 @@ class AgeInputScreen extends React.Component {
 				/>
 				<Button
 					title="enter"
-					onPress={ this.handleSubmit }
+					onPress={e => {e.preventDefault(), this.handleSubmit(user)}}
 				/>
 			</View>
 		);

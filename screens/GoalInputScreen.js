@@ -8,50 +8,34 @@ class GoalInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
 		this.value;
+		this.handlePress = this.handlePress.bind(this);
 
-		this.handleWeightGain = this.handleWeightGain.bind(this);
-		this.handleWeightLoss = this.handleWeightLoss.bind(this);
-		this.handleWeightMaintain = this.handleWeightMaintain.bind(this);
-	}
-
-	//when the weight gain selection is made
-	//-Venables
-	handleWeightGain(event) {
-		event.preventDefault();
-		this.value = "Weight Gain";
-		alert("Button pressed is Weight Gain");
 	}
 
 	//-Venables
-	handleWeightLoss(event) {
-		event.preventDefault();
-		this.value = "Weight Loss";
-		alert("Button pressed is Weight Loss");
-	}
-
-	//-Venables
-	handleWeightMaintain(event) {
-		event.preventDefault();
-		this.value = "Weight Maintain";
-		alert("Button pressed is Weight Maintain");
+	handlePress(goalType, user){
+		this.value.goals = goalType;
+		this.props.navigation.navigate('UserInputGoals', { user: this.value });
 	}
 
 	render() {
+		var { user } = this.props.route.params;
+		this.value = user;
+
 		return(
 			<View>
 				<Text>Goal Input Screen</Text>
 				<Button
 					title="Weight Gain"
-					onPress = { this.handleWeightGain }
-
+					onPress = {e =>{e.preventDefault(), this.handlePress('Gain', { user })}}
 				/>
 				<Button
 					title="Weight Loss"
-					onPress = { this.handleWeightLoss }
+					onPress = {e =>{e.preventDefault(), this.handlePress('Loss', { user })}}
 				/>
 				<Button
 					title="Maintain Weight"
-					onPress = { this.handleWeightMaintain }
+					onPress = {e =>{e.preventDefault(), this.handlePress('Maintain', { user })}}
 				/>
 			</View>
 		);

@@ -7,7 +7,7 @@ import { Fragment, TextInput, Button, Text, View } from 'react-native';
 class HeightInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
-		//this.state = {value: ''};
+		this.state;
 		this.value;
 
 		this.handleChange = this.handleChange.bind(this);
@@ -22,18 +22,21 @@ class HeightInputScreen extends React.Component {
 
 	//handles the button press for entering the data, alerts the user of the value
 	//-Venables
-	handleSubmit(event) {
-		event.preventDefault();
-		//var val = value
+	handleSubmit(user) {
+		
 		if(isNaN(this.value)){
 			alert('Please only enter whole numeric values.');
 		}
 		else{
-			alert('Button Pressed ' + this.value);
+			user.height = this.value;
+			this.state = user;
+			this.props.navigation.navigate('UserInputGoals', { user: this.state });
 		}
 	}
 
 	render() {
+		var { user } = this.props.route.params;
+		
 		return(
 			<View>
 				<Text>Input Height</Text>
@@ -44,7 +47,7 @@ class HeightInputScreen extends React.Component {
 				/>
 				<Button
 					title="enter"
-					onPress={ this.handleSubmit }
+					onPress={e => {e.preventDefault(), this.handleSubmit(user)}}
 				/>
 			</View>
 		);

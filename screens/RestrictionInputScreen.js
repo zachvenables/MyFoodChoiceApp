@@ -26,7 +26,7 @@ class RestrictionInputScreen extends React.Component {
 		this.value;
 
 		this.handlePress = this.handlePress.bind(this);
-		//this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
 	}
 
@@ -44,7 +44,7 @@ class RestrictionInputScreen extends React.Component {
 				user.restrictions.Eggs = !user.restrictions.Eggs
 				break;
 			case "Fish":
-				user.restrictions.Peanuts = !user.restrictions.Peanuts
+				user.restrictions.Fish = !user.restrictions.Fish
 				break;
 			case "Peanuts":
 				user.restrictions.Peanuts = !user.restrictions.Peanuts
@@ -73,32 +73,16 @@ class RestrictionInputScreen extends React.Component {
 	//Logs the selections that have been made and then outputs them to the screen
 	//Primarily for testing
 	//-Venables
-	/*
-	handleSubmit(event){
-		event.preventDefault();
-		var message = ""
-
-		message += "Gluten: ";
-		if(this.Gluten){message += "Selected"}
-		message += "\nShellFish: ";
-		if(this.ShellFish){message += "Selected"}
-		message += "\nEggs: ";
-		if(this.Eggs){message += "Selected"}
-		message += "\nFish: ";
-		if(this.Fish){message += "Selected"}
-		message += "\nPeanuts: ";
-		if(this.Peanuts){message += "Selected"}
-		message += "\nSoy: ";
-		if(this.Soy){message += "Selected"}
-		message += "\nTreeNuts: ";
-		if(this.TreeNuts){message += "Selected"}
-		message += "\nVegetarian: ";
-		if(this.Vegetarian){message += "Selected"}
-		message += "\nVegan: ";
-		if(this.Vegan){message += "Selected"}
-
-		alert(message);
-	}*/
+	
+	handleSubmit(user){
+	
+		if(user.goals == 'none'){
+			this.props.navigation.navigate('UserInputNoGoals', { user: this.value });
+		}else{
+			this.props.navigation.navigate('UserInputGoals', { user: this.value });
+		}
+		
+	}
 
 	render() {
 		var { user } = this.props.route.params;
@@ -144,7 +128,7 @@ class RestrictionInputScreen extends React.Component {
 				/>
 				<Button 
 					title="Submit"
-					onPress = { e=> { e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', {user: this.value}) }}
+					onPress = { e=> { e.preventDefault(); this.handleSubmit(user)}}
 				/>
 			</View>
 		);

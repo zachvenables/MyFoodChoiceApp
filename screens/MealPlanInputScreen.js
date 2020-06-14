@@ -67,6 +67,14 @@ class MealPlanInputScreen extends React.Component {
 		this.value = user;
 	}
 
+	handleDone(user){
+		if(user.goals == "none"){
+			this.props.navigation.navigate('UserInputNoGoals', { user: this.value })
+		}else{
+			this.props.navigation.navigate('UserInputGoals', { user: this.value })
+		}
+	}
+
 	render() {
 		var { user } = this.props.route.params;
 	
@@ -99,7 +107,7 @@ class MealPlanInputScreen extends React.Component {
 				/>
 				<Button
 					title="Done"
-					onPress = { e=> {e.preventDefault(); this.props.navigation.navigate('UserInputNoGoals', {user: this.value}) }}
+					onPress = { e=> {e.preventDefault(); this.handleDone(user) }}
 				/>
 			</View>
 		);
