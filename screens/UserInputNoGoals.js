@@ -4,6 +4,12 @@ import { Button, Text, View } from 'react-native';
 
 //navigates to each respective input screen
 //-Venables
+
+
+function SaveUserData(user){
+	alert('saved');
+}
+
 export default function UserInputNoGoals( {route, navigation } ){
 	var { user } = route.params;
 	alert(
@@ -40,7 +46,7 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 			<Button
 				title='Next'
-				//onPress={() => navigation.navigate('MealScreen')}
+				onPress={e => {e.preventDefault(), SaveUserData(user)}}
 			/>
 		</View>
 	);
