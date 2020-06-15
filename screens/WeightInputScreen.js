@@ -15,22 +15,28 @@ class WeightInputScreen extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	//Used when the text in the box is changed.  Updates to reflect value in the box
+	//-Venables
 	handleChange = (text) => {
 		this.value = text;
 	}
 
-	handleSubmit(event) {
-		event.preventDefault();
-		//var val = value
+	//When the enter button is pressed, alerts the value to the screen
+	//-Venables
+	handleSubmit(user) {
+
 		if(isNaN(this.value)){
 			alert('Please only enter whole numeric values.');
 		}
 		else{
-			alert('Button Pressed ' + this.value);
+			user.weight = this.value;
+			this.props.navigation.navigate('UserInputGoals', { user })
 		}
 	}
 
 	render() {
+		var { user } = this.props.route.params;
+
 		return(
 		<View>
 			<Text>Input Weight</Text>
@@ -41,7 +47,7 @@ class WeightInputScreen extends React.Component {
 			/>
 			<Button
 				title="enter"
-				onPress={ this.handleSubmit }
+				onPress={ e => { e.preventDefault(),  this.handleSubmit(user) }}
 			/>
 		</View>
 		);

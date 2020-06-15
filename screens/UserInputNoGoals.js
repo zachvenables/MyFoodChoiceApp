@@ -4,9 +4,14 @@ import { Button, Text, View } from 'react-native';
 
 //navigates to each respective input screen
 //-Venables
-export default function UserInputScreen( {route, navigation } ){
-	var { user } = route.params;
 
+
+function SaveUserData(user){
+	alert('saved');
+}
+
+export default function UserInputNoGoals( {route, navigation } ){
+	var { user } = route.params;
 	alert(
 		'mealPlan: ' + user.mealPlan.type + '\n'
 		+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
@@ -32,26 +37,6 @@ export default function UserInputScreen( {route, navigation } ){
 		<View>
 			<Text>Please enter the following information about yourself:</Text>
 			<Button
-				onPress={() => navigation.navigate('WeightInputScreen', { user })}
-				title='Weight'
-				color= '#990000'
-			/>
-			<Button
-				onPress={() => navigation.navigate('AgeInputScreen', { user })}
-				title='Age'
-				color= '#990000'
-			/>
-			<Button
-				onPress={() => navigation.navigate('HeightInputScreen', { user })}
-				title='Height'
-				color= '#990000'
-			/>
-			<Button
-				onPress={() => navigation.navigate('GoalInputScreen', { user })}
-				title='Goal'
-				color= '#990000'
-			/>
-			<Button
 				onPress={() => navigation.navigate('MealPlanInputScreen', { user })}
 				title='Meal Plan'
 				color= '#990000'
@@ -63,7 +48,7 @@ export default function UserInputScreen( {route, navigation } ){
 			/>
 			<Button
 				title='Next'
-				//onPress={() => navigation.navigate('MealScreen')}
+				onPress={e => {e.preventDefault(), SaveUserData(user)}}
 				color= '#990000'
 			/>
 		</View>

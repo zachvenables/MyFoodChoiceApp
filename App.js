@@ -7,6 +7,8 @@ import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
+//Screens for entire app
+//-Venables
 import UserInput from './screens/UserInput';
 import UserInputGoals from './screens/UserInputGoals';
 import WeightInputScreen from './screens/WeightInputScreen';
@@ -15,11 +17,16 @@ import HeightInputScreen from './screens/HeightInputScreen';
 import GoalInputScreen from './screens/GoalInputScreen';
 import MealPlanInputScreen from './screens/MealPlanInputScreen';
 import RestrictionInputScreen from './screens/RestrictionInputScreen';
+import UserInputNoGoals from './screens/UserInputNoGoals';
 
 const Stack = createStackNavigator();
 
+
+//Creates Navigator and navigates to home screen.  All navigation afterwards is dependent on current screen.
+//-Venables
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
+  
 
   if (!isLoadingComplete) {
     return null;
@@ -38,6 +45,7 @@ export default function App(props) {
             <Stack.Screen name="GoalInputScreen" component={GoalInputScreen} />
             <Stack.Screen name="MealPlanInputScreen" component={MealPlanInputScreen} />
             <Stack.Screen name="RestrictionInputScreen" component={RestrictionInputScreen} />
+            <Stack.Screen name="UserInputNoGoals" component={UserInputNoGoals} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

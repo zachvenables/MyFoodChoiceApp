@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 export default function HomeScreen( { navigation } ) {
+
   return (
     <View style={styles.container}>
        <Button
@@ -20,7 +21,8 @@ export default function HomeScreen( { navigation } ) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    backgroundColor: "#fff",
   },
   
 });

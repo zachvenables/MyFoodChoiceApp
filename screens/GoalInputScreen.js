@@ -2,52 +2,40 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 
-
+//Deals with the goal inputs from the user
+//-Venables
 class GoalInputScreen extends React.Component {
 	constructor(props) {
 		super (props);
 		this.value;
-
-		this.handleWeightGain = this.handleWeightGain.bind(this);
-		this.handleWeightLoss = this.handleWeightLoss.bind(this);
-		this.handleWeightMaintain = this.handleWeightMaintain.bind(this);
-	}
-
-	handleWeightGain(event) {
-		event.preventDefault();
-		this.value = "Weight Gain";
-		alert("Button pressed is Weight Gain");
+		this.handlePress = this.handlePress.bind(this);
 
 	}
 
-	handleWeightLoss(event) {
-		event.preventDefault();
-		this.value = "Weight Loss";
-		alert("Button pressed is Weight Loss");
-	}
-
-	handleWeightMaintain(event) {
-		event.preventDefault();
-		this.value = "Weight Maintain";
-		alert("Button pressed is Weight Maintain");
+	//-Venables
+	handlePress(goalType, user){
+		this.value.goals = goalType;
+		this.props.navigation.navigate('UserInputGoals', { user: this.value });
 	}
 
 	render() {
+		var { user } = this.props.route.params;
+		this.value = user;
+
 		return(
 			<View>
 				<Text>Goal Input Screen</Text>
 				<Button
 					title="Weight Gain"
-					onPress = { this.handleWeightGain }
-
+					onPress = {e =>{e.preventDefault(), this.handlePress('Gain', { user })}}
 				/>
 				<Button
 					title="Weight Loss"
-					onPress = { this.handleWeightLoss }
+					onPress = {e =>{e.preventDefault(), this.handlePress('Loss', { user })}}
 				/>
 				<Button
 					title="Maintain Weight"
-					onPress = { this.handleWeightMaintain }
+					onPress = {e =>{e.preventDefault(), this.handlePress('Maintain', { user })}}
 				/>
 			</View>
 		);
