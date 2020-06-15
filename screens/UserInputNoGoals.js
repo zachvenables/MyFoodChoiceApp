@@ -39,14 +39,17 @@ export default function UserInputNoGoals( {route, navigation } ){
 			<Button
 				onPress={() => navigation.navigate('MealPlanInputScreen', { user })}
 				title='Meal Plan'
+				color= '#990000'
 			/>
 			<Button
 				onPress={() => navigation.navigate('RestrictionInputScreen', { user })}
 				title='Restrictions'
+				color= '#990000'
 			/>
 			<Button
 				title='Next'
 				onPress={e => {e.preventDefault(), SaveUserData(user)}}
+				color= '#990000'
 			/>
 		</View>
 	);

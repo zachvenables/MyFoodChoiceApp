@@ -93,42 +93,52 @@ class RestrictionInputScreen extends React.Component {
 				<Button
 					title="Gluten"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gluten", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="ShellFish"
 					onPress = {e=> { e.preventDefault(); this.handlePress("ShellFish", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Eggs"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Eggs", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Fish"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Fish", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Peanuts"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Peanuts", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Soy"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Soy", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="TreeNuts"
 					onPress = {e=> { e.preventDefault(); this.handlePress("TreeNuts", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Vegetarian"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Vegetarian", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Vegan"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan", user)} }
+					color= '#990000'
 				/>
 				<Button 
 					title="Submit"
 					onPress = { e=> { e.preventDefault(); this.handleSubmit(user)}}
+					color= '#990000'
 				/>
 			</View>
 		);

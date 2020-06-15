@@ -34,30 +34,37 @@ export default function UserInputScreen( {route, navigation } ){
 			<Button
 				onPress={() => navigation.navigate('WeightInputScreen', { user })}
 				title='Weight'
+				color= '#990000'
 			/>
 			<Button
 				onPress={() => navigation.navigate('AgeInputScreen', { user })}
 				title='Age'
+				color= '#990000'
 			/>
 			<Button
 				onPress={() => navigation.navigate('HeightInputScreen', { user })}
 				title='Height'
+				color= '#990000'
 			/>
 			<Button
 				onPress={() => navigation.navigate('GoalInputScreen', { user })}
 				title='Goal'
+				color= '#990000'
 			/>
 			<Button
 				onPress={() => navigation.navigate('MealPlanInputScreen', { user })}
 				title='Meal Plan'
+				color= '#990000'
 			/>
 			<Button
 				onPress={() => navigation.navigate('RestrictionInputScreen', { user })}
 				title='Restrictions'
+				color= '#990000'
 			/>
 			<Button
 				title='Next'
 				//onPress={() => navigation.navigate('MealScreen')}
+				color= '#990000'
 			/>
 		</View>
 	);

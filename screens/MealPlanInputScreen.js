@@ -84,30 +84,37 @@ class MealPlanInputScreen extends React.Component {
 				<Button
 					title="Gray10"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gray10", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Scarlet14"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Scarlet14", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Unlimited"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Unlimited", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="DecliningBalance"
 					onPress = {e=> { e.preventDefault(); this.handlePress("DecliningBalance", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Carmen1"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen1", user)} }
+					color= '#990000'
 				/>
 				<Button
 					title="Carmen2"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen2", user) } }
+					color= '#990000'
 				/>
 				<Button
 					title="Done"
 					onPress = { e=> {e.preventDefault(); this.handleDone(user) }}
+					color= '#990000'
 				/>
 			</View>
 		);

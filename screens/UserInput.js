@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { StyleSheet, Button, Text, View } from 'react-native';
 
 //class for storing restriction info
 //-Venables
@@ -56,12 +56,26 @@ export default function UserInputScreen( { route, navigation } ){
 			<Button
 				onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
 				title='yes'
+				color= '#990000'
 			/>
 
 			<Button
 				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
 				title='no'
+				color= '#990000'
 			/>
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+
+  button: {
+	color: '#990000',
+  },
+  
+});
