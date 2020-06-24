@@ -18,6 +18,7 @@ import GoalInputScreen from './screens/GoalInputScreen';
 import MealPlanInputScreen from './screens/MealPlanInputScreen';
 import RestrictionInputScreen from './screens/RestrictionInputScreen';
 import UserInputNoGoals from './screens/UserInputNoGoals';
+import NearestFoodScreen from './screens/NearestFoodScreen';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,7 @@ export default function App(props) {
             <Stack.Screen name="MealPlanInputScreen" component={MealPlanInputScreen} />
             <Stack.Screen name="RestrictionInputScreen" component={RestrictionInputScreen} />
             <Stack.Screen name="UserInputNoGoals" component={UserInputNoGoals} />
+            <Stack.Screen name="NearestFoodScreen" component={NearestFoodScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

@@ -6,8 +6,9 @@ import { Button, Text, View } from 'react-native';
 //-Venables
 
 
-function SaveUserData(user){
+function SaveUserData(user, navigation){
 	alert('saved');
+	navigation.navigate('NearestFoodScreen', { user });
 }
 
 export default function UserInputNoGoals( {route, navigation } ){
@@ -48,7 +49,7 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 			<Button
 				title='Next'
-				onPress={e => {e.preventDefault(), SaveUserData(user)}}
+				onPress={e => {e.preventDefault(), SaveUserData(user, navigation)}}
 				color= '#990000'
 			/>
 		</View>
