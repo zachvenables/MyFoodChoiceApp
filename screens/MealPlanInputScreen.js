@@ -1,6 +1,5 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'

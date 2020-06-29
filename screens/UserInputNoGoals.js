@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { View } from 'react-native';
 
@@ -10,7 +9,7 @@ import OSUPrompt from '../components/Prompt.js'
 //-Venables
 
 
-function SaveUserData(user){
+function SaveUserData(){
 	alert('saved');
 }
 
@@ -50,7 +49,7 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 			<OSUButton
 				title='Next'
-				onPress={e => {e.preventDefault(), SaveUserData(user)}}
+				onPress={e => {e.preventDefault(), SaveUserData()}}
 			/>
 		</View>
 	);

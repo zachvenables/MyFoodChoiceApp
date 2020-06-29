@@ -25,7 +25,7 @@ const buttons = StyleSheet.create({
 promptTexts = StyleSheet.create({
     promptContainer: {
         paddingTop: 50,
-        paddingLeft: 10,
+        paddingLeft: 50,
         paddingBottom: 2
     },
     promptText: {
@@ -39,15 +39,20 @@ textBoxes = StyleSheet.create({
     container: {
         paddingHorizontal: 20
     },
-    promptContainer: promptTexts.promptContainer,
+    promptContainer: {
+        paddingTop: 50,
+        paddingLeft: 0,
+        paddingBottom: 5
+    },
     promptText: promptTexts.promptText,
     textBoxContainer: {
-        paddingBottom: 10
+        paddingBottom: 20
     },
     textBox: {
         height: 40,
         borderColor: Colors.tOSUgray,
         borderWidth: 2,
+        borderBottomWidth: 5,
         borderRadius: 5
     },
 });

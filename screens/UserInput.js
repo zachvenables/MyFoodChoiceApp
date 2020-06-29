@@ -1,6 +1,5 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
@@ -52,7 +51,7 @@ class User{
 
 //Checks if the user wants to have weight management Goals
 //-Venables
-export default function UserInputScreen( { route, navigation } ){
+export default function UserInputScreen( { navigation } ){
 	
 	return(
 		<View>
@@ -69,14 +68,3 @@ export default function UserInputScreen( { route, navigation } ){
 	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-
-  button: {
-	color: '#990000',
-  },
-  
-});

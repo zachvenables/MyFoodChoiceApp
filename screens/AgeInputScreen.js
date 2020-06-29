@@ -1,10 +1,8 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Fragment, Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import OSUButton from '../components/Button.js'
 import OSUTextBox from '../components/TextBox.js'
-import OSUPrompt from '../components/Prompt.js'
 
 //handles screen for user age input
 //-Venables
