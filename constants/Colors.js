@@ -11,4 +11,8 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
+  tOSUscarlet: '#bb0000',
+  tOSUgray: '#666666',
+  tOSUwhite: '#ffffff', 
+  tOSUblack: '#000000'
 };
