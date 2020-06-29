@@ -1,6 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { StyleSheet, Button, Text, View } from 'react-native';
 
 //navigates to each respective input screen
 //-Venables
@@ -33,25 +33,59 @@ export default function UserInputNoGoals( {route, navigation } ){
 		+ 'height: ' + user.height + '\n'
 		+ 'goals: ' + user.goals + '\n'
 	);
+
+
+	const styles = StyleSheet.create({
+		  container: {
+			flex: 1,
+			alignItems: "center",
+			backgroundColor: "#fff",
+		  },
+
+		  button: {
+			width: "60%",
+			height: 50,
+		  },
+
+		  text: {
+			height: 170,
+			justifyContent: 'center',
+		  },
+	});
+
+
 	
 	return(
-		<View>
-			<Text>Please enter the following information about yourself:</Text>
+		<View style={styles.container}>
+			<View style={styles.text}>
+				<Text>Please enter the following information about yourself:</Text>
+			</View>
+			<View style={styles.button}>
 			<Button
 				onPress={() => navigation.navigate('MealPlanInputScreen', { user })}
 				title='Meal Plan'
 				color= '#990000'
 			/>
+			</View>
+			<View style={styles.button}>
 			<Button
 				onPress={() => navigation.navigate('RestrictionInputScreen', { user })}
 				title='Restrictions'
 				color= '#990000'
 			/>
+			</View>
+			<View style={styles.button}>
 			<Button
 				title='Next'
 				onPress={e => {e.preventDefault(), SaveUserData(user, navigation)}}
 				color= '#990000'
 			/>
+			</View>
 		</View>
 	);
+
+
+
+
+	
 }

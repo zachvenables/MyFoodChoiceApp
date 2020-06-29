@@ -51,19 +51,22 @@ class User{
 export default function UserInputScreen( { route, navigation } ){
 	
 	return(
-		<View>
-			<Text>Would you like to meet weight management Goals?</Text>
-			<Button
-				onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
-				title='yes'
-				color= '#990000'
-			/>
-
-			<Button
-				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
-				title='no'
-				color= '#990000'
-			/>
+		<View style={styles.container}>
+			<Text style={{height: 50}}>Would you like to meet weight management Goals?</Text>
+			<View style={styles.button}>
+				<Button
+					onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
+					title='yes'
+					color= '#990000'
+				/>
+			</View>
+			<View style={styles.button}>
+				<Button
+					onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
+					title='no'
+					color= '#990000'
+				/>
+			</View>
 		</View>
 	);
 }
@@ -71,11 +74,14 @@ export default function UserInputScreen( { route, navigation } ){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+	justifyContent: 'center',
+	alignItems: 'center',
     backgroundColor: '#fff',
   },
 
   button: {
-	color: '#990000',
+	width: "60%",
+	height: 50,
   },
   
 });
