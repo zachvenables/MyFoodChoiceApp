@@ -4,7 +4,7 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
 
 export default function HomeScreen( { navigation } ) {
 

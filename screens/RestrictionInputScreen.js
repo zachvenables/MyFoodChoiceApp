@@ -1,24 +1,12 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { View } from 'react-native';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 //Class used to track which restriction selections have been made
 //-Venables
-class RestrictionTracker {
-	constructor(props){
-		this.Gluten = false;
-		this.ShellFish = false;
-		this.Eggs = false;
-		this.Fish = false;
-		this.Peanuts = false;
-		this.Soy = false;
-		this.TreeNuts = false;
-		this.Vegetarian = false;
-		this.Vegan = false;
-	}
-}
 
 //Class for all restriction input functionality
 //-Venables
@@ -91,7 +79,8 @@ class RestrictionInputScreen extends React.Component {
 		
 		return(
 			<View>
-				<Text>Select Dietary Restrictions:</Text>
+				<OSUPrompt prompt = 'Select Dietary Restrictions'/>
+				
 				<OSUButton
 					title="Gluten"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gluten", user)} }

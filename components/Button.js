@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text, View } from 'react-native'
 
-import { buttons } from '../components/Styles';
+import { buttons } from './Styles';
 
 //A stateless stylized button in a view
 export default function OSUButton ({ title, onPress}) {

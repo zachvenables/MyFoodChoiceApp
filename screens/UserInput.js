@@ -2,7 +2,9 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 //class for storing restriction info
 //-Venables
@@ -54,12 +56,11 @@ export default function UserInputScreen( { route, navigation } ){
 	
 	return(
 		<View>
-			<Text>Would you like to meet weight management Goals?</Text>
+			<OSUPrompt prompt = 'Would you like to meet weight management Goals?'/>
 			<OSUButton
 				onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
 				title='yes'
 			/>
-
 			<OSUButton
 				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
 				title='no'

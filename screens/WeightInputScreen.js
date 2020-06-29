@@ -1,8 +1,9 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Fragment, TextInput, Text, View } from 'react-native';
+import { View } from 'react-native';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
+import OSUTextBox from '../components/TextBox.js'
+
 //import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 class WeightInputScreen extends React.Component {
@@ -40,9 +41,8 @@ class WeightInputScreen extends React.Component {
 
 		return(
 		<View>
-			<Text>Input Weight</Text>
-			<TextInput
-				style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+			<OSUTextBox 
+				prompt = 'Input Weight' 
 				keyboardType="numeric"
 				onChangeText = {this.handleChange}
 			/>

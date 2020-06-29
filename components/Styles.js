@@ -1,5 +1,6 @@
 import {StyleSheet } from 'react-native'
 import Colors from '../constants/Colors';
+import { colors } from 'react-native-elements';
 
 const buttons = StyleSheet.create({
     container: {
@@ -19,17 +20,38 @@ const buttons = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center'
     }
-})
+}),
 
-const textBox = StyleSheet.create({
+promptTexts = StyleSheet.create({
+    promptContainer: {
+        paddingTop: 50,
+        paddingLeft: 10,
+        paddingBottom: 2
+    },
+    promptText: {
+        color: Colors.tOSUblack,
+        fontSize: 24,
+        fontWeight: 'bold'
+    },
+}),
+
+textBoxes = StyleSheet.create({
     container: {
-        paddingHorizontal: 50
+        paddingHorizontal: 20
+    },
+    promptContainer: promptTexts.promptContainer,
+    promptText: promptTexts.promptText,
+    textBoxContainer: {
+        paddingBottom: 10
     },
     textBox: {
-
+        height: 40,
+        borderColor: Colors.tOSUgray,
+        borderWidth: 2,
+        borderRadius: 5
     },
-    text: {
-        color: Colors.tOSUblack,
-    }
-})
-export { buttons }
+});
+
+
+
+export { buttons, textBoxes, promptTexts }

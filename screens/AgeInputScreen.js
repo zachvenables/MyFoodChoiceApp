@@ -1,8 +1,10 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Fragment, TextInput, Text, View } from 'react-native';
+import { Fragment, Text, View } from 'react-native';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
+import OSUTextBox from '../components/TextBox.js'
+import OSUPrompt from '../components/Prompt.js'
 
 //handles screen for user age input
 //-Venables
@@ -44,17 +46,21 @@ class AgeInputScreen extends React.Component {
 
 		return(
 			<View>
-				<Text>Input Age</Text>
+				<OSUTextBox 
+					prompt = 'Input Age' 
+					keyboardType="numeric"
+					onChangeText = {this.handleChange}
+					/>
+				{/* <Text>Input Age</Text>
 				<TextInput
 					style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
 					keyboardType="numeric"
 					onChangeText = {this.handleChange}
-				/>
-				<OSUButton title={'enter'} onPress={e => {e.preventDefault(), this.handleSubmit(user)}} />
-				{/* <Button
+				/> */}
+				<OSUButton
 					title="enter"
 					onPress={e => {e.preventDefault(), this.handleSubmit(user)}}
-				/> */}
+				/>
 			</View>
 		);
 	}

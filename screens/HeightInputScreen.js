@@ -1,8 +1,9 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Fragment, TextInput, Text, View } from 'react-native';
+import { Fragment, Text, View } from 'react-native';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
+import OSUTextBox from '../components/TextBox.js'
 
 //Class for taking heigh input
 //-Venables
@@ -41,9 +42,8 @@ class HeightInputScreen extends React.Component {
 		
 		return(
 			<View>
-				<Text>Input Height</Text>
-				<TextInput
-					style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+				<OSUTextBox 
+					prompt = 'Input Height'
 					keyboardType="numeric"
 					onChangeText = {this.handleChange}
 				/>

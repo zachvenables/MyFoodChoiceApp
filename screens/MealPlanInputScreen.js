@@ -2,7 +2,9 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Text, View } from 'react-native';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 //Class that deals with meal plan selection for the user
 //-Venables
 class MealPlanInputScreen extends React.Component {
@@ -81,7 +83,9 @@ class MealPlanInputScreen extends React.Component {
 	
 		return(
 			<View>
-				<Text>Select Your Meal Plan</Text>
+				<OSUPrompt prompt = 'Select Your Meal Plan'/>
+				
+
 				<OSUButton
 					title="Gray10"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gray10", user)} }

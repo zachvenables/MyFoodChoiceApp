@@ -1,8 +1,9 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
-import OSUButton from '../components/button.js'
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 //navigates to each respective input screen
 //-Venables
@@ -32,7 +33,7 @@ export default function UserInputScreen( {route, navigation } ){
 	
 	return(
 		<View>
-			<Text>Please enter the following information about yourself:</Text>
+			<OSUPrompt prompt = 'Please enter the following information about yourself:'/>
 			<OSUButton
 				onPress={() => navigation.navigate('WeightInputScreen', { user })}
 				title='Weight'
