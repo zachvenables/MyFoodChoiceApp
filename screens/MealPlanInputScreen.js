@@ -1,7 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
+import OSUButton from '../components/button.js'
 //Class that deals with meal plan selection for the user
 //-Venables
 class MealPlanInputScreen extends React.Component {
@@ -81,40 +82,33 @@ class MealPlanInputScreen extends React.Component {
 		return(
 			<View>
 				<Text>Select Your Meal Plan</Text>
-				<Button
+				<OSUButton
 					title="Gray10"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gray10", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Scarlet14"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Scarlet14", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Unlimited"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Unlimited", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="DecliningBalance"
 					onPress = {e=> { e.preventDefault(); this.handlePress("DecliningBalance", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Carmen1"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen1", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Carmen2"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen2", user) } }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Done"
 					onPress = { e=> {e.preventDefault(); this.handleDone(user) }}
-					color= '#990000'
 				/>
 			</View>
 		);

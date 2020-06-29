@@ -1,6 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+
+import OSUButton from '../components/button.js'
 
 //Deals with the goal inputs from the user
 //-Venables
@@ -25,15 +27,16 @@ class GoalInputScreen extends React.Component {
 		return(
 			<View>
 				<Text>Goal Input Screen</Text>
-				<Button
+				
+				<OSUButton
 					title="Weight Gain"
 					onPress = {e =>{e.preventDefault(), this.handlePress('Gain', { user })}}
 				/>
-				<Button
+				<OSUButton
 					title="Weight Loss"
 					onPress = {e =>{e.preventDefault(), this.handlePress('Loss', { user })}}
 				/>
-				<Button
+				<OSUButton
 					title="Maintain Weight"
 					onPress = {e =>{e.preventDefault(), this.handlePress('Maintain', { user })}}
 				/>

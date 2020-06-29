@@ -1,6 +1,8 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { StyleSheet, Button, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+import OSUButton from '../components/button.js'
 
 //class for storing restriction info
 //-Venables
@@ -53,16 +55,14 @@ export default function UserInputScreen( { route, navigation } ){
 	return(
 		<View>
 			<Text>Would you like to meet weight management Goals?</Text>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
 				title='yes'
-				color= '#990000'
 			/>
 
-			<Button
+			<OSUButton
 				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
 				title='no'
-				color= '#990000'
 			/>
 		</View>
 	);
