@@ -118,7 +118,7 @@ class RestrictionInputScreen extends React.Component {
 					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan", user)} } 
 				/>
 				<OSUButton 
-					title="Submit"
+					title="Done"
 					onPress = { e=> { e.preventDefault(); this.handleSubmit(user)}}
 				/>
 			</View>

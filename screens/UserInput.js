@@ -37,11 +37,11 @@ class MealPlan {
 //User class structure
 //-Venables
 class User{
-	constructor(){
+	constructor(goals){
 		this.weight = 0;
 		this.height = 0;
 		this.age = 0;
-		this.goals = 'none';
+		this.goals = goals;
 		this.mealPlan = new MealPlan();
 		this.restrictions = new RestrictionTracker();
 	}
@@ -57,11 +57,11 @@ export default function UserInputScreen( { navigation } ){
 		<View>
 			<OSUPrompt prompt = 'Would you like to meet weight management Goals?'/>
 			<OSUButton
-				onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
+				onPress={() => navigation.navigate('UserInputGoals', {user: new User('building')})}
 				title='yes'
 			/>
 			<OSUButton
-				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
+				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User('none')})}
 				title='no'
 			/>
 		</View>
