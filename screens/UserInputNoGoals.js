@@ -9,8 +9,9 @@ import OSUPrompt from '../components/Prompt.js'
 //-Venables
 
 
-function SaveUserData(){
+function SaveUserData(user, navigation){
 	alert('saved');
+	navigation.navigate('NearestFoodScreen', { user });
 }
 
 export default function UserInputNoGoals( {route, navigation } ){
@@ -49,7 +50,7 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 			<OSUButton
 				title='Next'
-				onPress={e => {e.preventDefault(), SaveUserData()}}
+				onPress={e => {e.preventDefault(), SaveUserData(user, navigation)}}
 			/>
 		</View>
 	);

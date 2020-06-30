@@ -7,6 +7,7 @@ import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
+
 //Screens for entire app
 //-Venables
 import UserInput from './screens/UserInput';
@@ -18,6 +19,7 @@ import GoalInputScreen from './screens/GoalInputScreen';
 import MealPlanInputScreen from './screens/MealPlanInputScreen';
 import RestrictionInputScreen from './screens/RestrictionInputScreen';
 import UserInputNoGoals from './screens/UserInputNoGoals';
+import NearestFoodScreen from './screens/NearestFoodScreen';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +28,6 @@ const Stack = createStackNavigator();
 //-Venables
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
-  
 
   if (!isLoadingComplete) {
     return null;
@@ -46,6 +47,7 @@ export default function App(props) {
             <Stack.Screen name="MealPlanInputScreen" component={MealPlanInputScreen} />
             <Stack.Screen name="RestrictionInputScreen" component={RestrictionInputScreen} />
             <Stack.Screen name="UserInputNoGoals" component={UserInputNoGoals} />
+            <Stack.Screen name="NearestFoodScreen" component={NearestFoodScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
