@@ -1,12 +1,20 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { View } from 'react-native';
+
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 //navigates to each respective input screen
 //-Venables
+
+function SaveUserData(user, navigation){
+	//alert('saved');
+	navigation.navigate('NearestFoodScreen', { user });
+}
+
 export default function UserInputScreen( {route, navigation } ){
 	var { user } = route.params;
-
 	alert(
 		'mealPlan: ' + user.mealPlan.type + '\n'
 		+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
@@ -30,41 +38,35 @@ export default function UserInputScreen( {route, navigation } ){
 	
 	return(
 		<View>
-			<Text>Please enter the following information about yourself:</Text>
-			<Button
+			<OSUPrompt prompt = 'Please enter the following information about yourself:'/>
+			<OSUButton
 				onPress={() => navigation.navigate('WeightInputScreen', { user })}
 				title='Weight'
-				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('AgeInputScreen', { user })}
 				title='Age'
-				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('HeightInputScreen', { user })}
 				title='Height'
-				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('GoalInputScreen', { user })}
 				title='Goal'
-				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('MealPlanInputScreen', { user })}
 				title='Meal Plan'
-				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('RestrictionInputScreen', { user })}
 				title='Restrictions'
-				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				title='Next'
-				//onPress={() => navigation.navigate('MealScreen')}
-				color= '#990000'
+				onPress={e => {e.preventDefault(), SaveUserData(user, navigation)}}
+				submit = {true}
 			/>
 		</View>
 	);

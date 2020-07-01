@@ -1,10 +1,10 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import OSUButton from '../components/Button.js'
 
+//class for storing restriction info
+//-Venables
 class RestrictionTracker {
 	constructor(){
 		this.Gluten = false;
@@ -66,16 +66,17 @@ class HomeScreen extends React.Component {
     }
 }
 
-render(){
+  render(){  
     return (
       <View style={styles.container}>
-        <Button
-           onPress={e => {e.preventDefault(), this.checkUserData()}}
-           title="Enter Data"
-           color="#990000"
-          />
+       <OSUButton onPress={e => {e.preventDefault(), this.checkUserData()}} title="Enter Data" />
+        {/* <Button
+          onPress={() => navigation.navigate('UserInput')}
+          title="Enter Data"
+          color="#990000"
+          /> */}
       </View>
-    );
+  );
   }
 }
 

@@ -1,7 +1,9 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 //navigates to each respective input screen
 //-Venables
@@ -41,9 +43,14 @@ const saveData = async (user) => {
 		try{
 			await AsyncStorage.setItem('userInfo', JSON.stringify(user));
 			alert('saved!');
+			//this.props.navigation.navigate('HomeScreen', { user });
 		}catch(e){
 			console.log(e);
 		}
+	}
+	
+function toFoodScreen(user, navigation){
+	navigation.navigate('NearestFoodScreen', { user });
 }
 
 export default function UserInputNoGoals( {route, navigation } ){
@@ -71,25 +78,28 @@ export default function UserInputNoGoals( {route, navigation } ){
 	
 	return(
 		<View>
-			<Text>Please enter the following information about yourself:</Text>
-			<Button
+			<OSUPrompt prompt = 'Please enter the following information about yourself:'/>
+			<OSUButton
 				onPress={() => navigation.navigate('MealPlanInputScreen', { user })}
 				title='Meal Plan'
-				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('RestrictionInputScreen', { user })}
 				title='Restrictions'
-				color= '#990000'
 			/>
-			<Button
-				title='Next'
+			<OSUButton
+				title='Save Data'
 				onPress={e => {e.preventDefault(), saveData(user)}}
 				color= '#990000'
 			/>
-			<Button
+			<OSUButton
 				title='Display Data'
 				onPress={e => {e.preventDefault(), getData(user)}}
+				color= '#990000'
+			/>
+			<OSUButton
+				title='Continue'
+				onPress={e => {e.preventDefault(), toFoodScreen(user, navigation)}}
 				color= '#990000'
 			/>
 		</View>

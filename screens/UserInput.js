@@ -1,6 +1,9 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { StyleSheet, Button, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 //class for storing restriction info
 //-Venables
@@ -34,11 +37,11 @@ class MealPlan {
 //User class structure
 //-Venables
 class User{
-	constructor(){
+	constructor(goals){
 		this.weight = 0;
 		this.height = 0;
 		this.age = 0;
-		this.goals = 'none';
+		this.goals = goals;
 		this.mealPlan = new MealPlan();
 		this.restrictions = new RestrictionTracker();
 	}
@@ -48,34 +51,20 @@ class User{
 
 //Checks if the user wants to have weight management Goals
 //-Venables
-export default function UserInputScreen( { route, navigation } ){
+export default function UserInputScreen( { navigation } ){
 	
 	return(
 		<View>
-			<Text>Would you like to meet weight management Goals?</Text>
-			<Button
-				onPress={() => navigation.navigate('UserInputGoals', {user: new User()})}
+			<OSUPrompt prompt = 'Would you like to meet weight management Goals?'/>
+			<OSUButton
+				onPress={() => navigation.navigate('UserInputGoals', {user: new User('select')})}
 				title='yes'
-				color= '#990000'
 			/>
-
-			<Button
-				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User()})}
+			<OSUButton
+				onPress={ () => navigation.navigate('UserInputNoGoals', {user: new User('none')})}
 				title='no'
-				color= '#990000'
 			/>
 		</View>
 	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-
-  button: {
-	color: '#990000',
-  },
-  
-});
