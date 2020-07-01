@@ -43,7 +43,6 @@ const saveData = async (user) => {
 		try{
 			await AsyncStorage.setItem('userInfo', JSON.stringify(user));
 			alert('saved!');
-			//this.props.navigation.navigate('HomeScreen', { user });
 		}catch(e){
 			console.log(e);
 		}
@@ -90,17 +89,14 @@ export default function UserInputNoGoals( {route, navigation } ){
 			<OSUButton
 				title='Save Data'
 				onPress={e => {e.preventDefault(), saveData(user)}}
-				color= '#990000'
 			/>
 			<OSUButton
 				title='Display Data'
 				onPress={e => {e.preventDefault(), getData(user)}}
-				color= '#990000'
 			/>
 			<OSUButton
 				title='Continue'
 				onPress={e => {e.preventDefault(), toFoodScreen(user, navigation)}}
-				color= '#990000'
 			/>
 		</View>
 	);
