@@ -1,22 +1,12 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Text, View, TouchableHighlight } from 'react-native';
+import { View } from 'react-native';
+
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 //Class used to track which restriction selections have been made
 //-Venables
-class RestrictionTracker {
-	constructor(props){
-		this.Gluten = false;
-		this.ShellFish = false;
-		this.Eggs = false;
-		this.Fish = false;
-		this.Peanuts = false;
-		this.Soy = false;
-		this.TreeNuts = false;
-		this.Vegetarian = false;
-		this.Vegan = false;
-	}
-}
 
 //Class for all restriction input functionality
 //-Venables
@@ -89,56 +79,47 @@ class RestrictionInputScreen extends React.Component {
 		
 		return(
 			<View>
-				<Text>Select Dietary Restrictions:</Text>
-				<Button
+				<OSUPrompt prompt = 'Select Dietary Restrictions'/>
+				
+				<OSUButton
 					title="Gluten"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gluten", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="ShellFish"
 					onPress = {e=> { e.preventDefault(); this.handlePress("ShellFish", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Eggs"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Eggs", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Fish"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Fish", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Peanuts"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Peanuts", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Soy"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Soy", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="TreeNuts"
 					onPress = {e=> { e.preventDefault(); this.handlePress("TreeNuts", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Vegetarian"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Vegetarian", user)} }
-					color= '#990000'
 				/>
-				<Button
+				<OSUButton
 					title="Vegan"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan", user)} }
-					color= '#990000'
+					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan", user)} } 
 				/>
-				<Button 
+				<OSUButton 
 					title="Submit"
 					onPress = { e=> { e.preventDefault(); this.handleSubmit(user)}}
-					color= '#990000'
 				/>
 			</View>
 		);

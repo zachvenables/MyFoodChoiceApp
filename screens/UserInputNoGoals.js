@@ -1,20 +1,18 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-<<<<<<< Updated upstream
-import { StyleSheet, Button, Text, View } from 'react-native';
-=======
+
 import { View } from 'react-native';
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
+
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
->>>>>>> Stashed changes
 
 //navigates to each respective input screen
 //-Venables
+
 
 
 async function SaveUserData(user, navigation){
@@ -108,31 +106,20 @@ export default function UserInputNoGoals( {route, navigation } ){
 
 	
 	return(
-		<View style={styles.container}>
-			<View style={styles.text}>
-				<Text>Please enter the following information about yourself:</Text>
-			</View>
-			<View style={styles.button}>
-			<Button
+		<View>
+			<OSUPrompt prompt = 'Please enter the following information about yourself:'/>
+			<OSUButton
 				onPress={() => navigation.navigate('MealPlanInputScreen', { user })}
 				title='Meal Plan'
-				color= '#990000'
 			/>
-			</View>
-			<View style={styles.button}>
-			<Button
+			<OSUButton
 				onPress={() => navigation.navigate('RestrictionInputScreen', { user })}
 				title='Restrictions'
-				color= '#990000'
 			/>
-			</View>
-			<View style={styles.button}>
-			<Button
+			<OSUButton
 				title='Next'
 				onPress={e => {e.preventDefault(), SaveUserData(user, navigation)}}
-				color= '#990000'
 			/>
-			</View>
 		</View>
 	);
 

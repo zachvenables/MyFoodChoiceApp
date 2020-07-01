@@ -1,9 +1,7 @@
-import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet, View } from 'react-native';
 
+import OSUButton from '../components/Button.js'
 
 
 
@@ -11,13 +9,12 @@ export default function HomeScreen( { navigation } ) {
 
   return (
     <View style={styles.container}>
-        <View style={styles.button}>
-           <Button
-              onPress={() => navigation.navigate('UserInput')}
-              title="Enter Data"
-              color="#990000"
-            />
-        </View>
+      <OSUButton onPress={() => navigation.navigate('UserInput')} title="Enter Data" />
+       {/* <Button
+          onPress={() => navigation.navigate('UserInput')}
+          title="Enter Data"
+          color="#990000"
+        /> */}
      </View>
   );
 }
