@@ -49,6 +49,7 @@ class WeightInputScreen extends React.Component {
 			<OSUButton
 				title="enter"
 				onPress={ e => { e.preventDefault(),  this.handleSubmit(user) }}
+				submit = {true}
 			/>
 		</View>
 		);

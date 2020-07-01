@@ -10,7 +10,7 @@ import OSUPrompt from '../components/Prompt.js'
 
 
 function SaveUserData(user, navigation){
-	alert('saved');
+	//alert('saved');
 	navigation.navigate('NearestFoodScreen', { user });
 }
 
@@ -51,6 +51,7 @@ export default function UserInputNoGoals( {route, navigation } ){
 			<OSUButton
 				title='Next'
 				onPress={e => {e.preventDefault(), SaveUserData(user, navigation)}}
+				submit = {true}
 			/>
 		</View>
 	);

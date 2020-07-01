@@ -57,7 +57,7 @@ export default function UserInputScreen( { navigation } ){
 		<View>
 			<OSUPrompt prompt = 'Would you like to meet weight management Goals?'/>
 			<OSUButton
-				onPress={() => navigation.navigate('UserInputGoals', {user: new User('building')})}
+				onPress={() => navigation.navigate('UserInputGoals', {user: new User('select')})}
 				title='yes'
 			/>
 			<OSUButton

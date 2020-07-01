@@ -8,6 +8,8 @@ import 'firebase/firestore';
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
+import Colors from '../constants/Colors';
+
 
 class NearestFoodScreen extends React.Component {
 	
@@ -65,7 +67,7 @@ class NearestFoodScreen extends React.Component {
 	}
 
 	loadNextLocation(user){
-		alert('load next clost eatery');
+		alert('load next clost eateries');
 	}
 
 	getDirections(user){
@@ -75,7 +77,7 @@ class NearestFoodScreen extends React.Component {
 	render() {
 		var { user } = this.props.route.params;
 
-		alert(this.database.collection('location'));
+		//alert(this.database.collection('location'));
 		
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
@@ -85,21 +87,42 @@ class NearestFoodScreen extends React.Component {
 					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
 			/>
 			<OSUPrompt prompt = {this.locationName} />
-			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightgrey'}}>
+			<View style={{width: '100%', height: 350, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
 				<ScrollView style={{width: '90%'}}>
 					{
 						this.state.foods.map((item, index) =>(
 							<View key={item.id} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
-								<Text>{item.name}     Calories: {item.calories}</Text>
+								<Text style = {{color: Colors.tOSUscarlet, fontSize: 20}}>{item.name}     Calories: {item.calories}</Text>
 							</View>
 						))
 					}
 				</ScrollView>
 			</View>
+
+
+
+
+
+			<View style={{paddingTop:100}}/> 
+
+
+
+
+
 			<OSUButton 
 				title="Next Location"
 				onPress={e => {e.preventDefault(), this.loadNextLocation(user)}}
 			/>
+
+
+
+
+
+			<View style={{paddingTop:10}}/>
+
+
+
+
 			<OSUButton 
 				title="Get Directions"
 				onPress={e => {e.preventDefault(), this.getDirections(user)}}
