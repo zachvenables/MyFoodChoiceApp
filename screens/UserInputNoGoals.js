@@ -1,14 +1,66 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
+<<<<<<< Updated upstream
 import { StyleSheet, Button, Text, View } from 'react-native';
+=======
+import { View } from 'react-native';
+
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
+>>>>>>> Stashed changes
 
 //navigates to each respective input screen
 //-Venables
 
 
-function SaveUserData(user, navigation){
-	alert('saved');
-	navigation.navigate('NearestFoodScreen', { user });
+async function SaveUserData(user, navigation){
+
+	
+	//Initialize Firebase..
+	if(!firebase.apps.length){
+		firebase.initializeApp({
+				apiKey: "AIzaSyBCjwYHTf9Yj1kAN7mByIhnA3rD0OZlzJY",
+				authDomain: "osumyfoodchoiceapp-a8fd6.firebaseapp.com",
+				databaseURL: "https://osumyfoodchoiceapp-a8fd6.firebaseio.com",
+				projectId: "osumyfoodchoiceapp-a8fd6",
+				storageBucket: "osumyfoodchoiceapp-a8fd6.appspot.com",
+				messagingSenderId: "752614312654",
+				appId: "1:752614312654:web:e3234a1c1c83e85a0dde9f",
+				measurementId: "G-XKCPW0Q23G"
+		});
+	}
+		
+	this.database = firebase.firestore();
+
+	var location = "";
+
+	await this.database.collection('location').doc('restaraunt_a1').get().then(function (doc) {
+			if(doc.exists){
+				location = doc.data().name;
+				
+			}else{
+				alert('error');
+			}
+		});
+
+	var nextState = [];
+
+	var foodItems = await this.database.collection('location').doc('restaraunt_a1').collection('foods');
+
+	await foodItems.get().then(function(doc) {
+		var i = 0;
+		doc.forEach(function(item){
+			nextState.push({'name': item.data().name, 'calories': item.data().total_calories, 'id':i});
+			i += 1;
+		});
+	});
+
+		
+	navigation.navigate('NearestFoodScreen', { user, location, nextState});
 }
 
 export default function UserInputNoGoals( {route, navigation } ){

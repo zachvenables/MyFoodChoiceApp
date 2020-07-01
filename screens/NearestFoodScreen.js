@@ -8,6 +8,33 @@ class NearestFoodScreen extends React.Component {
 
 	constructor(props) {
 		super (props);
+<<<<<<< Updated upstream
+=======
+		
+		//Initialize Firebase..
+		/*
+		if(!firebase.apps.length){
+			firebase.initializeApp({
+					apiKey: "AIzaSyBCjwYHTf9Yj1kAN7mByIhnA3rD0OZlzJY",
+					authDomain: "osumyfoodchoiceapp-a8fd6.firebaseapp.com",
+					databaseURL: "https://osumyfoodchoiceapp-a8fd6.firebaseio.com",
+					projectId: "osumyfoodchoiceapp-a8fd6",
+					storageBucket: "osumyfoodchoiceapp-a8fd6.appspot.com",
+					messagingSenderId: "752614312654",
+					appId: "1:752614312654:web:e3234a1c1c83e85a0dde9f",
+					measurementId: "G-XKCPW0Q23G"
+			});
+		}
+		
+		this.database = firebase.firestore();
+		*/
+		
+		this.locationName = "eatery";
+
+		//this.getLocationName();
+
+
+>>>>>>> Stashed changes
 		this.state = {
 			foods: [
 				{'name': 'FoodA', 'calories': 100, 'id': 1},
@@ -25,6 +52,15 @@ class NearestFoodScreen extends React.Component {
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
 		this.getDirections = this.getDirections.bind(this);
+<<<<<<< Updated upstream
+=======
+		this.getData = this.getData.bind(this);
+		//this.getLocationName = this.getLocationName.bind(this);
+	}
+
+	getData(data){
+		alert(snapshot.val());
+>>>>>>> Stashed changes
 	}
 
 	
@@ -40,12 +76,27 @@ class NearestFoodScreen extends React.Component {
 	getDirections(user){
 		alert('go to directions screen');
 	}
-
+	/*
+	async getLocationName() {
+		await this.database.collection('location').doc('restaraunt_a1').get().then(function (doc) {
+			if(doc.exists){
+				alert(doc.data().name);
+				
+			}else{
+				alert('error');
+			}
+		
+		});
+	}
+	*/
 	render() {
-		var { user } = this.props.route.params;
+		var { user, location, nextState } = this.props.route.params;
 
+<<<<<<< Updated upstream
 		//user location data to find closest eatery
 
+=======
+>>>>>>> Stashed changes
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
 			<View style={{height: 130, justifyContent: 'center', alignItems: 'center'}}>
@@ -55,18 +106,23 @@ class NearestFoodScreen extends React.Component {
 				<Button 
 					title="Meal Plan Balance" 
 					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
+<<<<<<< Updated upstream
 					color='#990000'
 				/>
 			</View>
 			<View style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
 				<Text>Location X (Closest)</Text>
 			</View>
+=======
+			/>
+			<OSUPrompt prompt = { location } />
+>>>>>>> Stashed changes
 			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightgrey'}}>
 				<ScrollView style={{width: '90%'}}>
 					{
-						this.state.foods.map((item, index) =>(
+						nextState.map((item, index) =>(
 							<View key={item.id} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
-								<Text>{item.name}     Calories: {item.calories}</Text>
+								<Text>{item.name} - Calories: {item.calories}</Text>
 							</View>
 						
 						))
