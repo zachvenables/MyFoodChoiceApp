@@ -1,18 +1,20 @@
-import * as WebBrowser from 'expo-web-browser';
+//import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { ScrollView, TextInput, Button, Text, View } from 'react-native';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+//import firebaseKeys from './../firebase';
 
-//import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
+
 
 class NearestFoodScreen extends React.Component {
-
+	
 	constructor(props) {
 		super (props);
-<<<<<<< Updated upstream
-=======
 		
 		//Initialize Firebase..
-		/*
 		if(!firebase.apps.length){
 			firebase.initializeApp({
 					apiKey: "AIzaSyBCjwYHTf9Yj1kAN7mByIhnA3rD0OZlzJY",
@@ -27,14 +29,10 @@ class NearestFoodScreen extends React.Component {
 		}
 		
 		this.database = firebase.firestore();
-		*/
 		
-		this.locationName = "eatery";
+		
+		this.locationName = "Eatery";
 
-		//this.getLocationName();
-
-
->>>>>>> Stashed changes
 		this.state = {
 			foods: [
 				{'name': 'FoodA', 'calories': 100, 'id': 1},
@@ -52,16 +50,13 @@ class NearestFoodScreen extends React.Component {
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
 		this.getDirections = this.getDirections.bind(this);
-<<<<<<< Updated upstream
-=======
 		this.getData = this.getData.bind(this);
-		//this.getLocationName = this.getLocationName.bind(this);
 	}
 
 	getData(data){
 		alert(snapshot.val());
->>>>>>> Stashed changes
 	}
+
 
 	
 	//-Venables
@@ -70,79 +65,46 @@ class NearestFoodScreen extends React.Component {
 	}
 
 	loadNextLocation(user){
-		alert('load next closest eatery');
+		alert('load next clost eatery');
 	}
 
 	getDirections(user){
 		alert('go to directions screen');
 	}
-	/*
-	async getLocationName() {
-		await this.database.collection('location').doc('restaraunt_a1').get().then(function (doc) {
-			if(doc.exists){
-				alert(doc.data().name);
-				
-			}else{
-				alert('error');
-			}
-		
-		});
-	}
-	*/
+
 	render() {
-		var { user, location, nextState } = this.props.route.params;
+		var { user } = this.props.route.params;
 
-<<<<<<< Updated upstream
-		//user location data to find closest eatery
-
-=======
->>>>>>> Stashed changes
+		alert(this.database.collection('location'));
+		
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
-			<View style={{height: 130, justifyContent: 'center', alignItems: 'center'}}>
-				<Text>Nearest Food</Text>
-			</View>
-			<View style={{height: 90, backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'center'}}>
-				<Button 
+			<OSUPrompt prompt = 'Nearest Food' />
+			<OSUButton 
 					title="Meal Plan Balance" 
 					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
-<<<<<<< Updated upstream
-					color='#990000'
-				/>
-			</View>
-			<View style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
-				<Text>Location X (Closest)</Text>
-			</View>
-=======
 			/>
-			<OSUPrompt prompt = { location } />
->>>>>>> Stashed changes
+			<OSUPrompt prompt = {this.locationName} />
 			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightgrey'}}>
 				<ScrollView style={{width: '90%'}}>
 					{
-						nextState.map((item, index) =>(
+						this.state.foods.map((item, index) =>(
 							<View key={item.id} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
-								<Text>{item.name} - Calories: {item.calories}</Text>
+								<Text>{item.name}     Calories: {item.calories}</Text>
 							</View>
-						
 						))
 					}
 				</ScrollView>
 			</View>
-			<View  style={{height: 90, justifyContent: 'center', alignItems: 'center'}}>
-				<Button 
-					title="Next Location"
-					onPress={e => {e.preventDefault(), this.loadNextLocation(user)}}
-					color="#990000"
-				/>
-			</View>
-			<View  style={{height: 110, justifyContent: 'center', alignItems: 'center'}}>
-				<Button 
-					title="Get Directions"
-					onPress={e => {e.preventDefault(), this.getDirections(user)}}
-					color="#990000"
-				/>
-			</View>
+			<OSUButton 
+				title="Next Location"
+				onPress={e => {e.preventDefault(), this.loadNextLocation(user)}}
+			/>
+			<OSUButton 
+				title="Get Directions"
+				onPress={e => {e.preventDefault(), this.getDirections(user)}}
+			/>
+			
 			
 		</View>
 		);
