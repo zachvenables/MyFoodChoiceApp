@@ -64,8 +64,10 @@ class MealPlanInputScreen extends React.Component {
 				break;
 			default:
 				alert("Something didn't work right");
+				break;
+			
 		}
-		
+		//this.handleDone(user);
 		this.value = user;
 	}
 
@@ -112,6 +114,7 @@ class MealPlanInputScreen extends React.Component {
 				<OSUButton
 					title="Done"
 					onPress = { e=> {e.preventDefault(); this.handleDone(user) }}
+					submit = {true}
 				/>
 			</View>
 		);
