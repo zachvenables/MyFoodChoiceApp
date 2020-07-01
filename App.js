@@ -20,6 +20,7 @@ import RestrictionInputScreen from './screens/RestrictionInputScreen';
 import UserInputNoGoals from './screens/UserInputNoGoals';
 import NearestFoodScreen from './screens/NearestFoodScreen';
 
+
 const Stack = createStackNavigator();
 
 
@@ -27,7 +28,7 @@ const Stack = createStackNavigator();
 //-Venables
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
-  
+  //console.disableYellowBox = true;
 
   if (!isLoadingComplete) {
     return null;

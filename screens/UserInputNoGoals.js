@@ -1,26 +1,29 @@
 import * as React from 'react';
 
+import {decode, encode} from 'base-64';
+
 import { View } from 'react-native';
+
+import OSUButton from '../components/Button.js'
+import OSUPrompt from '../components/Prompt.js'
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
 
-import OSUButton from '../components/Button.js'
-import OSUPrompt from '../components/Prompt.js'
-
-
 //navigates to each respective input screen
 //-Venables
 
-
-
 async function SaveUserData(user, navigation){
+
+	if (!global.btoa) {  global.btoa = encode; }
+
+	if (!global.atob) { global.atob = decode; }
 
 	
 	//Initialize Firebase..
 	if(!firebase.apps.length){
-		firebase.initializeApp({
+		 firebase.initializeApp({
 				apiKey: "AIzaSyBCjwYHTf9Yj1kAN7mByIhnA3rD0OZlzJY",
 				authDomain: "osumyfoodchoiceapp-a8fd6.firebaseapp.com",
 				databaseURL: "https://osumyfoodchoiceapp-a8fd6.firebaseio.com",
@@ -32,33 +35,41 @@ async function SaveUserData(user, navigation){
 		});
 	}
 		
-	this.database = firebase.firestore();
-
+	var database = firebase.firestore();
 	var location = "";
-
-	await this.database.collection('location').doc('restaraunt_a1').get().then(function (doc) {
-			if(doc.exists){
-				location = doc.data().name;
+	var nextState = [];
+	var food = [];
+	
+	await database.collection('location').doc('restaraunt_a1').get().then(async function (doc) {
+			if(!doc.exists){
+				alert('error');	
 				
 			}else{
-				alert('error');
+				location = doc.data().name;
+				console.log(doc.data());
+				
 			}
-		});
+		}).catch(error =>{
+			console.log(error);
+	});
 
-	var nextState = [];
+	//console.log(food);
+	
+	//await setTimeout(() => { console.log("World!"); }, 2000);
+	
 
-	var foodItems = await this.database.collection('location').doc('restaraunt_a1').collection('foods');
-
-	await foodItems.get().then(function(doc) {
+	//var foodItems = await this.database.collection('location');
+	/*
+	await foodItems.get().then(async function(doc) {
 		var i = 0;
-		doc.forEach(function(item){
-			nextState.push({'name': item.data().name, 'calories': item.data().total_calories, 'id':i});
+		await doc.forEach(async function(item){
+			await nextState.push({'name': item.data().name, 'calories': item.data().total_calories, 'id':i});
 			i += 1;
 		});
 	});
-
+	*/
 		
-	navigation.navigate('NearestFoodScreen', { user, location, nextState});
+	navigation.navigate('NearestFoodScreen', { user, location });
 }
 
 export default function UserInputNoGoals( {route, navigation } ){
@@ -84,24 +95,6 @@ export default function UserInputNoGoals( {route, navigation } ){
 		+ 'goals: ' + user.goals + '\n'
 	);
 
-
-	const styles = StyleSheet.create({
-		  container: {
-			flex: 1,
-			alignItems: "center",
-			backgroundColor: "#fff",
-		  },
-
-		  button: {
-			width: "60%",
-			height: 50,
-		  },
-
-		  text: {
-			height: 170,
-			justifyContent: 'center',
-		  },
-	});
 
 
 	

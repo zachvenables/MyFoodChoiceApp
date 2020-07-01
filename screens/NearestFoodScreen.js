@@ -1,19 +1,21 @@
 //import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { ScrollView, TextInput, Button, Text, View } from 'react-native';
-import * as firebase from 'firebase';
-import 'firebase/firestore';
-//import firebaseKeys from './../firebase';
 
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
+
+import {decode, encode} from 'base-64';
+
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 
 class NearestFoodScreen extends React.Component {
 	
 	constructor(props) {
 		super (props);
-		
+		/*
 		//Initialize Firebase..
 		if(!firebase.apps.length){
 			firebase.initializeApp({
@@ -29,7 +31,7 @@ class NearestFoodScreen extends React.Component {
 		}
 		
 		this.database = firebase.firestore();
-		
+		*/
 		
 		this.locationName = "Eatery";
 
@@ -73,9 +75,9 @@ class NearestFoodScreen extends React.Component {
 	}
 
 	render() {
-		var { user } = this.props.route.params;
+		var { user, location } = this.props.route.params;
 
-		alert(this.database.collection('location'));
+		//alert(this.database.collection('location'));
 		
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
@@ -84,7 +86,7 @@ class NearestFoodScreen extends React.Component {
 					title="Meal Plan Balance" 
 					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
 			/>
-			<OSUPrompt prompt = {this.locationName} />
+			<OSUPrompt prompt = {location} />
 			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightgrey'}}>
 				<ScrollView style={{width: '90%'}}>
 					{
@@ -109,15 +111,6 @@ class NearestFoodScreen extends React.Component {
 		</View>
 		);
 
-
-		const styles = StyleSheet.create({
-			container: {
-				flex: 1,
-				justifyContent: "center",
-				alignItems: "center",
-				backgroundColor: "#fff",
-			},  
-		});
 
 	}
 }
