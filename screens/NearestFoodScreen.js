@@ -33,19 +33,40 @@ class NearestFoodScreen extends React.Component {
 		this.database = firebase.firestore();
 		
 		
-		this.locationName = "Eatery";
+		this.locationName = "Oxley's by the Numbers";
 
 		this.state = {
 			foods: [
-				{'name': 'FoodA', 'calories': 100, 'id': 1},
-				{'name': 'FoodB', 'calories': 200, 'id': 2},
-				{'name': 'FoodC', 'calories': 300, 'id': 3},
-				{'name': 'FoodD', 'calories': 400, 'id': 4},
-				{'name': 'FoodE', 'calories': 100, 'id': 5},
-				{'name': 'FoodF', 'calories': 320, 'id': 6},
-				{'name': 'FoodG', 'calories': 500, 'id': 7},
-				{'name': 'FoodH', 'calories': 100, 'id': 8},
-				{'name': 'FoodI', 'calories': 300, 'id': 9}
+				{'name': 'BBQ Barbacoa Beef Nacho', 'calories': 170, 'id': 1},
+				{'name': 'Veggie Refried Pinto Beans Nacho', 'calories': 210, 'id': 2},
+				{'name': 'Black Beans & Roasted Corn Nacho', 'calories': 70, 'id': 3},
+				{'name': 'Chicken Sub Nacho', 'calories': 130, 'id': 4},
+				{'name': 'Chicken Grilled Nacho', 'calories': 170, 'id': 5},
+				{'name': 'BBQ Barbacoa Beef Burrito', 'calories': 170, 'id': 6},
+				{'name': 'Veggie Refried Pinto Beans Nacho', 'calories': 210, 'id': 7},
+				{'name': 'Black Beans & Roasted Corn Nacho', 'calories': 70, 'id': 8},
+				{'name': 'Chicken Sub Nacho', 'calories': 130, 'id': 9},
+				{'name': 'Chicken Grilled Nacho', 'calories': 170, 'id': 10},
+				{'name': 'BBQ Barbacoa Beef Nacho', 'calories': 170, 'id': 11},
+				{'name': 'Veggie Refried Pinto Beans Nacho', 'calories': 210, 'id': 12},
+				{'name': 'Black Beans & Roasted Corn Nacho', 'calories': 70, 'id': 13},
+				{'name': 'Chicken Sub Nacho', 'calories': 130, 'id': 14},
+				{'name': 'Chicken Grilled Nacho', 'calories': 170, 'id': 15},
+				{'name': 'BBQ Barbacoa Beef Burrito', 'calories': 170, 'id': 16},
+				{'name': 'Veggie Refried Pinto Beans Nacho', 'calories': 210, 'id': 17},
+				{'name': 'Black Beans & Roasted Corn Nacho', 'calories': 70, 'id': 18},
+				{'name': 'Chicken Sub Nacho', 'calories': 130, 'id': 19},
+				{'name': 'Chicken Grilled Nacho', 'calories': 170, 'id': 20},
+				{'name': 'BBQ Barbacoa Beef Nacho', 'calories': 170, 'id': 21},
+				{'name': 'Veggie Refried Pinto Beans Nacho', 'calories': 210, 'id': 22},
+				{'name': 'Black Beans & Roasted Corn Nacho', 'calories': 70, 'id': 23},
+				{'name': 'Chicken Sub Nacho', 'calories': 130, 'id': 24},
+				{'name': 'Chicken Grilled Nacho', 'calories': 170, 'id': 25},
+				{'name': 'BBQ Barbacoa Beef Burrito', 'calories': 170, 'id': 26},
+				{'name': 'Veggie Refried Pinto Beans Nacho', 'calories': 210, 'id': 27},
+				{'name': 'Black Beans & Roasted Corn Nacho', 'calories': 70, 'id': 28},
+				{'name': 'Chicken Sub Nacho', 'calories': 130, 'id': 29},
+				{'name': 'Chicken Grilled Nacho', 'calories': 170, 'id': 30}
 			]
 		};
 		
@@ -53,6 +74,7 @@ class NearestFoodScreen extends React.Component {
 		this.loadNextLocation = this.loadNextLocation.bind(this);
 		this.getDirections = this.getDirections.bind(this);
 		this.getData = this.getData.bind(this);
+		
 	}
 
 	getData(data){
@@ -63,15 +85,24 @@ class NearestFoodScreen extends React.Component {
 	
 	//-Venables
 	mealPlanCheck(user) {
-		alert('Show Meal plan status');
+		alert(
+			'Remember to rate our app ★★★★★ on the app store!'
+		)
+		//alert('Show Meal plan status');
 	}
 
 	loadNextLocation(user){
-		alert('load next clost eateries');
+		alert(
+			'Remember to rate our app ★★★★★ on the app store!'
+		)
+		//alert('load next clost eatery');
 	}
 
 	getDirections(user){
-		alert('go to directions screen');
+		alert(
+			'Remember to rate our app ★★★★★ on the app store!'
+		)
+		//alert('go to directions screen');
 	}
 
 	render() {
