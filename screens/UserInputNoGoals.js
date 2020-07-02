@@ -88,15 +88,11 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 			<OSUButton
 				title='Save Data'
-				onPress={e => {e.preventDefault(), saveData(user)}}
+				onPress={e => {e.preventDefault(), saveData(user), toFoodScreen(user, navigation)}}
 			/>
 			<OSUButton
 				title='Display Data'
 				onPress={e => {e.preventDefault(), getData(user)}}
-			/>
-			<OSUButton
-				title='Continue'
-				onPress={e => {e.preventDefault(), toFoodScreen(user, navigation)}}
 			/>
 		</View>
 	);
