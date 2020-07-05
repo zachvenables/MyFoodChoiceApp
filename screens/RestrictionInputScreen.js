@@ -53,11 +53,13 @@ class RestrictionInputScreen extends React.Component {
 				break;
 			default:
 				alert("Something didn't work right");
+				break;
 		}
 		
-		this.value = user;
 
-		alert('Added restriction: ' + restriction);
+		this.value = user;
+		this.props.navigation.navigate('RestrictionInputScreen', {user: this.value})
+		//alert('Added restriction: ' + restriction);
 	}
 
 	//Logs the selections that have been made and then outputs them to the screen
@@ -84,42 +86,52 @@ class RestrictionInputScreen extends React.Component {
 				<OSUButton
 					title="Gluten"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gluten", user)} }
+					submit = {user.restrictions.Gluten}
 				/>
 				<OSUButton
 					title="ShellFish"
 					onPress = {e=> { e.preventDefault(); this.handlePress("ShellFish", user)} }
+					submit = {user.restrictions.ShellFish}
 				/>
 				<OSUButton
 					title="Eggs"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Eggs", user)} }
+					submit = {user.restrictions.Eggs}
 				/>
 				<OSUButton
 					title="Fish"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Fish", user)} }
+					submit = {user.restrictions.Fish}
 				/>
 				<OSUButton
 					title="Peanuts"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Peanuts", user)} }
+					submit = {user.restrictions.Peanuts}
 				/>
 				<OSUButton
 					title="Soy"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Soy", user)} }
+					submit = {user.restrictions.Soy}
 				/>
 				<OSUButton
 					title="TreeNuts"
 					onPress = {e=> { e.preventDefault(); this.handlePress("TreeNuts", user)} }
+					submit = {user.restrictions.TreeNuts}
 				/>
 				<OSUButton
 					title="Vegetarian"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Vegetarian", user)} }
+					submit = {user.restrictions.Vegetarian}
 				/>
 				<OSUButton
 					title="Vegan"
-					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan", user)} } 
+					onPress = {e=> { e.preventDefault(); this.handlePress("Vegan", user)} }
+					submit = {user.restrictions.Vegan}
 				/>
 				<OSUButton 
-					title="Submit"
+					title="Done"
 					onPress = { e=> { e.preventDefault(); this.handleSubmit(user)}}
+					submit = {true}
 				/>
 			</View>
 		);

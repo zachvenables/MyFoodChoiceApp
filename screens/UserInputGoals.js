@@ -7,9 +7,14 @@ import OSUPrompt from '../components/Prompt.js'
 
 //navigates to each respective input screen
 //-Venables
+
+function SaveUserData(user, navigation){
+	//alert('saved');
+	navigation.navigate('NearestFoodScreen', { user });
+}
+
 export default function UserInputScreen( {route, navigation } ){
 	var { user } = route.params;
-
 	alert(
 		'mealPlan: ' + user.mealPlan.type + '\n'
 		+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
@@ -60,7 +65,8 @@ export default function UserInputScreen( {route, navigation } ){
 			/>
 			<OSUButton
 				title='Next'
-				//onPress={() => navigation.navigate('MealScreen')}
+				onPress={e => {e.preventDefault(), SaveUserData(user, navigation)}}
+				submit = {true}
 			/>
 		</View>
 	);
