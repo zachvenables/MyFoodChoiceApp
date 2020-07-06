@@ -56,6 +56,7 @@ async function SaveUserData(user, navigation){
 	//waits for the query to finish before navigating
   //-Venables
 	await setTimeout(() => { navigation.navigate('NearestFoodScreen', { user, location, nextState });; }, 2000);
+	}
 		
 
 //Parses JSON with key userInfo and fills values to user
@@ -149,9 +150,5 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 		</View>
 	);
-
-
-
-
 	
 }

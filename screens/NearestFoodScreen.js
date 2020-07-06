@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import { YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
 
-import { ScrollView, TextInput, Button, Text, View } from 'react-native';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 //import firebaseKeys from './../firebase';
@@ -12,9 +11,6 @@ import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
 //import {decode, encode} from 'base-64';
-
-import * as firebase from 'firebase';
-import 'firebase/firestore';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 
