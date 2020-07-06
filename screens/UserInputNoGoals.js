@@ -1,12 +1,62 @@
 import * as React from 'react';
+
+import {decode, encode} from 'base-64';
+
 import { View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
 
 //navigates to each respective input screen
 //-Venables
+
+
+async function SaveUserData(user, navigation){
+  
+  //Used to correct missing variable bug.  This is a bug with react native, we are using the recommended workaround
+  //-Venables
+	if (!global.btoa) {  global.btoa = encode; }
+
+	if (!global.atob) { global.atob = decode; }
+
+	
+	//Initialize Firebase..
+	if(!firebase.apps.length){
+		 firebase.initializeApp({
+				apiKey: "AIzaSyBCjwYHTf9Yj1kAN7mByIhnA3rD0OZlzJY",
+				authDomain: "osumyfoodchoiceapp-a8fd6.firebaseapp.com",
+				databaseURL: "https://osumyfoodchoiceapp-a8fd6.firebaseio.com",
+				projectId: "osumyfoodchoiceapp-a8fd6",
+				storageBucket: "osumyfoodchoiceapp-a8fd6.appspot.com",
+				messagingSenderId: "752614312654",
+				appId: "1:752614312654:web:e3234a1c1c83e85a0dde9f",
+				measurementId: "G-XKCPW0Q23G"
+		});
+	}
+		
+	var database = firebase.firestore();
+	var location = "";
+	var nextState = [];
+
+  //Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
+  //-Venables
+	const snapshota = await database.collection('location').doc('restaraunt_a1').get();
+	location = snapshota.data().name;
+	
+  //queries the data about the first restaurant ***UPDATE WHEN WE ADD GEOLOCATION***
+  //-Venables
+	const snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods').get();
+	snapshot.docs.map(doc => nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories}));
+
+	
+	//waits for the query to finish before navigating
+  //-Venables
+	await setTimeout(() => { navigation.navigate('NearestFoodScreen', { user, location, nextState });; }, 2000);
+		
 
 //Parses JSON with key userInfo and fills values to user
 const getData = async () => {
@@ -74,6 +124,9 @@ export default function UserInputNoGoals( {route, navigation } ){
 		+ 'height: ' + user.height + '\n'
 		+ 'goals: ' + user.goals + '\n'
 	);
+
+
+
 	
 	return(
 		<View>
@@ -88,7 +141,7 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 			<OSUButton
 				title='Save Data'
-				onPress={e => {e.preventDefault(), saveData(user), toFoodScreen(user, navigation)}}
+				onPress={e => {e.preventDefault(), saveData(user), SaveUserData(user, navigation)}}
 			/>
 			<OSUButton
 				title='Display Data'
@@ -96,4 +149,9 @@ export default function UserInputNoGoals( {route, navigation } ){
 			/>
 		</View>
 	);
+
+
+
+
+	
 }
