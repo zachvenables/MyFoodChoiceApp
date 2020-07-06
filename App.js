@@ -7,6 +7,7 @@ import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 
+
 //Screens for entire app
 //-Venables
 import UserInput from './screens/UserInput';
@@ -20,7 +21,6 @@ import RestrictionInputScreen from './screens/RestrictionInputScreen';
 import UserInputNoGoals from './screens/UserInputNoGoals';
 import NearestFoodScreen from './screens/NearestFoodScreen';
 
-
 const Stack = createStackNavigator();
 
 
@@ -28,7 +28,9 @@ const Stack = createStackNavigator();
 //-Venables
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
+
   //console.disableYellowBox = true;
+
 
   if (!isLoadingComplete) {
     return null;
