@@ -29,6 +29,9 @@ const Stack = createStackNavigator();
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
 
+  //console.disableYellowBox = true;
+
+
   if (!isLoadingComplete) {
     return null;
   } else {

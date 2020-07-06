@@ -1,5 +1,8 @@
 //import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
+
+import { YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
+
 import { ScrollView, TextInput, Button, Text, View } from 'react-native';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
@@ -8,7 +11,15 @@ import 'firebase/firestore';
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
+//import {decode, encode} from 'base-64';
+
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
+
 import Colors from '../constants/Colors';
+
 
 
 class NearestFoodScreen extends React.Component {
@@ -16,6 +27,10 @@ class NearestFoodScreen extends React.Component {
 	constructor(props) {
 		super (props);
 		
+		this.locationName = "Eatery";
+
+		this.state = {};
+
 		//Initialize Firebase..
 		if(!firebase.apps.length){
 			firebase.initializeApp({
@@ -69,12 +84,13 @@ class NearestFoodScreen extends React.Component {
 				{'name': 'Chicken Grilled Nacho', 'calories': 170, 'id': 30}
 			]
 		};
+
 		
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
 		this.getDirections = this.getDirections.bind(this);
 		this.getData = this.getData.bind(this);
-		
+
 	}
 
 	getData(data){
@@ -106,10 +122,10 @@ class NearestFoodScreen extends React.Component {
 	}
 
 	render() {
-		var { user } = this.props.route.params;
+		var { user, location, nextState } = this.props.route.params;
 
 		//alert(this.database.collection('location'));
-		
+
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
 			<OSUPrompt prompt = 'Nearest Food' />
@@ -117,12 +133,13 @@ class NearestFoodScreen extends React.Component {
 					title="Meal Plan Balance" 
 					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
 			/>
-			<OSUPrompt prompt = {this.locationName} />
+
+			<OSUPrompt prompt = {location} />
 			<View style={{width: '100%', height: 350, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
 				<ScrollView style={{width: '90%'}}>
 					{
-						this.state.foods.map((item, index) =>(
-							<View key={item.id} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
+						nextState.map((item, key) =>(
+							<View key={key} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
 								<Text style = {{color: Colors.tOSUscarlet, fontSize: 20}}>{item.name}     Calories: {item.calories}</Text>
 							</View>
 						))
@@ -130,35 +147,19 @@ class NearestFoodScreen extends React.Component {
 				</ScrollView>
 			</View>
 
-
-
-
-
 			<View style={{paddingTop:100}}/> 
-
-
-
-
 
 			<OSUButton 
 				title="Next Location"
 				onPress={e => {e.preventDefault(), this.loadNextLocation(user)}}
 			/>
 
-
-
-
-
 			<View style={{paddingTop:10}}/>
-
-
-
 
 			<OSUButton 
 				title="Get Directions"
 				onPress={e => {e.preventDefault(), this.getDirections(user)}}
 			/>
-			
 			
 		</View>
 		);

@@ -3,6 +3,8 @@ import { StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import OSUButton from '../components/Button.js'
 
+
+
 //class for storing restriction info
 //-Venables
 class RestrictionTracker {
@@ -48,6 +50,7 @@ class User{
 
 class HomeScreen extends React.Component {
 
+
   //If user data exists, give option to edit data or continue.
   //If no data exists, continue with user input process.  
   async checkUserData() {
@@ -84,7 +87,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#fff",
+  },
+
+  button:{
+    width: "60%"
   },
   
 });
