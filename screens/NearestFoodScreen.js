@@ -1,20 +1,26 @@
 //import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { ScrollView, TextInput, Button, Text, View } from 'react-native';
+import { YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
 
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
-import {decode, encode} from 'base-64';
+//import {decode, encode} from 'base-64';
 
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
 
 
 class NearestFoodScreen extends React.Component {
 	
 	constructor(props) {
 		super (props);
+
+		
+
+
 		/*
 		//Initialize Firebase..
 		if(!firebase.apps.length){
@@ -36,6 +42,7 @@ class NearestFoodScreen extends React.Component {
 		this.locationName = "Eatery";
 
 		this.state = {
+		/*
 			foods: [
 				{'name': 'FoodA', 'calories': 100, 'id': 1},
 				{'name': 'FoodB', 'calories': 200, 'id': 2},
@@ -47,6 +54,7 @@ class NearestFoodScreen extends React.Component {
 				{'name': 'FoodH', 'calories': 100, 'id': 8},
 				{'name': 'FoodI', 'calories': 300, 'id': 9}
 			]
+			*/
 		};
 		
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
@@ -75,7 +83,7 @@ class NearestFoodScreen extends React.Component {
 	}
 
 	render() {
-		var { user, location } = this.props.route.params;
+		var { user, location, nextState } = this.props.route.params;
 
 		//alert(this.database.collection('location'));
 		
@@ -90,9 +98,9 @@ class NearestFoodScreen extends React.Component {
 			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightgrey'}}>
 				<ScrollView style={{width: '90%'}}>
 					{
-						this.state.foods.map((item, index) =>(
-							<View key={item.id} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
-								<Text>{item.name}     Calories: {item.calories}</Text>
+						nextState.map((item, key) =>(
+							<View key={key} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
+								<Text>{item.name} Calories: {item.calories}</Text>
 							</View>
 						))
 					}

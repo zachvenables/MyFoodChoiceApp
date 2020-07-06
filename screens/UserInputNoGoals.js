@@ -39,23 +39,17 @@ async function SaveUserData(user, navigation){
 	var location = "";
 	var nextState = [];
 	var food = [];
-	
-	await database.collection('location').doc('restaraunt_a1').get().then(async function (doc) {
-			if(!doc.exists){
-				alert('error');	
-				
-			}else{
-				location = doc.data().name;
-				console.log(doc.data());
-				
-			}
-		}).catch(error =>{
-			console.log(error);
-	});
 
-	//console.log(food);
+	const snapshota = await database.collection('location').doc('restaraunt_a1').get();
+	location = snapshota.data().name;
+	console.log("location: " + location);
 	
-	//await setTimeout(() => { console.log("World!"); }, 2000);
+	const snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods').get();
+	snapshot.docs.map(doc => nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories}));
+
+	
+	
+	await setTimeout(() => { navigation.navigate('NearestFoodScreen', { user, location, nextState });; }, 2000);
 	
 
 	//var foodItems = await this.database.collection('location');
@@ -69,7 +63,7 @@ async function SaveUserData(user, navigation){
 	});
 	*/
 		
-	navigation.navigate('NearestFoodScreen', { user, location });
+	//navigation.navigate('NearestFoodScreen', { user, location });
 }
 
 export default function UserInputNoGoals( {route, navigation } ){
