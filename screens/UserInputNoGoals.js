@@ -49,8 +49,37 @@ async function SaveUserData(user, navigation){
 	
   //queries the data about the first restaurant ***UPDATE WHEN WE ADD GEOLOCATION***
   //-Venables
-	const snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods').get();
-	snapshot.docs.map(doc => nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories}));
+	var snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods');
+  //remove restrictions
+	if(user.restrictions.Eggs){
+		snapshot = snapshot.where("restriction_egg_free","==",user.restrictions.Eggs);
+	}
+	if(user.restrictions.Gluten){
+		snapshot = snapshot.where("restriction_gluten_free","==",user.restrictions.Gluten);
+	}
+	if(user.restrictions.Fish){
+		snapshot = snapshot.where("restriction_fish_free","==",user.restrictions.Fish);
+	}
+	if(user.restrictions.Peanut){
+		snapshot = snapshot.where("restriction_peanut_free","==",user.restrictions.Peanut);
+	}
+	if(user.restrictions.Soy){
+		snapshot = snapshot.where("restriction_soy_free","==",user.restrictions.Soy);
+	}
+	if(user.restrictions.TreeNuts){
+		snapshot = snapshot.where("restriction_treenut_free","==",user.restrictions.TreeNuts);
+	}
+	if(user.restrictions.Vegan){
+		snapshot = snapshot.where("restriction_vegan","==",user.restrictions.Vegan);
+	}
+	if(user.restrictions.Vegatarian){
+		snapshot = snapshot.where("restriction_vegatarian","==",user.restrictions.Vegatarian);
+	}
+	if(user.restrictions.ShellFish){
+		snapshot = snapshot.where("restriction_shellfish_free","==",user.restrictions.ShellFish);
+	}
+	snapshot.get().then(snapshot => {snapshot.forEach(doc => {nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories})})});
+
 
 	
 	//waits for the query to finish before navigating
