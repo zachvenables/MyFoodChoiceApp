@@ -15,7 +15,6 @@ class NearestFoodScreen extends React.Component {
 	
 	constructor(props) {
 		super (props);
-		this.state = {};
 		
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
