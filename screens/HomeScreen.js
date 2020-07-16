@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { Alert, Text, StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import OSUButton from '../components/Button.js'
+import OSUButton from '../components/Button.js';
+import * as Location from 'expo-location';
 
 
 
@@ -50,6 +51,10 @@ class User{
 
 class HomeScreen extends React.Component {
 
+    state = {
+        location: null
+    };
+
 
   //If user data exists, give option to edit data or continue.
   //If no data exists, continue with user input process.  
@@ -69,15 +74,26 @@ class HomeScreen extends React.Component {
     }
 }
 
+
   render(){  
+
+    if(this.state.location == null){
+        navigator.geolocation.getCurrentPosition(
+			position => {
+				const location = JSON.stringify(position);
+
+				this.setState({ location });
+			},
+			error => Alert.alert(error.message),
+			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+	    );
+	}
+
+
     return (
       <View style={styles.container}>
+      <Text>{this.state.location}</Text>
        <OSUButton onPress={e => {e.preventDefault(), this.checkUserData()}} title="Enter Data" />
-        {/* <Button
-          onPress={() => navigation.navigate('UserInput')}
-          title="Enter Data"
-          color="#990000"
-          /> */}
       </View>
   );
   }

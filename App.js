@@ -10,6 +10,7 @@ import LinkingConfiguration from './navigation/LinkingConfiguration';
 
 //Screens for entire app
 //-Venables
+import Home from './screens/HomeScreen';
 import UserInput from './screens/UserInput';
 import UserInputGoals from './screens/UserInputGoals';
 import WeightInputScreen from './screens/WeightInputScreen';
@@ -31,7 +32,6 @@ export default function App(props) {
 
   //console.disableYellowBox = true;
 
-
   if (!isLoadingComplete) {
     return null;
   } else {
@@ -40,7 +40,7 @@ export default function App(props) {
         {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
+            <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="UserInput" component={UserInput} />
             <Stack.Screen name="UserInputGoals" component={UserInputGoals} />
             <Stack.Screen name="WeightInputScreen" component={WeightInputScreen} />
