@@ -74,9 +74,11 @@ class HomeScreen extends React.Component {
     }
 }
 
+
   render(){  
 
-    navigator.geolocation.getCurrentPosition(
+    if(this.state.location == null){
+        navigator.geolocation.getCurrentPosition(
 			position => {
 				const location = JSON.stringify(position);
 
@@ -84,18 +86,14 @@ class HomeScreen extends React.Component {
 			},
 			error => Alert.alert(error.message),
 			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-	);
+	    );
+	}
 
 
     return (
       <View style={styles.container}>
       <Text>{this.state.location}</Text>
        <OSUButton onPress={e => {e.preventDefault(), this.checkUserData()}} title="Enter Data" />
-        {/* <Button
-          onPress={() => navigation.navigate('UserInput')}
-          title="Enter Data"
-          color="#990000"
-          /> */}
       </View>
   );
   }

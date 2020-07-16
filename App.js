@@ -31,7 +31,6 @@ export default function App(props) {
   const isLoadingComplete = useCachedResources();
 
   //console.disableYellowBox = true;
-  //<Stack.Screen name="Root" component={BottomTabNavigator} />
 
   if (!isLoadingComplete) {
     return null;
