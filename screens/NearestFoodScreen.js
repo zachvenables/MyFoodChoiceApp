@@ -35,7 +35,7 @@ class NearestFoodScreen extends React.Component {
 	}
 
 	render() {
-		var { user, location, nextState } = this.props.route.params;
+		var { user, location, nextState, restaurantLocation } = this.props.route.params;
 
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
@@ -69,7 +69,7 @@ class NearestFoodScreen extends React.Component {
 
 			<OSUButton 
 				title="Get Directions"
-				onPress={e => {e.preventDefault(), this.props.navigation.navigate('DirectionScreen')}}
+				onPress={e => {e.preventDefault(), this.props.navigation.navigate('DirectionScreen', { restaurantLocation })}}
 			/>
 			
 		</View>

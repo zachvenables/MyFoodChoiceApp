@@ -12,14 +12,53 @@ import 'firebase/firestore';
 
 
 class UserInputNoGoals extends React.Component{
-	state = {animate: false};
+	state = {animate: false, UserLocation: JSON.parse(global.Location).coords};
 	constructor(props){
 		super (props);
+
+		this.location;
+		
 
 		this.SaveUserData = this.SaveUserData.bind(this);
 		this.getData = this.getData.bind(this);
 		this.saveData = this.saveData.bind(this);
-		//this.toFoodScreen = this.toFoodScreen(this);
+		this.getClosestLocation = this.getClosestLocation.bind(this);
+	}
+
+	getClosestLocation(){
+			var locations = [{name: 'restaraunt_a1', latitude: 39.996768, longitude: -83.013802}, 
+				{name: 'restaraunt_a3', latitude: 40.004874, longitude: -83.013215}, 
+				{name: 'restaraunt_a4', latitude: 40.004307, longitude: -83.010929}, 
+				{name: 'restaraunt_a5', latitude: 39.999364, longitude: -83.018258}, 
+				{name: 'restaraunt_a6', latitude: 39.994172, longitude: -83014106}, 
+				{name: 'restaraunt_a7', latitude: 39.997536, longitude: -83.014577}, 
+				{name: 'restaraunt_a8', latitude: 39.999948, longitude: -83.021801}, 
+				{name: 'restaraunt_a10', latitude: 40.002565, longitude: -83.016633}, 
+				{name: 'restaraunt_a11', latitude: 40.002834, longitude: -83.016698}, 
+				{name: 'restaraunt_a12', latitude: 40.007038, longitude: -83.018217}, 
+				{name: 'restaraunt_a13', latitude: 40.004059, longitude: -83.013186},
+				{name: 'restaraunt_a14', latitude: 40.000792, longitude: -83.015056}
+			];
+
+		var minDistance = 1000000;
+		var closestLocation = locations[0];
+		for(var i = 0; i < locations.length; i ++){
+			var x = locations[i].latitude;
+			var y = locations[i].longitude;
+			var userX = this.state.UserLocation.latitude;
+			var userY = this.state.UserLocation.longitude;
+			
+			var distance = Math.sqrt(Math.pow((Math.abs(x-userX)), 2)+Math.pow(Math.abs(y-userY), 2));
+			
+			if (distance < minDistance){
+				minDistance = distance;
+				closestLocation = locations[i];
+			}
+		}
+
+		this.location = closestLocation;
+
+
 	}
 
 	//saves the users data, accesses the firebase, navigates to the next screen
@@ -30,7 +69,8 @@ class UserInputNoGoals extends React.Component{
 
 			if (!global.atob) { global.atob = decode; }
 
-	
+			
+
 			//Initialize Firebase..
 			if(!firebase.apps.length){
 				 firebase.initializeApp({
@@ -47,21 +87,23 @@ class UserInputNoGoals extends React.Component{
 		
 			var database = firebase.firestore();
 			var location = "";
+			var restaurantLocation = this.location;
 			var nextState = [];
+			
 	
 		  //Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
 		  //-Venables
-			const snapshota = await database.collection('location').doc('restaraunt_a1').get();
+			const snapshota = await database.collection('location').doc(this.location.name).get();
 			location = snapshota.data().name;
 	
 		  //queries the data about the first restaurant ***UPDATE WHEN WE ADD GEOLOCATION***
 		  //-Venables
-			const snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods').get();
+			const snapshot = await database.collection('location').doc(this.location.name).collection('foods').get();
 			snapshot.docs.map(doc => nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories}));
 
 			//waits for the query to finish before navigating
 		  //-Venables
-			await setTimeout(() => {this.setState({animate: false}), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState });; }, 1500);
+			await setTimeout(() => {this.setState({animate: false}), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState, restaurantLocation });; }, 1500);
 	}
 
 	//Parses JSON with key userInfo and fills values to user
@@ -97,7 +139,7 @@ class UserInputNoGoals extends React.Component{
 	async saveData (user){
 		try{
 			await AsyncStorage.setItem('userInfo', JSON.stringify(user));
-			alert('saved!');
+			//alert('saved!');
 		}catch(e){
 			console.log(e);
 		}
@@ -106,6 +148,9 @@ class UserInputNoGoals extends React.Component{
 	render(){
 		var { user } = this.props.route.params;
 		const animate = this.state.animate;
+
+		this.getClosestLocation();
+
 	
 		return(
 			<View>

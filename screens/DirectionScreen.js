@@ -8,11 +8,11 @@ import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
 //must add in key from GDrive
-const GOOGLE_API_KEY = '';
+const GOOGLE_API_KEY = 'AIzaSyD-SLZuE9347jsoS7P8LKKffy0xFg1YEXw';
 
 class DirectionScreen extends React.Component {
 	
-	state = {};
+	state = { UserLocation: JSON.parse(global.Location).coords};
 	constructor(props){
 		super(props);
 
@@ -22,23 +22,25 @@ class DirectionScreen extends React.Component {
 	//39.997747, -83.033540
 
 	render(){
-	
+		var { restaurantLocation } = this.props.route.params;
+
 		return(
 			<MapView
-				initialRegion={{latitude: 40.000796, longitude: -83.034572, latitudeDelta: 0.02, longitudeDelta: 0.02}}
+				initialRegion={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude, latitudeDelta: 0.0009, longitudeDelta: 0.0009}}
 				style = {{height: 400, marginTop: 80}}
 				showsUserLocation = {true}
 				followUserLocation = {true}
 				zoomEnabled = {true}
 			>
-				<MapView.Marker coordinate={{latitude: 40.003146, longitude: -83.035581}} />
-				<MapView.Marker coordinate={{latitude: 39.997747, longitude: -83.033540}} />
+				<MapView.Marker coordinate={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude}} />
+				<MapView.Marker coordinate={{latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude}} />
 				<MapViewDirections
-					origin={{latitude: 40.003146, longitude: -83.035581}}
-					destination={{latitude: 39.997747, longitude: -83.033540}}
+					origin={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude}}
+					destination={{latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude}}
+					mode={"WALKING"}
 					apikey={GOOGLE_API_KEY}
 					strokeWidth={3}
-					strokeColor={"hotpink"}
+					strokeColor={"red"}
 				/>
 			</MapView>
 		);

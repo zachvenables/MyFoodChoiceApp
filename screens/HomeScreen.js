@@ -88,7 +88,7 @@ class HomeScreen extends React.Component {
 			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
 	    );
 	}
-
+    global.Location = this.state.location;
 
     return (
       <View style={styles.container}>
