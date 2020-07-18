@@ -26,7 +26,7 @@ class DirectionScreen extends React.Component {
 
 		return(
 			<MapView
-				initialRegion={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude, latitudeDelta: 0.0009, longitudeDelta: 0.0009}}
+				initialRegion={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude, latitudeDelta: Math.abs(restaurantLocation.latitude - this.state.UserLocation.latitude), longitudeDelta: Math.abs(restaurantLocation.longitude - this.state.UserLocation.longitude)}}
 				style = {{height: 400, marginTop: 80}}
 				showsUserLocation = {true}
 				followUserLocation = {true}
