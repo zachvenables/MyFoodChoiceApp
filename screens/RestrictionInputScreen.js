@@ -30,26 +30,6 @@ export default function RestrictionInputScreen ( {route, navigation } ) {
 
 	//Submit button
 	const handleSubmit = event => {
-		alert(
-			'mealPlan: ' + user.mealPlan.type + '\n'
-			+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
-			+ 'TradVisitExch: ' + user.mealPlan.TraditionalVisitExchange + '\n'
-			+ 'DiningDollars: ' + user.mealPlan.DiningDollars + '\n'
-			+ 'BuckIDCash: ' + user.mealPlan.BuckIDCash + '\n'
-			+ 'gluten: ' + user.restrictions.Gluten + '\n'
-			+ 'shellfish: ' + user.restrictions.ShellFish + '\n'
-			+ 'eggs: ' + user.restrictions.Eggs + '\n'
-			+ 'fish: ' + user.restrictions.Fish + '\n'
-			+ 'peanuts: ' + user.restrictions.Peanuts + '\n'
-			+ 'soy: ' + user.restrictions.Soy + '\n'
-			+ 'treenuts: ' + user.restrictions.TreeNuts + '\n'
-			+ 'vegetarian: ' + user.restrictions.Vegetarian + '\n'
-			+ 'vegan: ' + user.restrictions.Vegan + '\n'
-			+ 'age: ' + user.age + '\n'
-			+ 'weight: ' + user.weight + '\n'
-			+ 'height: ' + user.height + '\n'
-			+ 'goals: ' + user.goals + '\n'
-		);
 		event.preventDefault();
 		//Set all restrictions from checkbox state
 		user.restrictions.Dairy = isDairy;
