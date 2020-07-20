@@ -49,50 +49,81 @@ class UserInputNoGoals extends React.Component{
 			var location = "";
 			var nextState = [];
 	
-		  //Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
-		  //-Venables
-			const snapshota = await database.collection('location').doc('restaraunt_a1').get();
-			location = snapshota.data().name;
-	
-		  //queries the data about the first restaurant ***UPDATE WHEN WE ADD GEOLOCATION***
-		  //-Venables
-			const snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods').get();
-			snapshot.docs.map(doc => nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories}));
-
-			//waits for the query to finish before navigating
-		  //-Venables
-			await setTimeout(() => {this.setState({animate: false}), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState });; }, 1500);
+	//Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
+	//-Venables
+	const snapshota = await database.collection('location').doc('restaraunt_a1').get();
+	location = snapshota.data().name;
+  	//queries the data about the first restaurant ***UPDATE WHEN WE ADD GEOLOCATION***
+  	//-Venables
+	var snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods');
+  	//remove restrictions
+	if(user.restrictions.Eggs){
+		snapshot = snapshot.where("restriction_egg_free","==",user.restrictions.Eggs);
 	}
-
-	//Parses JSON with key userInfo and fills values to user
-	async getData(user) {
-			try{
-				const jsonUser = await AsyncStorage.getItem('userInfo');
-				user = JSON.parse(jsonUser);
-				alert(
-					'mealPlan: ' + user.mealPlan.type + '\n'
-					+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
-					+ 'TradVisitExch: ' + user.mealPlan.TraditionalVisitExchange + '\n'
-					+ 'DiningDollars: ' + user.mealPlan.DiningDollars + '\n'
-					+ 'BuckIDCash: ' + user.mealPlan.BuckIDCash + '\n'
-					+ 'gluten: ' + user.restrictions.Gluten + '\n'
-					+ 'shellfish: ' + user.restrictions.ShellFish + '\n'
-					+ 'eggs: ' + user.restrictions.Eggs + '\n'
-					+ 'fish: ' + user.restrictions.Fish + '\n'
-					+ 'peanuts: ' + user.restrictions.Peanuts + '\n'
-					+ 'soy: ' + user.restrictions.Soy + '\n'
-					+ 'treenuts: ' + user.restrictions.TreeNuts + '\n'
-					+ 'vegetarian: ' + user.restrictions.Vegetarian + '\n'
-					+ 'vegan: ' + user.restrictions.Vegan + '\n'
-					+ 'age: ' + user.age + '\n'
-					+ 'weight: ' + user.weight + '\n'
-					+ 'height: ' + user.height + '\n'
-					+ 'goals: ' + user.goals + '\n'
-				);
-			}catch(e){
-				console.log(e);
-			}
+	if(user.restrictions.Gluten){
+		snapshot = snapshot.where("restriction_gluten_free","==",user.restrictions.Gluten);
 	}
+	if(user.restrictions.Fish){
+		snapshot = snapshot.where("restriction_fish_free","==",user.restrictions.Fish);
+	}
+	if(user.restrictions.Peanut){
+		snapshot = snapshot.where("restriction_peanut_free","==",user.restrictions.Peanut);
+	}
+	if(user.restrictions.Soy){
+		snapshot = snapshot.where("restriction_soy_free","==",user.restrictions.Soy);
+	}
+	if(user.restrictions.TreeNuts){
+		snapshot = snapshot.where("restriction_treenut_free","==",user.restrictions.TreeNuts);
+	}
+	if(user.restrictions.Vegan){
+		snapshot = snapshot.where("restriction_vegan","==",user.restrictions.Vegan);
+	}
+	if(user.restrictions.Vegatarian){
+		snapshot = snapshot.where("restriction_vegatarian","==",user.restrictions.Vegatarian);
+	}
+	if(user.restrictions.ShellFish){
+		snapshot = snapshot.where("restriction_shellfish_free","==",user.restrictions.ShellFish);
+	}
+	snapshot.get().then(snapshot => {snapshot.forEach(doc => {nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories})})});
+
+
+
+	//waits for the query to finish before navigating
+	//-Venables
+	await setTimeout(() => {this.setState({animate: false}), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState });; }, 1500);
+}
+
+//Parses JSON with key userInfo and fills values to user
+ 	async getData() {
+		try{
+			const jsonUser = await AsyncStorage.getItem('userInfo');
+			user = JSON.parse(jsonUser);
+			alert(
+				'mealPlan: ' + user.mealPlan.type + '\n'
+				+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
+				+ 'TradVisitExch: ' + user.mealPlan.TraditionalVisitExchange + '\n'
+				+ 'DiningDollars: ' + user.mealPlan.DiningDollars + '\n'
+				+ 'BuckIDCash: ' + user.mealPlan.BuckIDCash + '\n'
+				+ 'gluten: ' + user.restrictions.Gluten + '\n'
+				+ 'shellfish: ' + user.restrictions.ShellFish + '\n'
+				+ 'eggs: ' + user.restrictions.Eggs + '\n'
+				+ 'fish: ' + user.restrictions.Fish + '\n'
+				+ 'peanuts: ' + user.restrictions.Peanuts + '\n'
+				+ 'soy: ' + user.restrictions.Soy + '\n'
+				+ 'treenuts: ' + user.restrictions.TreeNuts + '\n'
+				+ 'wheat: ' + user.restrictions.Wheat + '\n'
+				+ 'dairy: ' + user.restrictions.Dairy + '\n'
+				+ 'vegetarian: ' + user.restrictions.Vegetarian + '\n'
+				+ 'vegan: ' + user.restrictions.Vegan + '\n'
+				+ 'age: ' + user.age + '\n'
+				+ 'weight: ' + user.weight + '\n'
+				+ 'height: ' + user.height + '\n'
+				+ 'goals: ' + user.goals + '\n'
+			);
+		}catch(e){
+			console.log(e);
+		}
+}
 
 	async saveData (user){
 		try{

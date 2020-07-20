@@ -45,6 +45,12 @@ class RestrictionInputScreen extends React.Component {
 			case "TreeNuts":
 				user.restrictions.TreeNuts = !user.restrictions.TreeNuts
 				break;
+			case "Wheat":
+				user.restrictions.Wheat = !user.restrictions.Wheat
+				break;
+			case "Dairy":
+				user.restrictions.Dairy = !user.restrictions.Dairy
+				break;
 			case "Vegetarian":
 				user.restrictions.Vegetarian = !user.restrictions.Vegetarian
 				break;
@@ -117,6 +123,16 @@ class RestrictionInputScreen extends React.Component {
 					title="TreeNuts"
 					onPress = {e=> { e.preventDefault(); this.handlePress("TreeNuts", user)} }
 					submit = {user.restrictions.TreeNuts}
+				/>
+				<OSUButton
+					title="Wheat"
+					onPress = {e=> { e.preventDefault(); this.handlePress("Wheat", user)} }
+					submit = {user.restrictions.Wheat}
+				/>
+				<OSUButton
+					title="Dairy"
+					onPress = {e=> { e.preventDefault(); this.handlePress("Dairy", user)} }
+					submit = {user.restrictions.Dairy}
 				/>
 				<OSUButton
 					title="Vegetarian"
