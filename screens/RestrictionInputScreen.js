@@ -1,14 +1,144 @@
-import * as React from 'react';
+import React, { useState } from 'react'
 import { View } from 'react-native';
 
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 import OSUCheckbox from '../components/Checkbox.js'
 
+//Converted to Functional from class for state hook functionality
 
+//Depricated
 //Class used to track which restriction selections have been made
 //-Venables
 
+export default function RestrictionInputScreen ( {route, navigation } ) {
+	var { user } = route.params;
+	//var { user } = this.props.route.params;
+
+	//Create initial state and setters for checkboxes
+	const [isDairy, setDairy] = useState(user.restrictions.Dairy);
+	const [isEggs, setEggs] = useState(user.restrictions.Eggs);
+	const [isFish, setFish] = useState(user.restrictions.Fish);
+	const [isGluten, setGluten] = useState(user.restrictions.Gluten);
+	const [isPeanuts, setPeanuts] = useState(user.restrictions.Peanuts);
+	const [isShellFish, setShellFish] = useState(user.restrictions.ShellFish);
+	const [isSoy, setSoy] = useState(user.restrictions.Soy);
+	const [isTreeNuts, setTreeNuts] = useState(user.restrictions.TreeNuts);
+	const [isWheat, setWheat] = useState(user.restrictions.Wheat);
+	const [isVegetarian, setVegetarian] = useState(user.restrictions.Vegetarian);
+	const [isVegan, setVegan] = useState(user.restrictions.Vegan);
+
+	//Submit button
+	const handleSubmit = event => {
+		alert(
+			'mealPlan: ' + user.mealPlan.type + '\n'
+			+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
+			+ 'TradVisitExch: ' + user.mealPlan.TraditionalVisitExchange + '\n'
+			+ 'DiningDollars: ' + user.mealPlan.DiningDollars + '\n'
+			+ 'BuckIDCash: ' + user.mealPlan.BuckIDCash + '\n'
+			+ 'gluten: ' + user.restrictions.Gluten + '\n'
+			+ 'shellfish: ' + user.restrictions.ShellFish + '\n'
+			+ 'eggs: ' + user.restrictions.Eggs + '\n'
+			+ 'fish: ' + user.restrictions.Fish + '\n'
+			+ 'peanuts: ' + user.restrictions.Peanuts + '\n'
+			+ 'soy: ' + user.restrictions.Soy + '\n'
+			+ 'treenuts: ' + user.restrictions.TreeNuts + '\n'
+			+ 'vegetarian: ' + user.restrictions.Vegetarian + '\n'
+			+ 'vegan: ' + user.restrictions.Vegan + '\n'
+			+ 'age: ' + user.age + '\n'
+			+ 'weight: ' + user.weight + '\n'
+			+ 'height: ' + user.height + '\n'
+			+ 'goals: ' + user.goals + '\n'
+		);
+		event.preventDefault();
+		//Set all restrictions from checkbox state
+		user.restrictions.Dairy = isDairy;
+		user.restrictions.Eggs = isEggs;
+		user.restrictions.Fish = isFish;
+		user.restrictions.Gluten = isGluten;
+		user.restrictions.Peanuts = isPeanuts;
+		user.restrictions.ShellFish = isShellFish;
+		user.restrictions.Soy = isSoy;
+		user.restrictions.TreeNuts = isTreeNuts;
+		user.restrictions.Wheat = isWheat;
+		user.restrictions.Vegetarian = isVegetarian;
+		user.restrictions.Vegan = isVegan;
+
+		//Submit and go to screen
+		if(user.goals == 'none'){
+			navigation.navigate('UserInputNoGoals', { user });
+		}else{
+			navigation.navigate('UserInputGoals', { user });
+		}
+	  }
+
+	return (
+			<View>
+				<OSUPrompt prompt = 'Select Dietary Restrictions'/>
+
+				<OSUCheckbox 
+					option = 'Dairy' 
+					isSelected = {isDairy}
+					setSelection = {setDairy} 
+				/>
+				<OSUCheckbox 
+					option = 'Eggs' 
+					isSelected = {isEggs}
+					setSelection = {setEggs} 
+				/>
+				<OSUCheckbox 
+					option = 'Fish' 
+					isSelected = {isFish}
+					setSelection = {setFish} 
+				/>
+				<OSUCheckbox 
+					option = 'Gluten' 
+					isSelected = {isGluten}
+					setSelection = {setGluten} 
+				/>
+				<OSUCheckbox 
+					option = 'Peanuts' 
+					isSelected = {isPeanuts}
+					setSelection = {setPeanuts} 
+				/>
+				<OSUCheckbox 
+					option = 'ShellFish' 
+					isSelected = {isShellFish}
+					setSelection = {setShellFish} 
+				/>
+				<OSUCheckbox 
+					option = 'Soy' 
+					isSelected = {isSoy}
+					setSelection = {setSoy} 
+				/>
+				<OSUCheckbox 
+					option = 'Tree Nuts' 
+					isSelected = {isTreeNuts}
+					setSelection = {setTreeNuts} 
+				/>
+				<OSUCheckbox 
+					option = 'Wheat' 
+					isSelected = {isWheat}
+					setSelection = {setWheat} 
+				/>
+				<OSUCheckbox 
+					option = 'Vegetarian' 
+					isSelected = {isVegetarian}
+					setSelection = {setVegetarian} 
+				/>
+				<OSUCheckbox 
+					option = 'Vegan' 
+					isSelected = {isVegan}
+					setSelection = {setVegan} 
+				/>
+				<OSUButton 
+					title="Done"
+					onPress = { handleSubmit}
+				/>
+			</View>
+	)
+}
+/*
 //Class for all restriction input functionality
 //-Venables
 class RestrictionInputScreen extends React.Component {
@@ -16,52 +146,52 @@ class RestrictionInputScreen extends React.Component {
 		super (props);
 		this.value;
 
-		this.handlePress = this.handlePress.bind(this);
+		//this.handlePress = this.handlePress.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 
 	}
 
 	//Uses different cases based on button type, has toggle properties
 	//-Venables
-	handlePress(restriction, user) {
-		switch(restriction){
-			case "Gluten":
-				user.restrictions.Gluten = !user.restrictions.Gluten
-				break;
-			case "ShellFish":
-				user.restrictions.ShellFish = !user.restrictions.ShellFish
-				break;
-			case "Eggs":
-				user.restrictions.Eggs = !user.restrictions.Eggs
-				break;
-			case "Fish":
-				user.restrictions.Fish = !user.restrictions.Fish
-				break;
-			case "Peanuts":
-				user.restrictions.Peanuts = !user.restrictions.Peanuts
-				break;
-			case "Soy":
-				user.restrictions.Soy = !user.restrictions.Soy
-				break;
-			case "TreeNuts":
-				user.restrictions.TreeNuts = !user.restrictions.TreeNuts
-				break;
-			case "Vegetarian":
-				user.restrictions.Vegetarian = !user.restrictions.Vegetarian
-				break;
-			case "Vegan":
-				user.restrictions.Vegan = !user.restrictions.Vegan
-				break;
-			default:
-				alert("Something didn't work right");
-				break;
-		}
+	// handlePress(restriction, user) {
+	// 	switch(restriction){
+	// 		case "Gluten":
+	// 			user.restrictions.Gluten = !user.restrictions.Gluten
+	// 			break;
+	// 		case "ShellFish":
+	// 			user.restrictions.ShellFish = !user.restrictions.ShellFish
+	// 			break;
+	// 		case "Eggs":
+	// 			user.restrictions.Eggs = !user.restrictions.Eggs
+	// 			break;
+	// 		case "Fish":
+	// 			user.restrictions.Fish = !user.restrictions.Fish
+	// 			break;
+	// 		case "Peanuts":
+	// 			user.restrictions.Peanuts = !user.restrictions.Peanuts
+	// 			break;
+	// 		case "Soy":
+	// 			user.restrictions.Soy = !user.restrictions.Soy
+	// 			break;
+	// 		case "TreeNuts":
+	// 			user.restrictions.TreeNuts = !user.restrictions.TreeNuts
+	// 			break;
+	// 		case "Vegetarian":
+	// 			user.restrictions.Vegetarian = !user.restrictions.Vegetarian
+	// 			break;
+	// 		case "Vegan":
+	// 			user.restrictions.Vegan = !user.restrictions.Vegan
+	// 			break;
+	// 		default:
+	// 			alert("Something didn't work right");
+	// 			break;
+	// 	}
 		
 
-		this.value = user;
-		//this.props.navigation.navigate('RestrictionInputScreen', {user: this.value})
-		//alert('Added restriction: ' + restriction);
-	}
+	// 	this.value = user;
+	// 	//this.props.navigation.navigate('RestrictionInputScreen', {user: this.value})
+	// 	//alert('Added restriction: ' + restriction);
+	// }
 
 	//Logs the selections that have been made and then outputs them to the screen
 	//Primarily for testing
@@ -79,8 +209,6 @@ class RestrictionInputScreen extends React.Component {
 
 	render() {
 		var { user } = this.props.route.params;
-		
-		const [isSelected, setSeletion] = useState(false);
 		
 		return(
 			<View>
@@ -140,5 +268,5 @@ class RestrictionInputScreen extends React.Component {
 		);
 	}
 }
-
-export default RestrictionInputScreen;
+*/
+//export default RestrictionInputScreen;

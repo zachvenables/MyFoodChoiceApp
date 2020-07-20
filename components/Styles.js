@@ -67,15 +67,17 @@ checkBoxes = StyleSheet.create({
     container: {
         flexDirection: 'row',
         padding: 8,
-        paddingHorizontal: 20
+        paddingLeft: 60
     },
     text: {
         color: Colors.tOSUblack,
-        height: 40
+        height: 28,
+        fontSize: 20,
+        fontWeight: 'bold'
     }
 
 });
 
 
 
-export { buttons, textBoxes, promptTexts }
+export { buttons, textBoxes, promptTexts, checkBoxes }

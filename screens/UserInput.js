@@ -9,13 +9,15 @@ import OSUPrompt from '../components/Prompt.js'
 //-Venables
 class RestrictionTracker {
 	constructor(){
-		this.Gluten = false;
-		this.ShellFish = false;
+		this.Dairy = false;
 		this.Eggs = false;
-		this.Fish = false;
+		this.Fish = false;		
+		this.Gluten = false;
 		this.Peanuts = false;
+		this.ShellFish = false;
 		this.Soy = false;
 		this.TreeNuts = false;
+		this.Wheat = false;
 		this.Vegetarian = false;
 		this.Vegan = false;
 	}
