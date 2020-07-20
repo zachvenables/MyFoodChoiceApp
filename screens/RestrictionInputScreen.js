@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
+import OSUCheckbox from '../components/Checkbox.js'
 
 
 //Class used to track which restriction selections have been made
@@ -58,7 +59,7 @@ class RestrictionInputScreen extends React.Component {
 		
 
 		this.value = user;
-		this.props.navigation.navigate('RestrictionInputScreen', {user: this.value})
+		//this.props.navigation.navigate('RestrictionInputScreen', {user: this.value})
 		//alert('Added restriction: ' + restriction);
 	}
 
@@ -78,6 +79,8 @@ class RestrictionInputScreen extends React.Component {
 
 	render() {
 		var { user } = this.props.route.params;
+		
+		const [isSelected, setSeletion] = useState(false);
 		
 		return(
 			<View>

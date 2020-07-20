@@ -61,6 +61,19 @@ textBoxes = StyleSheet.create({
         borderBottomWidth: 5,
         borderRadius: 5
     },
+}),
+
+checkBoxes = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        padding: 8,
+        paddingHorizontal: 20
+    },
+    text: {
+        color: Colors.tOSUblack,
+        height: 40
+    }
+
 });
 
 
