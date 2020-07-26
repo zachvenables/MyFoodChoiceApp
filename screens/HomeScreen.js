@@ -17,7 +17,7 @@ class HomeScreen extends React.Component {
   async checkUserData() {
     try {
        const jsonUser = await AsyncStorage.getItem('userInfo');
-       if (jsonUser != null){
+       if (jsonUser == null){
          var user = new User();
          user = JSON.parse(jsonUser);
          this.props.navigation.navigate('UserInputNoGoals', { user })

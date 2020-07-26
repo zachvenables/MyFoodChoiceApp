@@ -174,7 +174,7 @@ class UserInputNoGoals extends React.Component{
 		}catch(e){
 			console.log(e);
 		}
-}
+	}
 
 	async saveData (user){
 		try{
