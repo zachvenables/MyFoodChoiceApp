@@ -18,7 +18,6 @@ class NearestFoodScreen extends React.Component {
 		
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
-		this.getDirections = this.getDirections.bind(this);
 	}
 
 
@@ -35,14 +34,8 @@ class NearestFoodScreen extends React.Component {
 		)
 	}
 
-	getDirections(user){
-		alert(
-			'Remember to rate our app ★★★★★ on the app store!'
-		)
-	}
-
 	render() {
-		var { user, location, nextState } = this.props.route.params;
+		var { user, location, nextState, restaurantLocation } = this.props.route.params;
 
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
@@ -53,7 +46,7 @@ class NearestFoodScreen extends React.Component {
 			/>
 
 			<OSUPrompt prompt = {location} />
-			<View style={{width: '100%', height: 350, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
+			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
 				<ScrollView style={{width: '90%'}}>
 					{
 						nextState.map((item, key) =>(
@@ -76,7 +69,7 @@ class NearestFoodScreen extends React.Component {
 
 			<OSUButton 
 				title="Get Directions"
-				onPress={e => {e.preventDefault(), this.getDirections(user)}}
+				onPress={e => {e.preventDefault(), this.props.navigation.navigate('DirectionScreen', { restaurantLocation })}}
 			/>
 			
 		</View>

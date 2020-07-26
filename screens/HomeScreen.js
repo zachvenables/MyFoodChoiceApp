@@ -45,6 +45,7 @@ class HomeScreen extends React.Component {
 	    );
 	}
 
+    global.Location = this.state.location;
 
     return (
       <View style={styles.container}>
