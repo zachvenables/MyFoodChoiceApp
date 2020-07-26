@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import {decode, encode} from 'base-64';
 
+
+
 import { ActivityIndicator, View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import OSUButton from '../components/Button.js'
@@ -10,8 +12,10 @@ import OSUPrompt from '../components/Prompt.js'
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
+const haversine = require('haversine');
 
 class UserInputNoGoals extends React.Component{
+	
 	state = {animate: false, UserLocation: JSON.parse(global.Location).coords};
 	constructor(props){
 		super (props);
@@ -43,13 +47,17 @@ class UserInputNoGoals extends React.Component{
 		var minDistance = 1000000;
 		var closestLocation = locations[0];
 		for(var i = 0; i < locations.length; i ++){
-			var x = locations[i].latitude;
-			var y = locations[i].longitude;
-			var userX = this.state.UserLocation.latitude;
-			var userY = this.state.UserLocation.longitude;
+			//var x = locations[i].latitude;
+			//var y = locations[i].longitude;
+			//var userX = this.state.UserLocation.latitude;
+			//var userY = this.state.UserLocation.longitude;
+			var userLocation = {latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude};
+			var restaurantLocation = {latitude: locations[i].latitude, longitude: locations[i].longitude};
 			
-			var distance = Math.sqrt(Math.pow((Math.abs(x-userX)), 2)+Math.pow(Math.abs(y-userY), 2));
+			//var distance = Math.sqrt(Math.pow((Math.abs(x-userX)), 2)+Math.pow(Math.abs(y-userY), 2));
 			
+			var distance = haversine(userLocation, restaurantLocation);
+
 			if (distance < minDistance){
 				minDistance = distance;
 				closestLocation = locations[i];

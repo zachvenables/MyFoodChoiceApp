@@ -17,9 +17,6 @@ class DirectionScreen extends React.Component {
 		super(props);
 
 	}
-	//40.000796, -83.034572
-	//40.003146, -83.035581
-	//39.997747, -83.033540
 
 	render(){
 		var { restaurantLocation } = this.props.route.params;
