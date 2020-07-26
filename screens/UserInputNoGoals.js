@@ -102,11 +102,11 @@ class UserInputNoGoals extends React.Component{
 
 	//Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
 	//-Venables
-	const snapshota = await database.collection('location').doc('restaraunt_a1').get();
+	const snapshota = await database.collection('location').doc(restaurantLocation.name).get();
 	location = snapshota.data().name;
   	//queries the data about the first restaurant ***UPDATE WHEN WE ADD GEOLOCATION***
   	//-Venables
-	var snapshot = await database.collection('location').doc('restaraunt_a1').collection('foods');
+	var snapshot = await database.collection('location').doc(restaurantLocation.name).collection('foods');
   	//remove restrictions
 	if(user.restrictions.Eggs){
 		snapshot = snapshot.where("restriction_egg_free","==",user.restrictions.Eggs);
@@ -141,7 +141,7 @@ class UserInputNoGoals extends React.Component{
 
 	//waits for the query to finish before navigating
 	//-Venables
-	await setTimeout(() => {this.setState({animate: false}), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState });; }, 1500);
+	await setTimeout(() => {this.setState({animate: false}), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState, restaurantLocation });; }, 1500);
 }
 
 //Parses JSON with key userInfo and fills values to user
