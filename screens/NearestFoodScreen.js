@@ -145,12 +145,8 @@ class NearestFoodScreen extends React.Component {
 
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
-			<OSUPrompt prompt = 'Nearest Food' />
-			<OSUButton 
-					title="Meal Plan Balance" 
-					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
-			/>
-
+			<Text>  </Text>
+			
 			<OSUPrompt prompt = {this.state.location} />
 			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
 				<ScrollView style={{width: '90%'}}>
@@ -164,14 +160,17 @@ class NearestFoodScreen extends React.Component {
 				</ScrollView>
 			</View>
 
-			<View style={{paddingTop:100}}/> 
-
+			<View style={{paddingTop:50}}/> 
+			<OSUButton 
+					title="Meal Plan Balance" 
+					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
+			/>
+			
 			<OSUButton 
 				title="Next Location"
 				onPress={e => {e.preventDefault(), this.setState({animate: true}), this.loadNextLocation(user)}}
 			/>
 
-			<View style={{paddingTop:10}}/>
 
 			<OSUButton 
 				title="Get Directions"

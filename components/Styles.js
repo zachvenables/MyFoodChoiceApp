@@ -11,13 +11,13 @@ const buttons = StyleSheet.create({
         backgroundColor: Colors.tOSUscarlet,
         borderRadius: 10,
         paddingHorizontal: 10, 
-        paddingVertical: 10,
+        paddingVertical: 6,
     },
     submitButton: {
         backgroundColor: Colors.tOSUgray,
         borderRadius: 10,
         paddingHorizontal: 10, 
-        paddingVertical: 10,
+        paddingVertical: 6,
     },
     text: {
         color: Colors.tOSUwhite,
@@ -30,7 +30,7 @@ const buttons = StyleSheet.create({
 
 promptTexts = StyleSheet.create({
     promptContainer: {
-        paddingTop: 50,
+        paddingTop: 20,
         paddingHorizontal: 50,
         paddingBottom: 2
     },

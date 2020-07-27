@@ -3,7 +3,7 @@ import { Alert, Text, StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Location from 'expo-location';
 import OSUButton from '../components/Button.js';
-//import User from '../User.js'
+import User from '../User.js'
 
 class HomeScreen extends React.Component {
 
@@ -14,15 +14,18 @@ class HomeScreen extends React.Component {
   //If user data exists, give option to edit data or continue.
   //If no data exists, continue with user input process.  
   async checkUserData() {
+
+    var user = new User();
     try {
        const jsonUser = await AsyncStorage.getItem('userInfo');
-       if (jsonUser == null){
-         var user = new User();
+       if (jsonUser != null){
+        
          user = JSON.parse(jsonUser);
-         this.props.navigation.navigate('UserInputNoGoals', { user })
+         this.props.navigation.navigate('UserInput', { user })
        }
        else {
-        this.props.navigation.navigate('UserInput', { user: JSON.parse(jsonUser) })
+       
+        this.props.navigation.navigate('UserInput', { user })
       }
     } catch (e) {
         console.log(e);

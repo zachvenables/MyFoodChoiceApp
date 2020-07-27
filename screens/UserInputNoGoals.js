@@ -5,8 +5,6 @@ import {decode, encode} from 'base-64';
 import { StyleSheet, ActivityIndicator, View } from 'react-native';
 
 import Colors from '../constants/Colors';
-import { colors } from 'react-native-elements';
-
 
 import AwesomeAlert from 'react-native-awesome-alerts';
 
