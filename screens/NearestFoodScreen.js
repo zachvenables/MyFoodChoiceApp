@@ -190,7 +190,7 @@ class NearestFoodScreen extends React.Component {
 				closeOnHardwareBackPress={false}
 				showConfirmButton={true}
 				confirmText="Got it!"
-				confirmButtonColor="#DD6B55"
+				confirmButtonColor={Colors.tOSUscarlet}
 				onCancelPressed={() => {
 					this.setState({showAlert: false});
 				}}

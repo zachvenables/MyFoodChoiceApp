@@ -4,6 +4,10 @@ import {decode, encode} from 'base-64';
 
 import { StyleSheet, ActivityIndicator, View } from 'react-native';
 
+import Colors from '../constants/Colors';
+import { colors } from 'react-native-elements';
+
+
 import AwesomeAlert from 'react-native-awesome-alerts';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -178,17 +182,17 @@ class UserInputNoGoals extends React.Component{
 
 		this.message = 
 				'Meal Plan: ' + user.mealPlan.type + '\n'
-				+ 'Gluten: ' + user.restrictions.Gluten + '\n'
-				+ 'Shellfish: ' + user.restrictions.ShellFish + '\n'
-				+ 'Eggs: ' + user.restrictions.Eggs + '\n'
-				+ 'Fish: ' + user.restrictions.Fish + '\n'
-				+ 'Peanuts: ' + user.restrictions.Peanuts + '\n'
-				+ 'Soy: ' + user.restrictions.Soy + '\n'
-				+ 'TreeNuts: ' + user.restrictions.TreeNuts + '\n'
-				+ 'Wheat: ' + user.restrictions.Wheat + '\n'
-				+ 'Dairy: ' + user.restrictions.Dairy + '\n'
-				+ 'Vegetarian: ' + user.restrictions.Vegetarian + '\n'
-				+ 'Vegan: ' + user.restrictions.Vegan + '\n'
+				+ 'Gluten: ' + (user.restrictions.Gluten ? "Yes":"No") + '\n'
+				+ 'Shellfish: ' + (user.restrictions.ShellFish ? "Yes":"No") + '\n'
+				+ 'Eggs: ' + (user.restrictions.Eggs ? "Yes":"No") + '\n'
+				+ 'Fish: ' + (user.restrictions.Fish ? "Yes":"No") + '\n'
+				+ 'Peanuts: ' + (user.restrictions.Peanuts ? "Yes":"No") + '\n'
+				+ 'Soy: ' + (user.restrictions.Soy ? "Yes":"No") + '\n'
+				+ 'TreeNuts: ' + (user.restrictions.TreeNuts ? "Yes":"No") + '\n'
+				+ 'Wheat: ' + (user.restrictions.Wheat ? "Yes":"No") + '\n'
+				+ 'Dairy: ' + (user.restrictions.Dairy ? "Yes":"No") + '\n'
+				+ 'Vegetarian: ' + (user.restrictions.Vegetarian ? "Yes":"No") + '\n'
+				+ 'Vegan: ' + (user.restrictions.Vegan ? "Yes":"No") + '\n'
 			;
 
 		this.getClosestLocation();
@@ -228,7 +232,7 @@ class UserInputNoGoals extends React.Component{
 					closeOnHardwareBackPress={false}
 					showConfirmButton={true}
 					confirmText="Got it!"
-					confirmButtonColor="#DD6B55"
+					confirmButtonColor={Colors.tOSUscarlet}
 					onCancelPressed={() => {
 						this.setState({showAlert: false});
 					}}
