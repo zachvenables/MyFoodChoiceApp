@@ -1,7 +1,15 @@
+/**
+ *This screen's main functions are to navigate the user to the different input screens and then when the "next" button is selected,
+ * sorts all locations by distance from the user's location.  It stores this value in a global variable titled "locationStack" that can be used in the nearestFoodScreen.
+ *At this time it also pulls from the cloud storage all of the food items associated with the closest location and then passes that to the nearestFoodScreen as well, but as a parameter.
+*/
+
+
 import * as React from 'react';
 import {decode, encode} from 'base-64';
 import { ActivityIndicator, View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import OSUButton from '../components/Button.js';
 import OSUPrompt from '../components/Prompt.js';
 import * as firebase from 'firebase';
@@ -9,28 +17,25 @@ import 'firebase/firestore';
 
 const haversine = require('haversine');
 
-
-//navigates to each respective input screen
-//-Venables
-
 class UserInputGoals extends React.Component{
 
-	state = {animate: false, UserLocation: JSON.parse(global.Location).coords};
+	state = {showAlert: false, animate: false, UserLocation: JSON.parse(global.Location).coords};
 
 	constructor(props){
 		super (props);
 
 		this.location;
 		this.locationStack;
+		this.message = '';
 		
-
 		this.SaveUserData = this.SaveUserData.bind(this);
 		this.getData = this.getData.bind(this);
 		this.saveData = this.saveData.bind(this);
 		this.getClosestLocation = this.getClosestLocation.bind(this);
 	}
 
-
+	//calculates distances to all of the dining locations to the user and then sorts them in order of shortest distance.
+	//-Venables
 	getClosestLocation(){
 			var userLocation = {latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude};
 
@@ -48,48 +53,23 @@ class UserInputGoals extends React.Component{
 				{name: 'restaraunt_a14', latitude: 40.000792, longitude: -83.015056, distance: haversine(userLocation, {latitude: 40.000792, longitude: -83.015056})}
 			];
 
-		
-		/*
-		var minDistance = 1000000;
-		var closestLocation = locations[0];
-		for(var i = 0; i < locations.length; i ++){
-			//var x = locations[i].latitude;
-			//var y = locations[i].longitude;
-			//var userX = this.state.UserLocation.latitude;
-			//var userY = this.state.UserLocation.longitude;
-			var userLocation = {latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude};
-			var restaurantLocation = {latitude: locations[i].latitude, longitude: locations[i].longitude};
-			
-			//var distance = Math.sqrt(Math.pow((Math.abs(x-userX)), 2)+Math.pow(Math.abs(y-userY), 2));
-			
-			var distance = haversine(userLocation, restaurantLocation);
-
-			if (distance < minDistance){
-				minDistance = distance;
-				closestLocation = locations[i];
-			}
-		}
-		*/
 		locations = locations.sort(function (a, b){
 			return a.distance > b.distance;	
 		});
 
 		this.location = locations[0];
 		global.locationStack = locations;
-
-
 	}
 
 
 	//saves the users data, accesses the firebase, navigates to the next screen
+	//-Venables
 	async SaveUserData(user){
 		//Used to correct missing variable bug.  This is a bug with react native, we are using the recommended workaround
 		//-Venables
 		if (!global.btoa) {  global.btoa = encode; }
 
 		if (!global.atob) { global.atob = decode; }
-
-			
 
 		//Initialize Firebase..
 		if(!firebase.apps.length){
@@ -110,8 +90,6 @@ class UserInputGoals extends React.Component{
 		var restaurantLocation = this.location;
 		var nextState = [];
 			
-	
-
 		//Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
 		//-Venables
 		const snapshota = await database.collection('location').doc(restaurantLocation.name).get();
@@ -150,22 +128,19 @@ class UserInputGoals extends React.Component{
 		snapshot.get().then(snapshot => {snapshot.forEach(doc => {nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories})})});
 
 
-
 		//waits for the query to finish before navigating
 		//-Venables
 		await setTimeout(() => {this.setState({animate: false}), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState, restaurantLocation });; }, 1500);
 	}
 
+
+	//Primarily used to display the currently saved data by the user
 	async getData() {
 		try{
 			const jsonUser = await AsyncStorage.getItem('userInfo');
 			user = JSON.parse(jsonUser);
-			alert(
+			this.message = 
 				'mealPlan: ' + user.mealPlan.type + '\n'
-				+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
-				+ 'TradVisitExch: ' + user.mealPlan.TraditionalVisitExchange + '\n'
-				+ 'DiningDollars: ' + user.mealPlan.DiningDollars + '\n'
-				+ 'BuckIDCash: ' + user.mealPlan.BuckIDCash + '\n'
 				+ 'gluten: ' + user.restrictions.Gluten + '\n'
 				+ 'shellfish: ' + user.restrictions.ShellFish + '\n'
 				+ 'eggs: ' + user.restrictions.Eggs + '\n'
@@ -181,12 +156,13 @@ class UserInputGoals extends React.Component{
 				+ 'weight: ' + user.weight + '\n'
 				+ 'height: ' + user.height + '\n'
 				+ 'goals: ' + user.goals + '\n'
-			);
+			;
 		}catch(e){
 			console.log(e);
 		}
 	}
 
+	//this is loaded on every page render to save the changes made to the user attributes
 	async saveData (user){
 		try{
 			await AsyncStorage.setItem('userInfo', JSON.stringify(user));
@@ -196,32 +172,34 @@ class UserInputGoals extends React.Component{
 		}
 	}
 
+
 	render(){
 		var { user } = this.props.route.params;
 		const animate = this.state.animate;
+		const showAlert = this.state.showAlert;
+
+		this.message = 
+				'Meal Plan: ' + user.mealPlan.type + '\n'
+				+ 'Gluten: ' + user.restrictions.Gluten + '\n'
+				+ 'Shellfish: ' + user.restrictions.ShellFish + '\n'
+				+ 'Eggs: ' + user.restrictions.Eggs + '\n'
+				+ 'Fish: ' + user.restrictions.Fish + '\n'
+				+ 'Peanuts: ' + user.restrictions.Peanuts + '\n'
+				+ 'Soy: ' + user.restrictions.Soy + '\n'
+				+ 'TreeNuts: ' + user.restrictions.TreeNuts + '\n'
+				+ 'Wheat: ' + user.restrictions.Wheat + '\n'
+				+ 'Dairy: ' + user.restrictions.Dairy + '\n'
+				+ 'Vegetarian: ' + user.restrictions.Vegetarian + '\n'
+				+ 'Vegan: ' + user.restrictions.Vegan + '\n'
+				+ 'Age: ' + user.age + '\n'
+				+ 'Weight: ' + user.weight + '\n'
+				+ 'Height: ' + user.height + '\n'
+				+ 'Goals: ' + user.goals + '\n'
+			;
 
 		this.getClosestLocation();
+		this.saveData(user);
 
-		alert(
-			'mealPlan: ' + user.mealPlan.type + '\n'
-			+ 'TradVisits: ' + user.mealPlan.WeeklyTraditionalVisits + '\n'
-			+ 'TradVisitExch: ' + user.mealPlan.TraditionalVisitExchange + '\n'
-			+ 'DiningDollars: ' + user.mealPlan.DiningDollars + '\n'
-			+ 'BuckIDCash: ' + user.mealPlan.BuckIDCash + '\n'
-			+ 'gluten: ' + user.restrictions.Gluten + '\n'
-			+ 'shellfish: ' + user.restrictions.ShellFish + '\n'
-			+ 'eggs: ' + user.restrictions.Eggs + '\n'
-			+ 'fish: ' + user.restrictions.Fish + '\n'
-			+ 'peanuts: ' + user.restrictions.Peanuts + '\n'
-			+ 'soy: ' + user.restrictions.Soy + '\n'
-			+ 'treenuts: ' + user.restrictions.TreeNuts + '\n'
-			+ 'vegetarian: ' + user.restrictions.Vegetarian + '\n'
-			+ 'vegan: ' + user.restrictions.Vegan + '\n'
-			+ 'age: ' + user.age + '\n'
-			+ 'weight: ' + user.weight + '\n'
-			+ 'height: ' + user.height + '\n'
-			+ 'goals: ' + user.goals + '\n'
-		);
 	
 		return(
 			<View>
@@ -250,14 +228,36 @@ class UserInputGoals extends React.Component{
 					onPress={() => this.props.navigation.navigate('RestrictionInputScreen', { user })}
 					title='Restrictions'
 				/>
+				<OSUButton 
+					title='display data'
+					onPress={e => {e.preventDefault(), this.setState({showAlert: true}), this.getData(user)}}
+				/>
 				<OSUButton
-					title='Next'
+					title='Continue'
 					onPress={e => {e.preventDefault(), this.setState({animate: true}), this.SaveUserData(user)}}
 					submit = {true}
 				/>
 				<ActivityIndicator 
 					animating = {animate}
 					size = "large"
+				/>
+
+				<AwesomeAlert
+					show={showAlert}
+					showProgress={false}
+					title="User Data"
+					message = {this.message}
+					closeOnTouchOutside={true}
+					closeOnHardwareBackPress={false}
+					showConfirmButton={true}
+					confirmText="Got it!"
+					confirmButtonColor="#DD6B55"
+					onCancelPressed={() => {
+						this.setState({showAlert: false});
+					}}
+					onConfirmPressed={() => {
+						this.setState({showAlert: false});
+					}}
 				/>
 
 			</View>

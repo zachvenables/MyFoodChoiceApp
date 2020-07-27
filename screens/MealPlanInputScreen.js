@@ -67,15 +67,13 @@ class MealPlanInputScreen extends React.Component {
 				break;
 			
 		}
-		//this.handleDone(user);
 		this.value = user;
-	}
 
-	handleDone(user){
-		if(user.goals == "none"){
-			this.props.navigation.navigate('UserInputNoGoals', { user: this.value })
+		//After the selection is made, navigates the user back to the appropraite input screen
+		if(user.goals == 'none'){
+			this.props.navigation.navigate('UserInputNoGoals', { user });
 		}else{
-			this.props.navigation.navigate('UserInputGoals', { user: this.value })
+			this.props.navigation.navigate('UserInputGoals', { user });
 		}
 	}
 
@@ -85,8 +83,6 @@ class MealPlanInputScreen extends React.Component {
 		return(
 			<View>
 				<OSUPrompt prompt = 'Select Your Meal Plan'/>
-				
-
 				<OSUButton
 					title="Gray10"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Gray10", user)} }
@@ -110,11 +106,6 @@ class MealPlanInputScreen extends React.Component {
 				<OSUButton
 					title="Carmen2"
 					onPress = {e=> { e.preventDefault(); this.handlePress("Carmen2", user) } }
-				/>
-				<OSUButton
-					title="Done"
-					onPress = { e=> {e.preventDefault(); this.handleDone(user) }}
-					submit = {true}
 				/>
 			</View>
 		);

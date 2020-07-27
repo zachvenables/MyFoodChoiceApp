@@ -4,6 +4,8 @@ import {decode, encode} from 'base-64';
 
 import { ActivityIndicator, YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
 
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
 
@@ -18,24 +20,30 @@ import Colors from '../constants/Colors';
 
 class NearestFoodScreen extends React.Component {
 	
-	state = { nextState: null, locationName: null, restaurantLocation: null, animate: false }
+	state = { showAlert: false, nextState: null, locationName: null, restaurantLocation: null, animate: false }
 
 	constructor(props) {
 		super (props);
 
 		this.locationIndex = 0;
-
+		this.message = '';
 		
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
+		this.getMealPlanData = this.getMealPlanData.bind(this);
 	}
 
+	getMealPlanData(mealPlan){
+		return "Type: " + mealPlan.type + "\n" 
+				+ 'Weekly Traditional Visits: ' + mealPlan.WeeklyTraditionalVisits + '\n'
+				+ 'Traditional Visit Exchange: ' + mealPlan.TraditionalVisitExchange + '\n'
+				+ 'Dining Dollars: ' + mealPlan.DiningDollars + '\n'
+				+ 'BuckID Cash: ' + mealPlan.BuckIDCash
+	}
 
 	//-Venables
 	mealPlanCheck(user) {
-		alert(
-			'Remember to rate our app ★★★★★ on the app store!'
-		)
+		this.setState({showAlert: true});
 	}
 
 	async loadNextLocation(user){
@@ -44,8 +52,6 @@ class NearestFoodScreen extends React.Component {
 		if (!global.btoa) {  global.btoa = encode; }
 
 		if (!global.atob) { global.atob = decode; }
-
-			
 
 		//Initialize Firebase..
 		if(!firebase.apps.length){
@@ -117,12 +123,15 @@ class NearestFoodScreen extends React.Component {
 		this.state.location = location;
 		//waits for the query to finish before navigating
 		//-Venables
-		await setTimeout(() => {this.setState({animate: false}), this.forceUpdate() }, 700);
+		await setTimeout(() => {this.setState({animate: false}), this.forceUpdate() }, 1000);
 	}
 
 	render() {
 		var { user, location, nextState, restaurantLocation } = this.props.route.params;
 		const animate = this.state.animate;
+		const showAlert = this.state.showAlert;
+
+		this.message = this.getMealPlanData(user.mealPlan);
 
 		if(this.state.nextState == null){
 			this.state.nextState = nextState;
@@ -171,6 +180,23 @@ class NearestFoodScreen extends React.Component {
 			<ActivityIndicator
 				animating = {animate}
 				size = "large"
+			/>
+			<AwesomeAlert
+				show={showAlert}
+				showProgress={false}
+				title="Meal Plan Stats"
+				message = {this.message}
+				closeOnTouchOutside={true}
+				closeOnHardwareBackPress={false}
+				showConfirmButton={true}
+				confirmText="Got it!"
+				confirmButtonColor="#DD6B55"
+				onCancelPressed={() => {
+					this.setState({showAlert: false});
+				}}
+				onConfirmPressed={() => {
+					this.setState({showAlert: false});
+				}}
 			/>
 			
 		</View>

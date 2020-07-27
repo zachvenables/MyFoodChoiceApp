@@ -5,19 +5,19 @@ import { colors } from 'react-native-elements';
 const buttons = StyleSheet.create({
     container: {
         paddingHorizontal: 50,
-        paddingVertical: 2
+        paddingVertical: 1
     },
     button: {
         backgroundColor: Colors.tOSUscarlet,
         borderRadius: 10,
         paddingHorizontal: 10, 
-        paddingVertical: 15
+        paddingVertical: 10,
     },
     submitButton: {
         backgroundColor: Colors.tOSUgray,
         borderRadius: 10,
         paddingHorizontal: 10, 
-        paddingVertical: 15
+        paddingVertical: 10,
     },
     text: {
         color: Colors.tOSUwhite,
