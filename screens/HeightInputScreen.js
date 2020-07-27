@@ -42,7 +42,7 @@ class HeightInputScreen extends React.Component {
 		return(
 			<View>
 				<OSUTextBox 
-					prompt = 'Input Height'
+					prompt = 'Input Height (inches)'
 					keyboardType="numeric"
 					onChangeText = {this.handleChange}
 				/>

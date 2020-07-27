@@ -14,6 +14,7 @@ class GoalInputScreen extends React.Component {
 
 	}
 
+	//Handles the selection of a goal type
 	//-Venables
 	handlePress(goalType){
 		this.value.goals = goalType;
@@ -27,8 +28,6 @@ class GoalInputScreen extends React.Component {
 		return(
 			<View>
 				<OSUPrompt prompt = 'Goal Input Screen'/>
-				
-				
 				<OSUButton
 					title="Weight Gain"
 					onPress = {e =>{e.preventDefault(), this.handlePress('Gain')}}
