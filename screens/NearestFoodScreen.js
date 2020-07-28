@@ -14,12 +14,13 @@ import 'firebase/firestore';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 
+
 import Colors from '../constants/Colors';
 
-
+//missing a promise when checking for next location
+console.disableYellowBox = true;	
 
 class NearestFoodScreen extends React.Component {
-	
 	state = { showAlert: false, nextState: null, locationName: null, restaurantLocation: null, animate: false }
 
 	constructor(props) {
@@ -145,8 +146,7 @@ class NearestFoodScreen extends React.Component {
 
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
-			<Text>  </Text>
-			
+			<View style={{paddingTop:50}}/> 
 			<OSUPrompt prompt = {this.state.location} />
 			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
 				<ScrollView style={{width: '90%'}}>
@@ -165,13 +165,10 @@ class NearestFoodScreen extends React.Component {
 					title="Meal Plan Balance" 
 					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
 			/>
-			
 			<OSUButton 
 				title="Next Location"
 				onPress={e => {e.preventDefault(), this.setState({animate: true}), this.loadNextLocation(user)}}
 			/>
-
-
 			<OSUButton 
 				title="Get Directions"
 				onPress={e => {e.preventDefault(), this.props.navigation.navigate('DirectionScreen', { restaurantLocation })}}
