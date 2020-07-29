@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { CheckBox, Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 
+import CheckBox from '@react-native-community/checkbox';
 import { checkBoxes } from './Styles';
 
 export default function OSUCheckbox ({ option, isSelected, setSelection}) {
