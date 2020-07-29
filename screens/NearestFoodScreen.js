@@ -122,8 +122,8 @@ class NearestFoodScreen extends React.Component {
 		if(user.restrictions.Vegan){
 			snapshot = snapshot.where("restriction_vegan","==",user.restrictions.Vegan);
 		}
-		if(user.restrictions.Vegatarian){
-			snapshot = snapshot.where("restriction_vegatarian","==",user.restrictions.Vegatarian);
+		if(user.restrictions.Vegetarian){
+			snapshot = snapshot.where("restriction_vegetarian","==",user.restrictions.Vegetarian);
 		}
 		if(user.restrictions.ShellFish){
 			snapshot = snapshot.where("restriction_shellfish_free","==",user.restrictions.ShellFish);
@@ -164,13 +164,13 @@ class NearestFoodScreen extends React.Component {
 			<OSUPrompt prompt = {this.state.location} />
 			</View>			
 			<View style={{width: '100%', height: '50%', justifyContent: 'center', alignItems: 'center', borderBottomWidth: 1, borderTopWidth: 1/*, backgroundColor: Colors.tOSUwhite*/}}>
-				<ScrollView style={{width: '93%'}}>
+				<ScrollView style={{width: '100%'}}>
 					<View>
 					<Table borderStyle={{borderWidth: 1, borderColor: '#BB0000'}}>
 						<Row data={this.state.tableHead} style={{ height: 45, backgroundColor: '#BB0000'}} textStyle={{ textAlign: 'center', color: 'white', fontSize: 18, fontWeight: 'bold'}} flexArr={[2, 1]} />
 					{
 						this.state.nextState.map((item, key) =>(
-							<Row data={[item.name, item.calories]} style={{height: 35}} textStyle={{textAlign: 'center'}} flexArr={[2, 1]}/>
+							<Row key={key} data={[item.name, item.calories]} style={{height: 35}} textStyle={{textAlign: 'center'}} flexArr={[2, 1]}/>
 						))
 					}
 					</Table>
