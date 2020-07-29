@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { decode, encode } from 'base-64';
-import { ActivityIndicator, View, Modal } from 'react-native';
+import { ActivityIndicator, View, Modal, Text } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Colors from '../constants/Colors';
@@ -17,7 +17,7 @@ import OSUCheckbox from '../components/Checkbox.js'
 import OSUTextBox from '../components/TextBox.js'
 import * as firebase from 'firebase';
 import 'firebase/firestore';
-//import { Picker } from '@react-native-community/picker';
+import RNPickerSelect from 'react-native-picker-select';
 
 
 const haversine = require('haversine');
@@ -26,7 +26,8 @@ class UserInputGoals extends React.Component {
 
 	state = {
 		showAlert: false, animate: false, UserLocation: JSON.parse(global.Location).coords,
-		restrictionsVisible: false, goal: 'Maintain', mealPlan: 'none'
+		restrictionsVisible: false, goal: 'Maintain', mealPlan: 'none',
+		ageText: 0, weightText: 0, heightText: 0,
 	};
 
 	constructor(props) {
@@ -211,7 +212,6 @@ class UserInputGoals extends React.Component {
 			+ 'Weight: ' + user.weight + '\n'
 			+ 'Height: ' + user.height + '\n'
 			+ 'Goals: ' + user.goals + '\n'
-			+ restrictionsVisible
 			;
 
 		this.getClosestLocation();
@@ -222,7 +222,7 @@ class UserInputGoals extends React.Component {
 			<View>
 				<View style={{ justifyContent: "center", alignItems: "center" }}>
 					<Modal animationType='Slide' visible={restrictionsVisible} transparent={true}>
-						<View style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet,backgroundColor: Colors.tOSUgray, margin: 50, padding: 30, justifyContent: 'center' }}>
+						<View style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50, padding: 30, justifyContent: 'center' }}>
 							<OSUPrompt style={{ justifyContent: 'center' }} prompt='Select Dietary Restrictions' />
 							<OSUCheckbox
 								option='Dairy'
@@ -292,31 +292,74 @@ class UserInputGoals extends React.Component {
 
 				<OSUPrompt prompt='Please enter the following information about yourself:' />
 
-				<View style = {{marginHorizontal: 30}}>
+				<View style={{ marginHorizontal: 30 }}>
 					<OSUTextBox
 						prompt='Input Weight (pounds)'
 						keyboardType="numeric"
-						onChangeText={this.handleChange}
+						onChangeText={value => { user.weight = value }}
 					/>
 					<OSUTextBox
 						prompt='Input Age'
 						keyboardType="numeric"
-						onChangeText={this.handleChange}
+						onChangeText={value => { user.age = value }}
 					/>
 					<OSUTextBox
 						prompt='Input Height (inches)'
 						keyboardType="numeric"
-						onChangeText={this.handleChange}
+						onChangeText={value => { user.height = value }}
 					/>
 				</View>
-				<OSUButton
-					onPress={() => navigation.navigate('GoalInputScreen', { user })}
-					title='Goal'
-				/>
-				<OSUButton
-					onPress={() => this.props.navigation.navigate('MealPlanInputScreen', { user })}
-					title='Meal Plan'
-				/>
+
+				<View style={{ paddingHorizontal: 50, paddingTop: 10, PaddingBottom: 5 }}>
+					<Text style={{ paddingBottom: 5, fontSize: 24, fontWeight: 'bold' }}>Enter your Goal</Text>
+					<View style={{
+						height: 40,
+						borderColor: Colors.tOSUgray,
+						borderWidth: 2,
+						borderBottomWidth: 5,
+						borderRadius: 5,
+						marginBottom: 10
+					}}>
+						<RNPickerSelect
+							placeholder={{}}
+							style={{ color: 'black' }}
+							onValueChange={(value) => { user.goals = value }}
+							items={[
+								{ label: 'Maintain Weight', value: 'Maintain' },
+								{ label: 'Weight Gain', value: 'Gain' },
+								{ label: 'Weight Loss', value: 'Loss' }
+							]}
+						/>
+					</View>
+
+					<Text style={{ paddingBottom: 5, fontSize: 24, fontWeight: 'bold' }}>Enter your Meal Plan</Text>
+					<View style={{
+						height: 40,
+						borderColor: Colors.tOSUgray,
+						borderWidth: 2,
+						borderBottomWidth: 5,
+						borderRadius: 5,
+						marginBottom: 10,
+						fontSize: 20
+
+
+					}}>
+						<RNPickerSelect
+							placeholder={{}}
+							style={{ color: 'black' }}
+							onValueChange={(value) => { user.mealPlan.type = value }}
+							items={[
+								{ label: 'Gray10', value: 'Gray10' },
+								{ label: 'Scarlet14', value: 'Scarlet14' },
+								{ label: 'Unlimited', value: 'Unlimited' },
+								{ label: 'Declining Balance', value: 'DecliningBalance' },
+								{ label: 'Carmen1', value: 'Carmen1' },
+								{ label: 'Carmen2', value: 'Carmen2' }
+							]}
+						/>
+					</View>
+				</View>
+
 				<OSUButton
 					onPress={() => {
 						this.restrictionsModalHandler(true);

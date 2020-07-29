@@ -10,13 +10,13 @@ const buttons = StyleSheet.create({
     button: {
         backgroundColor: Colors.tOSUscarlet,
         borderRadius: 10,
-        paddingHorizontal: 10, 
+        paddingHorizontal: 10,
         paddingVertical: 6,
     },
     submitButton: {
         backgroundColor: Colors.tOSUgray,
         borderRadius: 10,
-        paddingHorizontal: 10, 
+        paddingHorizontal: 10,
         paddingVertical: 6,
     },
     text: {
@@ -28,18 +28,18 @@ const buttons = StyleSheet.create({
     }
 }),
 
-promptTexts = StyleSheet.create({
-    promptContainer: {
-        paddingTop: 20,
-        paddingHorizontal: 50,
-        paddingBottom: 2
-    },
-    promptText: {
-        color: Colors.tOSUblack,
-        fontSize: 24,
-        fontWeight: 'bold'
-    },
-}),
+    promptTexts = StyleSheet.create({
+        promptContainer: {
+            paddingTop: 20,
+            paddingHorizontal: 50,
+            paddingBottom: 2
+        },
+        promptText: {
+            color: Colors.tOSUblack,
+            fontSize: 24,
+            fontWeight: 'bold'
+        },
+    }),
 
     textBoxes = StyleSheet.create({
         container: {
