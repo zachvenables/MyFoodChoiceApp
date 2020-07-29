@@ -7,8 +7,8 @@ import { textBoxes } from './Styles';
 export default function OSUTextBox ({ prompt, keyboardType, onChangeText}) {
     return (
         <View style = {textBoxes.container}>
-            <View style = {textBoxes.promptContainer}>
-                <Text style={textBoxes.promptText}>{prompt}</Text>
+            <View >
+                <Text style={{fontWeight: 'bold'}}>{prompt}</Text>
             </View>
             <View style = {textBoxes.textBoxContainer}>
                 <TextInput 

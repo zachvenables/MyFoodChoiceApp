@@ -335,28 +335,28 @@ class UserInputGoals extends React.Component {
 					</Modal>
 				</View>
 
-				<OSUPrompt prompt='Please enter the following information about yourself:' />
-
+				<OSUPrompt prompt='Enter the following info:' />
+				<Text />
 				<View style={{ marginHorizontal: 30 }}>
 					<OSUTextBox
-						prompt='Input Weight (pounds)'
-						keyboardType="numeric"
-						onChangeText={value => { user.weight = value }}
-					/>
-					<OSUTextBox
-						prompt='Input Age'
+						prompt='Age'
 						keyboardType="numeric"
 						onChangeText={value => { user.age = value }}
 					/>
 					<OSUTextBox
-						prompt='Input Height (inches)'
+						prompt='Weight (pounds)'
+						keyboardType="numeric"
+						onChangeText={value => { user.weight = value }}
+					/>
+					<OSUTextBox
+						prompt='Height (inches)'
 						keyboardType="numeric"
 						onChangeText={value => { user.height = value }}
 					/>
 				</View>
 
 				<View style={{ paddingHorizontal: 50, paddingTop: 10, PaddingBottom: 5 }}>
-					<Text style={{ paddingBottom: 5, fontSize: 24, fontWeight: 'bold' }}>Enter your Goal</Text>
+					<Text style={{ paddingBottom: 5, fontWeight: 'bold' }}>Select your Goal</Text>
 					<View style={{
 						height: 40,
 						borderColor: Colors.tOSUgray,
@@ -377,7 +377,7 @@ class UserInputGoals extends React.Component {
 						/>
 					</View>
 
-					<Text style={{ paddingBottom: 5, fontSize: 24, fontWeight: 'bold' }}>Enter your Meal Plan</Text>
+					<Text style={{ paddingBottom: 5, fontWeight: 'bold' }}>Select Your Meal Plan</Text>
 					<View style={{
 						height: 40,
 						borderColor: Colors.tOSUgray,
@@ -391,7 +391,7 @@ class UserInputGoals extends React.Component {
 					}}>
 						<RNPickerSelect
 							placeholder={{}}
-							style={{ color: 'black' }}
+							style={{ alignText: 'center', color: 'black' }}
 							onValueChange={(value) => { this.handleMealPlanChange(value, user) }}
 							items={[
 								{ label: 'Gray10', value: 'Gray10' },
@@ -409,7 +409,7 @@ class UserInputGoals extends React.Component {
 					onPress={() => {
 						this.restrictionsModalHandler(true);
 					}}
-					title='Restrictions'
+					title='Select Restrictions'
 				/>
 				<OSUButton
 					title='display data'

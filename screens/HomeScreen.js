@@ -39,11 +39,11 @@ class HomeScreen extends React.Component {
        if (jsonUser != null){
         
          user = JSON.parse(jsonUser);
-         this.props.navigation.navigate('UserInput', { user })
+         this.props.navigation.navigate('UserInputGoals', { user })
        }
        else {
        
-        this.props.navigation.navigate('UserInput', { user })
+        this.props.navigation.navigate('UserInputGoals', { user })
       }
     } catch (e) {
         console.log(e);
