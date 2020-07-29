@@ -2,7 +2,9 @@ import * as React from 'react';
 
 import {decode, encode} from 'base-64';
 
-import { ActivityIndicator, YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
+import { StyleSheet, ActivityIndicator, YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
+
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 import AwesomeAlert from 'react-native-awesome-alerts';
 
@@ -14,13 +16,22 @@ import 'firebase/firestore';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 
+
 import Colors from '../constants/Colors';
 
-
+//missing a promise when checking for next location
+console.disableYellowBox = true;	
 
 class NearestFoodScreen extends React.Component {
+	state = { 
+		showAlert: false, 
+		nextState: null, 
+		locationName: null, 
+		restaurantLocation: null, 
+		animate: false,
+		tableHead: ['Name', 'Cal']
 	
-	state = { showAlert: false, nextState: null, locationName: null, restaurantLocation: null, animate: false }
+		}
 
 	constructor(props) {
 		super (props);
@@ -121,9 +132,12 @@ class NearestFoodScreen extends React.Component {
 
 		this.state.nextState = nextState;
 		this.state.location = location;
+
+
+
 		//waits for the query to finish before navigating
 		//-Venables
-		await setTimeout(() => {this.setState({animate: false}), this.forceUpdate() }, 1000);
+		await setTimeout(() => {this.setState({animate: false}), this.forceUpdate() }, 1200);
 	}
 
 	render() {
@@ -145,33 +159,34 @@ class NearestFoodScreen extends React.Component {
 
 		return(
 		<View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch',}}>
-			<Text>  </Text>
-			
+			<View style={{paddingTop:'6%'}}/> 
+			<View style={{paddingBottom: '9%'}}>
 			<OSUPrompt prompt = {this.state.location} />
-			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
-				<ScrollView style={{width: '90%'}}>
+			</View>			
+			<View style={{width: '100%', height: '50%', justifyContent: 'center', alignItems: 'center', borderBottomWidth: 1, borderTopWidth: 1/*, backgroundColor: Colors.tOSUwhite*/}}>
+				<ScrollView style={{width: '93%'}}>
+					<View>
+					<Table borderStyle={{borderWidth: 1, borderColor: '#BB0000'}}>
+						<Row data={this.state.tableHead} style={{ height: 45, backgroundColor: '#BB0000'}} textStyle={{ textAlign: 'center', color: 'white', fontSize: 18, fontWeight: 'bold'}} flexArr={[2, 1]} />
 					{
 						this.state.nextState.map((item, key) =>(
-							<View key={key} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
-								<Text style = {{color: Colors.tOSUscarlet, fontSize: 12}}>{item.name}     Calories: {item.calories}</Text>
-							</View>
+							<Row data={[item.name, item.calories]} style={{height: 35}} textStyle={{textAlign: 'center'}} flexArr={[2, 1]}/>
 						))
 					}
+					</Table>
+					</View>
 				</ScrollView>
 			</View>
 
-			<View style={{paddingTop:50}}/> 
+			<View style={{paddingTop:'8%'}}/> 
 			<OSUButton 
 					title="Meal Plan Balance" 
 					onPress= {e => {e.preventDefault(), this.mealPlanCheck(user)}}
 			/>
-			
 			<OSUButton 
 				title="Next Location"
 				onPress={e => {e.preventDefault(), this.setState({animate: true}), this.loadNextLocation(user)}}
 			/>
-
-
 			<OSUButton 
 				title="Get Directions"
 				onPress={e => {e.preventDefault(), this.props.navigation.navigate('DirectionScreen', { restaurantLocation })}}
@@ -215,3 +230,4 @@ class NearestFoodScreen extends React.Component {
 }
 
 export default NearestFoodScreen;
+

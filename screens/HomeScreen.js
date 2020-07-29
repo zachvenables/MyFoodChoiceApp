@@ -51,7 +51,7 @@ class HomeScreen extends React.Component {
     global.Location = this.state.location;
 
     return (
-      <View style={styles.container}>
+      <View style = {{paddingTop: 220}}>
         <Text style = {styles.text}>Welcome to OSU MyFoodChoice</Text>
        <OSUButton onPress={e => {e.preventDefault(), this.checkUserData()}} title="Enter Data" />
       </View>
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 24,
-    paddingBottom: 60
+    paddingBottom: 60,
+     paddingLeft: 20
   }
   
 });
