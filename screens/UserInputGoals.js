@@ -43,8 +43,6 @@ class UserInputGoals extends React.Component{
 			var locations = [{name: 'restaraunt_a1', latitude: 39.996768, longitude: -83.013802, distance: haversine(userLocation, {latitude: 39.996768, longitude: -83.013802})}, 
 				{name: 'restaraunt_a3', latitude: 40.004874, longitude: -83.013215, distance: haversine(userLocation, {latitude: 40.004874, longitude: -83.013215})}, 
 				{name: 'restaraunt_a4', latitude: 40.004307, longitude: -83.010929, distance: haversine(userLocation, {latitude: 40.004307, longitude: -83.010929})}, 
-				{name: 'restaraunt_a5', latitude: 39.999364, longitude: -83.018258, distance: haversine(userLocation, {latitude: 39.999364, longitude: -83.018258})}, 
-				{name: 'restaraunt_a6', latitude: 39.994172, longitude: -83014106, distance: haversine(userLocation, {latitude: 39.994172, longitude: -83014106})}, 
 				{name: 'restaraunt_a7', latitude: 39.997536, longitude: -83.014577, distance: haversine(userLocation, {latitude: 39.997536, longitude: -83.014577})}, 
 				{name: 'restaraunt_a8', latitude: 39.999948, longitude: -83.021801, distance: haversine(userLocation, {latitude: 39.999948, longitude: -83.021801})}, 
 				{name: 'restaraunt_a10', latitude: 40.002565, longitude: -83.016633, distance: haversine(userLocation, {latitude: 40.002565, longitude: -83.016633})}, 
