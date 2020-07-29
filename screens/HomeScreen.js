@@ -11,6 +11,24 @@ class HomeScreen extends React.Component {
         location: null
     };
 
+    constructor(props){
+        super (props);
+        /*
+        navigator.geolocation.getCurrentPosition(
+			position => {
+				const location = JSON.stringify(position);
+
+				this.setState({ location });
+			},
+			error => Alert.alert(error.message),
+			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+	    );
+
+        global.Location = this.state.location;
+        */
+    
+    }
+
   //If user data exists, give option to edit data or continue.
   //If no data exists, continue with user input process.  
   async checkUserData() {
@@ -46,10 +64,11 @@ class HomeScreen extends React.Component {
 			error => Alert.alert(error.message),
 			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
 	    );
-	}
+        }
+	
 
     global.Location = this.state.location;
-
+    
     return (
       <View style = {{paddingTop: 220}}>
         <Text style = {styles.text}>Welcome to OSU MyFoodChoice</Text>

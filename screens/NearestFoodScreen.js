@@ -47,7 +47,7 @@ class NearestFoodScreen extends React.Component {
 	getMealPlanData(mealPlan){
 		return "Type: " + mealPlan.type + "\n" 
 				+ 'Weekly Traditional Visits: ' + mealPlan.WeeklyTraditionalVisits + '\n'
-				+ 'Traditional Visit Exchange: ' + mealPlan.TraditionalVisitExchange + '\n'
+				+ 'Traditional Visit Exchange: ' + (mealPlan.TraditionalVisitExchange ? "Yes" : "No") + '\n'
 				+ 'Dining Dollars: ' + mealPlan.DiningDollars + '\n'
 				+ 'BuckID Cash: ' + mealPlan.BuckIDCash
 	}

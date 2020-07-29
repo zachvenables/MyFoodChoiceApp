@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { decode, encode } from 'base-64';
-import { ActivityIndicator, View, Modal, Text } from 'react-native';
+import { ScrollView, ActivityIndicator, View, Modal, Text } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import Colors from '../constants/Colors';
@@ -36,6 +36,8 @@ class UserInputGoals extends React.Component {
 		this.location;
 		this.locationStack;
 		this.message = '';
+
+		this.handleMealPlanChange = this.handleMealPlanChange.bind(this);
 
 		this.SaveUserData = this.SaveUserData.bind(this);
 		this.getData = this.getData.bind(this);
@@ -189,6 +191,55 @@ class UserInputGoals extends React.Component {
 	}
 
 
+	//fills appropraite meal plan info for each class
+	//-Venables
+	handleMealPlanChange(newPlan, user) {
+		user.mealPlan.type = newPlan;
+		switch(newPlan){
+			case "Gray10":
+				user.mealPlan.WeeklyTraditionalVisits = 10;
+				user.mealPlan.TraditionalVisitExchange = true;
+				user.mealPlan.DiningDollars = 200.0;
+				user.mealPlan.BuckIDCash = 150.0;
+				break;
+			case "Scarlet14":
+				user.mealPlan.WeeklyTraditionalVisits = 14;
+				user.mealPlan.TraditionalVisitExchange = true;
+				user.mealPlan.DiningDollars = 200.0;
+				user.mealPlan.BuckIDCash = 150.0;
+				break;
+			case "Unlimited":
+				user.mealPlan.WeeklyTraditionalVisits = 999;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 100.0;
+				user.mealPlan.BuckIDCash = 0.0;
+				break;
+			case "DecliningBalance":
+				user.mealPlan.WeeklyTraditionalVisits = 0;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 1399.0;
+				user.mealPlan.BuckIDCash = 0.0;
+				break;
+			case "Carmen1":
+				user.mealPlan.WeeklyTraditionalVisits = 0;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 284.0;
+				user.mealPlan.BuckIDCash = 0.0;
+				break;
+			case "Carmen2":
+				user.mealPlan.WeeklyTraditionalVisits = 0;
+				user.mealPlan.TraditionalVisitExchange = false;
+				user.mealPlan.DiningDollars = 0.0;
+				user.mealPlan.BuckIDCash = 150.0;
+				break;
+			default:
+				alert("Something didn't work right");
+				break;
+			
+		}
+	}
+
+
 	render() {
 		var { user } = this.props.route.params;
 		const animate = this.state.animate;
@@ -204,7 +255,6 @@ class UserInputGoals extends React.Component {
 			+ 'Peanuts: ' + (user.restrictions.Peanuts ? "Yes" : "No") + '\n'
 			+ 'Soy: ' + (user.restrictions.Soy ? "Yes" : "No") + '\n'
 			+ 'TreeNuts: ' + (user.restrictions.TreeNuts ? "Yes" : "No") + '\n'
-			+ 'Wheat: ' + (user.restrictions.Wheat ? "Yes" : "No") + '\n'
 			+ 'Dairy: ' + (user.restrictions.Dairy ? "Yes" : "No") + '\n'
 			+ 'Vegetarian: ' + (user.restrictions.Vegetarian ? "Yes" : "No") + '\n'
 			+ 'Vegan: ' + (user.restrictions.Vegan ? "Yes" : "No") + '\n'
@@ -219,7 +269,7 @@ class UserInputGoals extends React.Component {
 
 
 		return (
-			<View>
+			<ScrollView>
 				<View style={{ justifyContent: "center", alignItems: "center" }}>
 					<Modal animationType='Slide' visible={restrictionsVisible} transparent={true}>
 						<View style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50, padding: 30, justifyContent: 'center' }}>
@@ -263,11 +313,6 @@ class UserInputGoals extends React.Component {
 								option='Tree Nuts'
 								isSelected={user.restrictions.TreeNuts}
 								setSelection={value => { user.restrictions.TreeNuts = value }}
-							/>
-							<OSUCheckbox
-								option='Wheat'
-								isSelected={user.restrictions.Wheat}
-								setSelection={value => { user.restrictions.Wheat = value }}
 							/>
 							<OSUCheckbox
 								option='Vegetarian'
@@ -347,7 +392,7 @@ class UserInputGoals extends React.Component {
 						<RNPickerSelect
 							placeholder={{}}
 							style={{ color: 'black' }}
-							onValueChange={(value) => { user.mealPlan.type = value }}
+							onValueChange={(value) => { this.handleMealPlanChange(value, user) }}
 							items={[
 								{ label: 'Gray10', value: 'Gray10' },
 								{ label: 'Scarlet14', value: 'Scarlet14' },
@@ -398,7 +443,7 @@ class UserInputGoals extends React.Component {
 					}}
 				/>
 
-			</View>
+			</ScrollView>
 		);
 	}
 }
