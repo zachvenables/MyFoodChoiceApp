@@ -46,12 +46,13 @@ class NearestFoodScreen extends React.Component {
 			/>
 
 			<OSUPrompt prompt = {location} />
-			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
+			<View style={{width: '100%', height: 150, justifyContent: 'center', alignItems: 'flex-end', borderBottomWidth: 2, borderTopWidth: 2/*, backgroundColor: Colors.tOSUwhite*/}}>
 				<ScrollView style={{width: '90%'}}>
 					{
 						nextState.map((item, key) =>(
-							<View key={key} style={{width: '95%', justifyContent: 'center', alignItems: 'center'}}>
-								<Text style = {{color: Colors.tOSUscarlet, fontSize: 12}}>{item.name}     Calories: {item.calories}</Text>
+							<View key={key} style={{width: '70%', justifyContent: 'space-between', alignItems: 'flex-end', flexDirection: 'row'}}>
+								<Text style = {{color: Colors.tOSUscarlet, fontSize: 12}}>{item.name}</Text>
+								<Text style = {{color: Colors.tOSUscarlet, fontSize: 12}}>Calories: {item.calories}</Text>
 							</View>
 						))
 					}
