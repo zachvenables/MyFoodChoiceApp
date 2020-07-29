@@ -122,8 +122,8 @@ class NearestFoodScreen extends React.Component {
 		if(user.restrictions.Vegan){
 			snapshot = snapshot.where("restriction_vegan","==",user.restrictions.Vegan);
 		}
-		if(user.restrictions.Vegatarian){
-			snapshot = snapshot.where("restriction_vegatarian","==",user.restrictions.Vegatarian);
+		if(user.restrictions.Vegetarian){
+			snapshot = snapshot.where("restriction_vegetarian","==",user.restrictions.Vegetarian);
 		}
 		if(user.restrictions.ShellFish){
 			snapshot = snapshot.where("restriction_shellfish_free","==",user.restrictions.ShellFish);
