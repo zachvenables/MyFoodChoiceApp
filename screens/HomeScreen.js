@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Alert, Text, StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Location from 'expo-location';
-import OSUButton from '../components/Button.js'
+import OSUButton from '../components/Button.js';
 import User from '../User.js'
 
 class HomeScreen extends React.Component {
@@ -11,19 +11,21 @@ class HomeScreen extends React.Component {
         location: null
     };
 
-
   //If user data exists, give option to edit data or continue.
   //If no data exists, continue with user input process.  
   async checkUserData() {
+
+    var user = new User();
     try {
        const jsonUser = await AsyncStorage.getItem('userInfo');
-       if (jsonUser == null){
-         var user = new User();
+       if (jsonUser != null){
+        
          user = JSON.parse(jsonUser);
-         this.props.navigation.navigate('UserInputNoGoals', { user })
+         this.props.navigation.navigate('UserInput', { user })
        }
        else {
-        this.props.navigation.navigate('UserInput')
+       
+        this.props.navigation.navigate('UserInput', { user })
       }
     } catch (e) {
         console.log(e);
@@ -32,7 +34,8 @@ class HomeScreen extends React.Component {
 
 
   render(){  
-
+    
+    //Gets the user's location from their device and stores it as a global variable
     if(this.state.location == null){
         navigator.geolocation.getCurrentPosition(
 			position => {
@@ -48,8 +51,8 @@ class HomeScreen extends React.Component {
     global.Location = this.state.location;
 
     return (
-      <View style={styles.container}>
-      <Text>{this.state.location}</Text>
+      <View style = {{paddingTop: 220}}>
+        <Text style = {styles.text}>Welcome to OSU MyFoodChoice</Text>
        <OSUButton onPress={e => {e.preventDefault(), this.checkUserData()}} title="Enter Data" />
       </View>
   );
@@ -67,6 +70,13 @@ const styles = StyleSheet.create({
   button:{
     width: "60%"
   },
+  
+  text: {
+    fontWeight: "bold",
+    fontSize: 24,
+    paddingBottom: 60,
+     paddingLeft: 20
+  }
   
 });
 

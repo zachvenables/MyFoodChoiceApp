@@ -178,7 +178,7 @@ class RestrictionInputScreen extends React.Component {
 	//-Venables
 	
 	handleSubmit(user){
-	
+		this.value = user;
 		if(user.goals == 'none'){
 			this.props.navigation.navigate('UserInputNoGoals', { user: this.value });
 		}else{

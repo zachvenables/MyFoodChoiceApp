@@ -4,20 +4,20 @@ import { colors } from 'react-native-elements';
 
 const buttons = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingHorizontal: 50,
+        paddingVertical: 1
     },
     button: {
         backgroundColor: Colors.tOSUscarlet,
         borderRadius: 10,
-        paddingHorizontal: 10,
-        paddingVertical: 15
+        paddingHorizontal: 10, 
+        paddingVertical: 6,
     },
     submitButton: {
         backgroundColor: Colors.tOSUgray,
         borderRadius: 10,
-        paddingHorizontal: 10,
-        paddingVertical: 15
+        paddingHorizontal: 10, 
+        paddingVertical: 6,
     },
     text: {
         color: Colors.tOSUwhite,
@@ -28,24 +28,18 @@ const buttons = StyleSheet.create({
     }
 }),
 
-    promptTexts = StyleSheet.create({
-        promptContainer: {
-            paddingTop: 50,
-            paddingHorizontal: 20,
-            paddingBottom: 2,
-            alignContent: 'center',
-            alignItems: 'center', 
-            justifyContent: 'center'
-        },
-        promptText: {
-            color: Colors.tOSUblack,
-            fontSize: 28,
-            fontWeight: 'bold',
-            alignContent: 'center',
-            alignItems: 'center', 
-            justifyContent: 'center'
-        },
-    }),
+promptTexts = StyleSheet.create({
+    promptContainer: {
+        paddingTop: 20,
+        paddingHorizontal: 50,
+        paddingBottom: 2
+    },
+    promptText: {
+        color: Colors.tOSUblack,
+        fontSize: 24,
+        fontWeight: 'bold'
+    },
+}),
 
     textBoxes = StyleSheet.create({
         container: {
