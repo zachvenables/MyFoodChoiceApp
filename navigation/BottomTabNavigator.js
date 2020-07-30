@@ -39,11 +39,12 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 function getHeaderTitle(route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
+  return 'hi';
+  /*
   switch (routeName) {
     case 'Home':
       return 'Welcome to OSU MyFoodChoice App';
     case 'Links':
       return 'Links to learn more';
-  }
+  }*/
 }
