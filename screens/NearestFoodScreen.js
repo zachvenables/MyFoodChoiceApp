@@ -126,7 +126,7 @@ class NearestFoodScreen extends React.Component {
 
 		//waits for the query to finish before navigating
 		//-Venables
-		await setTimeout(() => {this.setState({animate: false}), this.state.foodList = nextState, this.forceUpdate() }, 1300);
+		await setTimeout(() => {this.setState({animate: false}), this.state.foodList = nextState, this.forceUpdate() }, 1400);
 	}
 
 
