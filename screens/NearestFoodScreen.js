@@ -1,26 +1,19 @@
 import * as React from 'react';
-
 import {decode, encode} from 'base-64';
-
 import { TouchableOpacity, StyleSheet, ActivityIndicator, YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
-
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-
 import AwesomeAlert from 'react-native-awesome-alerts';
-
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
-
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import Colors from '../constants/Colors';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
 
-
-import Colors from '../constants/Colors';
-
 //missing a promise when checking for next location
 console.disableYellowBox = true;	
+
 
 class NearestFoodScreen extends React.Component {
 	state = { 
@@ -39,14 +32,9 @@ class NearestFoodScreen extends React.Component {
 		this.locationIndex = 0;
 		this.message = '';
 
-	
-		
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
 		this.getMealPlanData = this.getMealPlanData.bind(this);
-
-
-
 	}
 
 	getMealPlanData(mealPlan){
@@ -135,7 +123,6 @@ class NearestFoodScreen extends React.Component {
 
 		//this.setState({foodList: nextState});
 		this.state.location = location;
-
 
 		//waits for the query to finish before navigating
 		//-Venables
@@ -228,10 +215,8 @@ class NearestFoodScreen extends React.Component {
 					this.setState({showAlert: false});
 				}}
 			/>
-			
 		</View>
 		);
-
 
 		const styles = StyleSheet.create({
 			container: {

@@ -19,7 +19,6 @@ import * as firebase from 'firebase';
 import 'firebase/firestore';
 import RNPickerSelect from 'react-native-picker-select';
 
-
 const haversine = require('haversine');
 
 class UserInputGoals extends React.Component {
@@ -47,7 +46,6 @@ class UserInputGoals extends React.Component {
 
 	//calculates distances to all of the dining locations to the user and then sorts them in order of shortest distance.
 	//-Venables
-
 	getClosestLocation(){
 			var userLocation = {latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude};
 
@@ -242,8 +240,8 @@ class UserInputGoals extends React.Component {
 
 	render() {
 		var { user } = this.props.route.params;
-		const animate = this.state.animate;
-		const showAlert = this.state.showAlert;
+		const animate = this.state.animate;//for activit indicator
+		const showAlert = this.state.showAlert; //for AwesomeAlert
 		const { restrictionsVisible } = this.state;
 
 		this.message =

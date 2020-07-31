@@ -13,19 +13,7 @@ class HomeScreen extends React.Component {
 
     constructor(props){
         super (props);
-        /*
-        navigator.geolocation.getCurrentPosition(
-			position => {
-				const location = JSON.stringify(position);
-
-				this.setState({ location });
-			},
-			error => Alert.alert(error.message),
-			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-	    );
-
-        global.Location = this.state.location;
-        */
+       
     
     }
 
