@@ -272,8 +272,9 @@ class UserInputGoals extends React.Component {
 			<ScrollView>
 				<View style={{ justifyContent: "center", alignItems: "center" }}>
 					<Modal animationType='Slide' visible={restrictionsVisible} transparent={true}>
-						<View style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50, padding: 30, justifyContent: 'center' }}>
-							<OSUPrompt style={{ justifyContent: 'center' }} prompt='Select Dietary Restrictions' />
+
+						<ScrollView style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50 }}>
+							<OSUPrompt  prompt='Restrictions' />
 							<OSUCheckbox
 								option='Dairy'
 								isSelected={user.restrictions.Dairy}
@@ -319,19 +320,19 @@ class UserInputGoals extends React.Component {
 								isSelected={user.restrictions.Vegetarian}
 								setSelection={value => { user.restrictions.Vegetarian = value }}
 							/>
+						
 							<OSUCheckbox
 								option='Vegan'
 								isSelected={user.restrictions.Vegan}
 								setSelection={value => { user.restrictions.Vegan = value }}
 							/>
-
 							<OSUButton
 								onPress={() => {
 									this.restrictionsModalHandler(false);
 								}}
 								title='Done'
 							/>
-						</View>
+						</ScrollView>
 					</Modal>
 				</View>
 
