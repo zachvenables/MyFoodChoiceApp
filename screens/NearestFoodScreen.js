@@ -183,6 +183,7 @@ class NearestFoodScreen extends React.Component {
 			<OSUButton 
 				title="Get Directions"
 				onPress={e => {e.preventDefault(), this.props.navigation.navigate('DirectionScreen', { restaurantLocation })}}
+				submit={true}
 			/>
 			<ActivityIndicator
 				animating = {animate}
