@@ -274,7 +274,7 @@ class UserInputGoals extends React.Component {
 					<Modal animationType='Slide' visible={restrictionsVisible} transparent={true}>
 
 						<ScrollView style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50 }}>
-							<OSUPrompt  prompt='Restrictions' />
+							<OSUPrompt  prompt='Restrictions:' />
 							<OSUCheckbox
 								option='Dairy'
 								isSelected={user.restrictions.Dairy}
@@ -424,6 +424,16 @@ class UserInputGoals extends React.Component {
 				<ActivityIndicator
 					animating={animate}
 					size="large"
+					color = 'grey'
+					style = {{
+						position: 'absolute',
+						left: 0,
+						right: 0,
+						top: '-65%',
+						bottom: 0,
+						alignItems: 'center',
+						justifyContent: 'center'
+					}}
 				/>
 
 				<AwesomeAlert

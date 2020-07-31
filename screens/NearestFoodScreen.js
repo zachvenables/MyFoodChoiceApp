@@ -46,21 +46,6 @@ class NearestFoodScreen extends React.Component {
 		this.getMealPlanData = this.getMealPlanData.bind(this);
 
 
-		this.state.tableNameSort = () => (
-			<TouchableOpacity onPress = { () => this.sortNameHeader() }>
-				
-					<Text>Name</Text>
-				
-			</TouchableOpacity>
-		);
-		
-		this.state.tableCalSort = () => (
-			<TouchableOpacity onPress = { () => this.sortCalHeader() }>
-				<View>
-					<Text>Cal</Text>
-				</View>
-			</TouchableOpacity>
-		);
 
 	}
 
@@ -157,14 +142,6 @@ class NearestFoodScreen extends React.Component {
 		await setTimeout(() => {this.setState({animate: false}), this.state.foodList = nextState, this.forceUpdate() }, 1300);
 	}
 
-	tableNameSort(){
-		alert('name pressed!');
-	}
-
-	tableCalSort(){
-		alert('cal pressed!');
-	}
-
 
 	render() {
 		var { user, location, nextState, restaurantLocation } = this.props.route.params;
@@ -223,6 +200,16 @@ class NearestFoodScreen extends React.Component {
 			<ActivityIndicator
 				animating = {animate}
 				size = "large"
+				color = 'grey'
+				style = {{
+					position: 'absolute',
+					left: 0,
+					right: 0,
+					top: '-65%',
+					bottom: 0,
+					alignItems: 'center',
+					justifyContent: 'center'
+				}}
 			/>
 			<AwesomeAlert
 				show={showAlert}
