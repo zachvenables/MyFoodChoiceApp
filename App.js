@@ -31,6 +31,8 @@ const Stack = createStackNavigator();
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
 
+  global.DirectionName = 'Directions';
+
   //console.disableYellowBox = true;
 
   if (!isLoadingComplete) {
@@ -43,16 +45,16 @@ export default function App(props) {
           <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="UserInput" component={UserInput} />
-            <Stack.Screen name="UserInputGoals" component={UserInputGoals} />
+            <Stack.Screen name="UserInputGoals" component={UserInputGoals} options={{title: "Input"}}/>
             <Stack.Screen name="WeightInputScreen" component={WeightInputScreen} />
             <Stack.Screen name="AgeInputScreen" component={AgeInputScreen} />
             <Stack.Screen name="HeightInputScreen" component={HeightInputScreen} />
             <Stack.Screen name="GoalInputScreen" component={GoalInputScreen} />
             <Stack.Screen name="MealPlanInputScreen" component={MealPlanInputScreen} />
             <Stack.Screen name="RestrictionInputScreen" component={RestrictionInputScreen} />
-            <Stack.Screen name="UserInputNoGoals" component={UserInputNoGoals} />
-            <Stack.Screen name="NearestFoodScreen" component={NearestFoodScreen} />
-            <Stack.Screen name="DirectionScreen" component={DirectionScreen} />
+            <Stack.Screen name="UserInputNoGoals" component={UserInputNoGoals} options={{title: "Input"}}/>
+            <Stack.Screen name="NearestFoodScreen" component={NearestFoodScreen} options={{title: "Closest Location"}} />
+            <Stack.Screen name="DirectionScreen" component={DirectionScreen} options={{title: global.DirectionName}} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

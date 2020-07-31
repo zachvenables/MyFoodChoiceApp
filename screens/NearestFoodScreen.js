@@ -133,6 +133,8 @@ class NearestFoodScreen extends React.Component {
 		this.state.nextState = nextState;
 		this.state.location = location;
 
+		
+
 
 
 		//waits for the query to finish before navigating
@@ -144,6 +146,9 @@ class NearestFoodScreen extends React.Component {
 		var { user, location, nextState, restaurantLocation } = this.props.route.params;
 		const animate = this.state.animate;
 		const showAlert = this.state.showAlert;
+
+		//this is updated for the direction screen header name
+		global.DirectionName = location;
 
 		this.message = this.getMealPlanData(user.mealPlan);
 

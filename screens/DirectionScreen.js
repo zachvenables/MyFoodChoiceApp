@@ -16,6 +16,9 @@ class DirectionScreen extends React.Component {
 	constructor(props){
 		super(props);
 
+		//changes the header
+		this.props.navigation.setOptions({title: global.DirectionName});
+
 		this.changeDirectionState = this.changeDirectionState.bind(this);
 	}
 
@@ -49,7 +52,6 @@ class DirectionScreen extends React.Component {
 					followUserLocation = {true}
 					zoomEnabled = {true}
 				>
-					<MapView.Marker coordinate={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude}} />
 					<MapView.Marker coordinate={{latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude}} />
 					<MapViewDirections
 						origin={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude}}
