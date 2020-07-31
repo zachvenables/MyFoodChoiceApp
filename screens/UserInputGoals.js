@@ -19,7 +19,6 @@ import * as firebase from 'firebase';
 import 'firebase/firestore';
 import RNPickerSelect from 'react-native-picker-select';
 
-
 const haversine = require('haversine');
 
 class UserInputGoals extends React.Component {
@@ -47,7 +46,6 @@ class UserInputGoals extends React.Component {
 
 	//calculates distances to all of the dining locations to the user and then sorts them in order of shortest distance.
 	//-Venables
-
 	getClosestLocation(){
 			var userLocation = {latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude};
 
@@ -242,8 +240,8 @@ class UserInputGoals extends React.Component {
 
 	render() {
 		var { user } = this.props.route.params;
-		const animate = this.state.animate;
-		const showAlert = this.state.showAlert;
+		const animate = this.state.animate;//for activit indicator
+		const showAlert = this.state.showAlert; //for AwesomeAlert
 		const { restrictionsVisible } = this.state;
 
 		this.message =
@@ -272,8 +270,9 @@ class UserInputGoals extends React.Component {
 			<ScrollView>
 				<View style={{ justifyContent: "center", alignItems: "center" }}>
 					<Modal animationType='Slide' visible={restrictionsVisible} transparent={true}>
-						<View style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50, padding: 30, justifyContent: 'center' }}>
-							<OSUPrompt style={{ justifyContent: 'center' }} prompt='Select Dietary Restrictions' />
+
+						<ScrollView style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50 }}>
+							<OSUPrompt  prompt='Restrictions:' />
 							<OSUCheckbox
 								option='Dairy'
 								isSelected={user.restrictions.Dairy}
@@ -319,19 +318,19 @@ class UserInputGoals extends React.Component {
 								isSelected={user.restrictions.Vegetarian}
 								setSelection={value => { user.restrictions.Vegetarian = value }}
 							/>
+						
 							<OSUCheckbox
 								option='Vegan'
 								isSelected={user.restrictions.Vegan}
 								setSelection={value => { user.restrictions.Vegan = value }}
 							/>
-
 							<OSUButton
 								onPress={() => {
 									this.restrictionsModalHandler(false);
 								}}
 								title='Done'
 							/>
-						</View>
+						</ScrollView>
 					</Modal>
 				</View>
 
@@ -423,6 +422,16 @@ class UserInputGoals extends React.Component {
 				<ActivityIndicator
 					animating={animate}
 					size="large"
+					color = 'grey'
+					style = {{
+						position: 'absolute',
+						left: 0,
+						right: 0,
+						top: '-65%',
+						bottom: 0,
+						alignItems: 'center',
+						justifyContent: 'center'
+					}}
 				/>
 
 				<AwesomeAlert

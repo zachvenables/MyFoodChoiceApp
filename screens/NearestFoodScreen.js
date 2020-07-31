@@ -1,31 +1,24 @@
 import * as React from 'react';
-
 import {decode, encode} from 'base-64';
-
-import { StyleSheet, ActivityIndicator, YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
-
+import { TouchableOpacity, StyleSheet, ActivityIndicator, YellowBox, ScrollView, TextInput, Button, Text, View } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-
 import AwesomeAlert from 'react-native-awesome-alerts';
-
 import OSUButton from '../components/Button.js'
 import OSUPrompt from '../components/Prompt.js'
-
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import Colors from '../constants/Colors';
 
 YellowBox.ignoreWarnings(['Setting a timer']);
-
-
-import Colors from '../constants/Colors';
 
 //missing a promise when checking for next location
 console.disableYellowBox = true;	
 
+
 class NearestFoodScreen extends React.Component {
 	state = { 
 		showAlert: false, 
-		nextState: null, 
+		foodList: null, 
 		locationName: null, 
 		restaurantLocation: null, 
 		animate: false,
@@ -38,7 +31,7 @@ class NearestFoodScreen extends React.Component {
 
 		this.locationIndex = 0;
 		this.message = '';
-		
+
 		this.mealPlanCheck = this.mealPlanCheck.bind(this);
 		this.loadNextLocation = this.loadNextLocation.bind(this);
 		this.getMealPlanData = this.getMealPlanData.bind(this);
@@ -90,9 +83,7 @@ class NearestFoodScreen extends React.Component {
 		var location = "";
 		var restaurantLocation = global.locationStack[this.locationIndex];
 		var nextState = [];
-			
 	
-
 		//Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
 		//-Venables
 		const snapshota = await database.collection('location').doc(restaurantLocation.name).get();
@@ -130,17 +121,14 @@ class NearestFoodScreen extends React.Component {
 		}
 		snapshot.get().then(snapshot => {snapshot.forEach(doc => {nextState.push({'name': doc.data().name, 'calories': doc.data().total_calories})})});
 
-		this.state.nextState = nextState;
+		//this.setState({foodList: nextState});
 		this.state.location = location;
-
-		
-
-
 
 		//waits for the query to finish before navigating
 		//-Venables
-		await setTimeout(() => {this.setState({animate: false}), this.forceUpdate() }, 1200);
+		await setTimeout(() => {this.setState({animate: false}), this.state.foodList = nextState, this.forceUpdate() }, 1300);
 	}
+
 
 	render() {
 		var { user, location, nextState, restaurantLocation } = this.props.route.params;
@@ -152,8 +140,8 @@ class NearestFoodScreen extends React.Component {
 
 		this.message = this.getMealPlanData(user.mealPlan);
 
-		if(this.state.nextState == null){
-			this.state.nextState = nextState;
+		if(this.state.foodList == null){
+			this.state.foodList = nextState;
 		}
 
 		if(this.state.location == null){
@@ -174,7 +162,7 @@ class NearestFoodScreen extends React.Component {
 					<Table borderStyle={{borderWidth: 1, borderColor: '#BB0000'}}>
 						<Row data={this.state.tableHead} style={{ height: 45, backgroundColor: '#BB0000'}} textStyle={{ textAlign: 'center', color: 'white', fontSize: 18, fontWeight: 'bold'}} flexArr={[2, 1]} />
 					{
-						this.state.nextState.map((item, key) =>(
+						this.state.foodList.map((item, key) =>(
 							<Row key={key} data={[item.name, item.calories]} style={{height: 35}} textStyle={{textAlign: 'center'}} flexArr={[2, 1]}/>
 						))
 					}
@@ -199,6 +187,16 @@ class NearestFoodScreen extends React.Component {
 			<ActivityIndicator
 				animating = {animate}
 				size = "large"
+				color = 'grey'
+				style = {{
+					position: 'absolute',
+					left: 0,
+					right: 0,
+					top: '-65%',
+					bottom: 0,
+					alignItems: 'center',
+					justifyContent: 'center'
+				}}
 			/>
 			<AwesomeAlert
 				show={showAlert}
@@ -217,10 +215,8 @@ class NearestFoodScreen extends React.Component {
 					this.setState({showAlert: false});
 				}}
 			/>
-			
 		</View>
 		);
-
 
 		const styles = StyleSheet.create({
 			container: {

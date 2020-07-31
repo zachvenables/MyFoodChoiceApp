@@ -11,8 +11,9 @@ import LinkingConfiguration from './navigation/LinkingConfiguration';
 //Screens for entire app
 //-Venables
 import Home from './screens/HomeScreen';
-import UserInput from './screens/UserInput';
+//import UserInput from './screens/UserInput';
 import UserInputGoals from './screens/UserInputGoals';
+/*
 import WeightInputScreen from './screens/WeightInputScreen';
 import AgeInputScreen from './screens/AgeInputScreen';
 import HeightInputScreen from './screens/HeightInputScreen';
@@ -20,6 +21,7 @@ import GoalInputScreen from './screens/GoalInputScreen';
 import MealPlanInputScreen from './screens/MealPlanInputScreen';
 import RestrictionInputScreen from './screens/RestrictionInputScreen';
 import UserInputNoGoals from './screens/UserInputNoGoals';
+*/
 import NearestFoodScreen from './screens/NearestFoodScreen';
 import DirectionScreen from './screens/DirectionScreen';
 
@@ -44,15 +46,10 @@ export default function App(props) {
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="UserInput" component={UserInput} />
+            
             <Stack.Screen name="UserInputGoals" component={UserInputGoals} options={{title: "Input"}}/>
-            <Stack.Screen name="WeightInputScreen" component={WeightInputScreen} />
-            <Stack.Screen name="AgeInputScreen" component={AgeInputScreen} />
-            <Stack.Screen name="HeightInputScreen" component={HeightInputScreen} />
-            <Stack.Screen name="GoalInputScreen" component={GoalInputScreen} />
-            <Stack.Screen name="MealPlanInputScreen" component={MealPlanInputScreen} />
-            <Stack.Screen name="RestrictionInputScreen" component={RestrictionInputScreen} />
-            <Stack.Screen name="UserInputNoGoals" component={UserInputNoGoals} options={{title: "Input"}}/>
+            
+            
             <Stack.Screen name="NearestFoodScreen" component={NearestFoodScreen} options={{title: "Closest Location"}} />
             <Stack.Screen name="DirectionScreen" component={DirectionScreen} options={{title: global.DirectionName}} />
           </Stack.Navigator>

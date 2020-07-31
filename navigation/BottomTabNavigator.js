@@ -4,7 +4,7 @@ import * as React from 'react';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import UserInputScreen from '../screens/UserInput';
+
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -39,12 +39,5 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 function getHeaderTitle(route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-  return 'hi';
-  /*
-  switch (routeName) {
-    case 'Home':
-      return 'Welcome to OSU MyFoodChoice App';
-    case 'Links':
-      return 'Links to learn more';
-  }*/
+  
 }

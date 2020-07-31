@@ -7,7 +7,12 @@ import MapViewDirections from 'react-native-maps-directions';
 import OSUButton from '../components/Button.js';
 import OSUPrompt from '../components/Prompt.js';
 
-//must add in key from GDrive
+/*------------------------------
+ *
+ *must add in key from GDrive
+ *
+ *------------------------------
+*/
 const GOOGLE_API_KEY = 'AIzaSyD-SLZuE9347jsoS7P8LKKffy0xFg1YEXw';
 
 class DirectionScreen extends React.Component {
@@ -34,7 +39,6 @@ class DirectionScreen extends React.Component {
 				ModeButton: "Walking"
 			});
 		}
-	
 	}
 
 	render(){

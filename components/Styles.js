@@ -30,8 +30,7 @@ const buttons = StyleSheet.create({
 
     promptTexts = StyleSheet.create({
         promptContainer: {
-            paddingTop: 20,
-            paddingHorizontal: 50,
+            alignItems: 'center',
             paddingBottom: 2
         },
         promptText: {
