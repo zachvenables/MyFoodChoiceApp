@@ -42,7 +42,33 @@ class UserInputGoals extends React.Component {
 		this.getData = this.getData.bind(this);
 		this.saveData = this.saveData.bind(this);
 		this.getClosestLocation = this.getClosestLocation.bind(this);
+		this.validCheck = this.validCheck.bind(this);
 	}
+
+
+	//input validation for text boxes
+	//-Venables
+	validCheck(user){
+		if(isNaN(user.age)){
+			alert('Error! Please enter a whole number for age.');
+			this.setState({animate: false});
+			return;
+		}
+		else if(isNaN(user.height)){
+			alert('Error! Please enter a whole number for height.');
+			this.setState({animate: false});
+			return;
+		}
+		else if(isNaN(user.weight)){
+			alert('Error! Please enter a whole number for weight.');
+			this.setState({animate: false});
+			return;
+		}
+		else{
+			this.SaveUserData(user);//save data and navigate to next screen
+		}
+	}
+
 
 	//calculates distances to all of the dining locations to the user and then sorts them in order of shortest distance.
 	//-Venables
@@ -375,7 +401,6 @@ class UserInputGoals extends React.Component {
 							]}
 						/>
 					</View>
-
 					<Text style={{ paddingBottom: 5, fontWeight: 'bold' }}>Select Your Meal Plan</Text>
 					<View style={{
 						height: 40,
@@ -385,8 +410,6 @@ class UserInputGoals extends React.Component {
 						borderRadius: 5,
 						marginBottom: 10,
 						fontSize: 20
-
-
 					}}>
 						<RNPickerSelect
 							placeholder={{}}
@@ -416,7 +439,7 @@ class UserInputGoals extends React.Component {
 				/>
 				<OSUButton
 					title='Continue'
-					onPress={e => { e.preventDefault(), this.setState({ animate: true }), this.SaveUserData(user) }}
+					onPress={e => { e.preventDefault(), this.setState({ animate: true }), this.validCheck(user) /*this.SaveUserData(user)*/ }}
 					submit={true}
 				/>
 				<ActivityIndicator
