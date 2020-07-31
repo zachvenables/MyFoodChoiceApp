@@ -151,6 +151,7 @@ class NearestFoodScreen extends React.Component {
 		//this.setState({foodList: nextState});
 		this.state.location = location;
 
+
 		//waits for the query to finish before navigating
 		//-Venables
 		await setTimeout(() => {this.setState({animate: false}), this.state.foodList = nextState, this.forceUpdate() }, 1300);
@@ -169,6 +170,9 @@ class NearestFoodScreen extends React.Component {
 		var { user, location, nextState, restaurantLocation } = this.props.route.params;
 		const animate = this.state.animate;
 		const showAlert = this.state.showAlert;
+
+		//this is updated for the direction screen header name
+		global.DirectionName = location;
 
 		this.message = this.getMealPlanData(user.mealPlan);
 
