@@ -124,6 +124,8 @@ class NearestFoodScreen extends React.Component {
 		//this.setState({foodList: nextState});
 		this.state.location = location;
 
+		global.DirectionName = location;
+
 		//waits for the query to finish before navigating
 		//-Venables
 		await setTimeout(() => {this.setState({animate: false}), this.state.foodList = nextState, this.forceUpdate() }, 1400);
@@ -136,7 +138,9 @@ class NearestFoodScreen extends React.Component {
 		const showAlert = this.state.showAlert;
 
 		//this is updated for the direction screen header name
-		global.DirectionName = location;
+		if(global.DirectionName == 'Directions'){
+			global.DirectionName = location;
+		}
 
 		this.message = this.getMealPlanData(user.mealPlan);
 
@@ -179,6 +183,10 @@ class NearestFoodScreen extends React.Component {
 			<OSUButton 
 				title="Next Location"
 				onPress={e => {e.preventDefault(), this.setState({animate: true}), this.loadNextLocation(user)}}
+			/>
+			<OSUButton 
+				title="Update Preferences"
+				onPress={e => {e.preventDefault(), this.locationIndex = 0, this.state.location = null,  this.state.foodList = null, this.props.navigation.navigate('UserInputGoals', {user})}}
 			/>
 			<OSUButton 
 				title="Get Directions"

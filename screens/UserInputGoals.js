@@ -4,7 +4,6 @@
  *At this time it also pulls from the cloud storage all of the food items associated with the closest location and then passes that to the nearestFoodScreen as well, but as a parameter.
 */
 
-
 import React from 'react';
 import { decode, encode } from 'base-64';
 import { ScrollView, ActivityIndicator, View, Modal, Text } from 'react-native';
@@ -136,9 +135,11 @@ class UserInputGoals extends React.Component {
 		//-Venables
 		const snapshota = await database.collection('location').doc(restaurantLocation.name).get();
 		location = snapshota.data().name;
+
 		//queries the data about the first restaurant ***UPDATE WHEN WE ADD GEOLOCATION***
 		//-Venables
 		var snapshot = await database.collection('location').doc(restaurantLocation.name).collection('foods');
+
 		//remove restrictions
 		if (user.restrictions.Eggs) {
 			snapshot = snapshot.where("restriction_egg_free", "==", user.restrictions.Eggs);
@@ -177,6 +178,7 @@ class UserInputGoals extends React.Component {
 
 
 	//Primarily used to display the currently saved data by the user
+	//-Venables
 	async getData() {
 		try {
 			const jsonUser = await AsyncStorage.getItem('userInfo');
@@ -268,8 +270,9 @@ class UserInputGoals extends React.Component {
 		var { user } = this.props.route.params;
 		const animate = this.state.animate;//for activit indicator
 		const showAlert = this.state.showAlert; //for AwesomeAlert
-		const { restrictionsVisible } = this.state;
+		const { restrictionsVisible } = this.state;//for modal in restriction input
 
+		//displays data that the user as entered
 		this.message =
 			'Meal Plan: ' + user.mealPlan.type + '\n'
 			+ 'Gluten: ' + (user.restrictions.Gluten ? "Yes" : "No") + '\n'
@@ -290,7 +293,6 @@ class UserInputGoals extends React.Component {
 
 		this.getClosestLocation();
 		this.saveData(user);
-
 
 		return (
 			<ScrollView>

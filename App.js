@@ -46,10 +46,7 @@ export default function App(props) {
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} />
-            
             <Stack.Screen name="UserInputGoals" component={UserInputGoals} options={{title: "Input"}}/>
-            
-            
             <Stack.Screen name="NearestFoodScreen" component={NearestFoodScreen} options={{title: "Closest Location"}} />
             <Stack.Screen name="DirectionScreen" component={DirectionScreen} options={{title: global.DirectionName}} />
           </Stack.Navigator>
