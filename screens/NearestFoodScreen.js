@@ -110,6 +110,9 @@ class NearestFoodScreen extends React.Component {
 		if(user.restrictions.TreeNuts){
 			snapshot = snapshot.where("restriction_treenut_free","==",user.restrictions.TreeNuts);
 		}
+		if(user.restrictions.Wheat){
+			snapshot = snapshot.where("restriction_wheat_free", "==", user.restrictions.Wheat);
+		}
 		if(user.restrictions.Vegan){
 			snapshot = snapshot.where("restriction_vegan","==",user.restrictions.Vegan);
 		}
@@ -138,7 +141,7 @@ class NearestFoodScreen extends React.Component {
 		const showAlert = this.state.showAlert;
 
 		//this is updated for the direction screen header name
-		if(global.DirectionName == 'Directions'){
+		if(global.DirectionName != this.state.location){
 			global.DirectionName = location;
 		}
 

@@ -27,6 +27,9 @@ class DirectionScreen extends React.Component {
 		this.changeDirectionState = this.changeDirectionState.bind(this);
 	}
 
+
+	//Used to change the mode of direction if the user has a bike
+	//-Venables
 	changeDirectionState(){
 		if(this.state.Mode == "WALKING"){
 			this.setState({
@@ -61,7 +64,7 @@ class DirectionScreen extends React.Component {
 						origin={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude}}
 						destination={{latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude}}
 						mode={mode}
-						apikey={GOOGLE_API_KEY}
+						apikey={GOOGLE_API_KEY}//MUST ENTER IN ORDER TO USE
 						strokeWidth={3}
 						strokeColor={"red"}
 					/>

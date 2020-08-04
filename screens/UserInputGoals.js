@@ -192,6 +192,9 @@ class UserInputGoals extends React.Component {
 		if (user.restrictions.TreeNuts) {
 			snapshot = snapshot.where("restriction_treenut_free", "==", user.restrictions.TreeNuts);
 		}
+		if(user.restrictions.Wheat){
+			snapshot = snapshot.where("restriction_wheat_free", "==", user.restrictions.Wheat);
+		}
 		if (user.restrictions.Vegan) {
 			snapshot = snapshot.where("restriction_vegan", "==", user.restrictions.Vegan);
 		}

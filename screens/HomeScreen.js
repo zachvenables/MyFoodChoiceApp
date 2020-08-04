@@ -45,7 +45,6 @@ class HomeScreen extends React.Component {
 
 		});
 
-
 		this.location = locations[0];
 		global.locationStack = locations;		
 	}
@@ -58,7 +57,6 @@ class HomeScreen extends React.Component {
 		if (!global.btoa) { global.btoa = encode; }
 
 		if (!global.atob) { global.atob = decode; }
-
 
 		//Initialize Firebase..
 		if (!firebase.apps.length) {
@@ -107,6 +105,9 @@ class HomeScreen extends React.Component {
 		if (user.restrictions.TreeNuts) {
 			snapshot = snapshot.where("restriction_treenut_free", "==", user.restrictions.TreeNuts);
 		}
+		if(user.restrictions.Wheat){
+			snapshot = snapshot.where("restriction_wheat_free", "==", user.restrictions.Wheat);
+		}
 		if (user.restrictions.Vegan) {
 			snapshot = snapshot.where("restriction_vegan", "==", user.restrictions.Vegan);
 		}
@@ -131,7 +132,7 @@ class HomeScreen extends React.Component {
 		var user = new User();
 		try {
 			const jsonUser = await AsyncStorage.getItem('userInfo');
-			if (jsonUser != null){
+			if (jsonUser == null){
 				
 				user = JSON.parse(jsonUser);
 				this.SaveUserData(user);
