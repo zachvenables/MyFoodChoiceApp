@@ -26,6 +26,7 @@ class UserInputGoals extends React.Component {
 		showAlert: false, animate: false, UserLocation: JSON.parse(global.Location).coords,
 		restrictionsVisible: false, goal: 'Maintain', mealPlan: 'none',
 		ageText: 0, weightText: 0, heightText: 0,
+		dairy: false, eggs: false, fish: false, gluten: false, peanuts: false, shellfish: false, soy: false, treenuts: false, wheat: false, vegetarian: false, vegan: false
 	};
 
 	constructor(props) {
@@ -42,28 +43,30 @@ class UserInputGoals extends React.Component {
 		this.saveData = this.saveData.bind(this);
 		this.getClosestLocation = this.getClosestLocation.bind(this);
 		this.validCheck = this.validCheck.bind(this);
+		this.initialRestrictions = this.initialRestrictions.bind(this);
+		this.updateRestrictions = this.updateRestrictions.bind(this);
 	}
 
 
 	//input validation for text boxes
 	//-Venables
-	validCheck(user){
-		if(isNaN(user.age)){
+	validCheck(user) {
+		if (isNaN(user.age)) {
 			alert('Error! Please enter a whole number for age.');
-			this.setState({animate: false});
+			this.setState({ animate: false });
 			return;
 		}
-		else if(isNaN(user.height)){
+		else if (isNaN(user.height)) {
 			alert('Error! Please enter a whole number for height.');
-			this.setState({animate: false});
+			this.setState({ animate: false });
 			return;
 		}
-		else if(isNaN(user.weight)){
+		else if (isNaN(user.weight)) {
 			alert('Error! Please enter a whole number for weight.');
-			this.setState({animate: false});
+			this.setState({ animate: false });
 			return;
 		}
-		else{
+		else {
 			this.SaveUserData(user);//save data and navigate to next screen
 		}
 	}
@@ -71,22 +74,22 @@ class UserInputGoals extends React.Component {
 
 	//calculates distances to all of the dining locations to the user and then sorts them in order of shortest distance.
 	//-Venables
-	getClosestLocation(){
-			var userLocation = {latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude};
+	getClosestLocation() {
+		var userLocation = { latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude };
 
-			var locations = [{name: 'restaraunt_a1', latitude: 39.996768, longitude: -83.013802, distance: haversine(userLocation, {latitude: 39.996768, longitude: -83.013802})}, 
-				{name: 'restaraunt_a3', latitude: 40.004874, longitude: -83.013215, distance: haversine(userLocation, {latitude: 40.004874, longitude: -83.013215})}, 
-				{name: 'restaraunt_a4', latitude: 40.004307, longitude: -83.010929, distance: haversine(userLocation, {latitude: 40.004307, longitude: -83.010929})}, 
-				{name: 'restaraunt_a7', latitude: 39.997536, longitude: -83.014577, distance: haversine(userLocation, {latitude: 39.997536, longitude: -83.014577})}, 
-				{name: 'restaraunt_a8', latitude: 39.999948, longitude: -83.021801, distance: haversine(userLocation, {latitude: 39.999948, longitude: -83.021801})}, 
-				{name: 'restaraunt_a10', latitude: 40.002565, longitude: -83.016633, distance: haversine(userLocation, {latitude: 40.002565, longitude: -83.016633})}, 
-				{name: 'restaraunt_a11', latitude: 40.002834, longitude: -83.016698, distance: haversine(userLocation, {latitude: 40.002834, longitude: -83.016698})}, 
-				{name: 'restaraunt_a12', latitude: 40.007038, longitude: -83.018217, distance: haversine(userLocation, {latitude: 40.007038, longitude: -83.018217})}, 
-				{name: 'restaraunt_a14', latitude: 40.000792, longitude: -83.015056, distance: haversine(userLocation, {latitude: 40.000792, longitude: -83.015056})}
-			];
+		var locations = [{ name: 'restaraunt_a1', latitude: 39.996768, longitude: -83.013802, distance: haversine(userLocation, { latitude: 39.996768, longitude: -83.013802 }) },
+		{ name: 'restaraunt_a3', latitude: 40.004874, longitude: -83.013215, distance: haversine(userLocation, { latitude: 40.004874, longitude: -83.013215 }) },
+		{ name: 'restaraunt_a4', latitude: 40.004307, longitude: -83.010929, distance: haversine(userLocation, { latitude: 40.004307, longitude: -83.010929 }) },
+		{ name: 'restaraunt_a7', latitude: 39.997536, longitude: -83.014577, distance: haversine(userLocation, { latitude: 39.997536, longitude: -83.014577 }) },
+		{ name: 'restaraunt_a8', latitude: 39.999948, longitude: -83.021801, distance: haversine(userLocation, { latitude: 39.999948, longitude: -83.021801 }) },
+		{ name: 'restaraunt_a10', latitude: 40.002565, longitude: -83.016633, distance: haversine(userLocation, { latitude: 40.002565, longitude: -83.016633 }) },
+		{ name: 'restaraunt_a11', latitude: 40.002834, longitude: -83.016698, distance: haversine(userLocation, { latitude: 40.002834, longitude: -83.016698 }) },
+		{ name: 'restaraunt_a12', latitude: 40.007038, longitude: -83.018217, distance: haversine(userLocation, { latitude: 40.007038, longitude: -83.018217 }) },
+		{ name: 'restaraunt_a14', latitude: 40.000792, longitude: -83.015056, distance: haversine(userLocation, { latitude: 40.000792, longitude: -83.015056 }) }
+		];
 
-		locations = locations.sort(function (a, b){
-			return a.distance > b.distance;	
+		locations = locations.sort(function (a, b) {
+			return a.distance > b.distance;
 
 		});
 
@@ -94,12 +97,42 @@ class UserInputGoals extends React.Component {
 		global.locationStack = locations;
 	}
 
-
+	//Modal Toggle
 	restrictionsModalHandler = (visible) => {
 		this.setState({ restrictionsVisible: visible });
 	}
 
+	//Used to swap between state and user without hooks
+	initialRestrictions(user) {
+		this.setState({
+			dairy: user.restrictions.Dairy,
+			eggs: user.restrictions.Eggs,
+			fish: user.restrictions.Fish,
+			gluten: user.restrictions.Gluten,
+			peanuts: user.restrictions.Peanuts,
+			shellfish: user.restrictions.ShellFish,
+			soy: user.restrictions.Soy,
+			treenuts: user.restrictions.TreeNuts,
+			wheat: user.restrictions.Wheat,
+			vegetarian: user.restrictions.Vegetarian,
+			vegan: user.restrictions.Vegan
+		})
+	}
 
+	//Used to swap between state and user without hooks
+	updateRestrictions(user) {
+		user.restrictions.Dairy = this.state.dairy;
+		user.restrictions.Eggs = this.state.eggs;
+		user.restrictions.Fish = this.state.fish;
+		user.restrictions.Gluten = this.state.gluten;
+		user.restrictions.Peanuts = this.state.peanuts;
+		user.restrictions.ShellFish = this.state.shellfish;
+		user.restrictions.Soy = this.state.soy;
+		user.restrictions.TreeNuts = this.state.treenuts;
+		user.restrictions.Wheat = this.state.wheat;
+		user.restrictions.Vegetarian = this.state.vegetarian;
+		user.restrictions.Vegan = this.state.vegan;
+	}
 
 
 
@@ -150,8 +183,8 @@ class UserInputGoals extends React.Component {
 		if (user.restrictions.Fish) {
 			snapshot = snapshot.where("restriction_fish_free", "==", user.restrictions.Fish);
 		}
-		if (user.restrictions.Peanut) {
-			snapshot = snapshot.where("restriction_peanut_free", "==", user.restrictions.Peanut);
+		if (user.restrictions.Peanuts) {
+			snapshot = snapshot.where("restriction_peanut_free", "==", user.restrictions.Peanuts);
 		}
 		if (user.restrictions.Soy) {
 			snapshot = snapshot.where("restriction_soy_free", "==", user.restrictions.Soy);
@@ -221,7 +254,7 @@ class UserInputGoals extends React.Component {
 	//-Venables
 	handleMealPlanChange(newPlan, user) {
 		user.mealPlan.type = newPlan;
-		switch(newPlan){
+		switch (newPlan) {
 			case "Gray10":
 				user.mealPlan.WeeklyTraditionalVisits = 10;
 				user.mealPlan.TraditionalVisitExchange = true;
@@ -261,7 +294,7 @@ class UserInputGoals extends React.Component {
 			default:
 				alert("Something didn't work right");
 				break;
-			
+
 		}
 	}
 
@@ -300,60 +333,66 @@ class UserInputGoals extends React.Component {
 					<Modal animationType='Slide' visible={restrictionsVisible} transparent={true}>
 
 						<ScrollView style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50 }}>
-							<OSUPrompt  prompt='Restrictions:' />
+							<OSUPrompt prompt='Restrictions:' />
 							<OSUCheckbox
 								option='Dairy'
-								isSelected={user.restrictions.Dairy}
-								setSelection={value => { user.restrictions.Dairy = value }}
+								isSelected={this.state.dairy}
+								setSelection={value => { this.setState({ dairy: value }) }}
 							/>
 							<OSUCheckbox
 								option='Eggs'
-								isSelected={user.restrictions.Eggs}
-								setSelection={value => { user.restrictions.Eggs = value }}
+								isSelected={this.state.eggs}
+								setSelection={value => { this.setState({ eggs: value }) }}
 							/>
 							<OSUCheckbox
 								option='Fish'
-								isSelected={user.restrictions.Fish}
-								setSelection={value => { user.restrictions.Fish = value }}
+								isSelected={this.state.fish}
+								setSelection={value => { this.setState({ fish: value }) }}
 							/>
 							<OSUCheckbox
 								option='Gluten'
-								isSelected={user.restrictions.Gluten}
-								setSelection={value => { user.restrictions.Gluten = value }}
+								isSelected={this.state.gluten}
+								setSelection={value => { this.setState({ gluten: value }) }}
 							/>
 							<OSUCheckbox
 								option='Peanuts'
-								isSelected={user.restrictions.Peanuts}
-								setSelection={value => { user.restrictions.Peanuts = value }}
+								isSelected={this.state.peanuts}
+								setSelection={value => { this.setState({ peanuts: value }) }}
 							/>
 							<OSUCheckbox
 								option='ShellFish'
-								isSelected={user.restrictions.ShellFish}
-								setSelection={value => { user.restrictions.ShellFish = value }}
+								isSelected={this.state.shellfish}
+								setSelection={value => { this.setState({ shellfish: value }) }}
 							/>
 							<OSUCheckbox
 								option='Soy'
-								isSelected={user.restrictions.Soy}
-								setSelection={value => { user.restrictions.Soy = value }}
+								isSelected={this.state.soy}
+								setSelection={value => { this.setState({ soy: value }) }}
 							/>
 							<OSUCheckbox
 								option='Tree Nuts'
-								isSelected={user.restrictions.TreeNuts}
-								setSelection={value => { user.restrictions.TreeNuts = value }}
+								isSelected={this.state.treenuts}
+								setSelection={value => { this.setState({ treenuts: value }) }}
+							/>
+							<OSUCheckbox
+								option='Wheat'
+								isSelected={this.state.wheat}
+								setSelection={value => { this.setState({ wheat: value }) }}
 							/>
 							<OSUCheckbox
 								option='Vegetarian'
-								isSelected={user.restrictions.Vegetarian}
-								setSelection={value => { user.restrictions.Vegetarian = value }}
+								isSelected={this.state.vegetarian}
+								setSelection={value => { this.setState({ vegetarian: value }) }}
 							/>
-						
 							<OSUCheckbox
 								option='Vegan'
-								isSelected={user.restrictions.Vegan}
-								setSelection={value => { user.restrictions.Vegan = value }}
+								isSelected={this.state.vegan}
+								setSelection={value => { this.setState({ vegan: value }) }}
 							/>
+
 							<OSUButton
 								onPress={() => {
+									this.updateRestrictions(user);
 									this.restrictionsModalHandler(false);
 								}}
 								title='Done'
@@ -431,6 +470,7 @@ class UserInputGoals extends React.Component {
 
 				<OSUButton
 					onPress={() => {
+						this.initialRestrictions(user),
 						this.restrictionsModalHandler(true);
 					}}
 					title='Select Restrictions'
@@ -447,8 +487,8 @@ class UserInputGoals extends React.Component {
 				<ActivityIndicator
 					animating={animate}
 					size="large"
-					color = 'grey'
-					style = {{
+					color='grey'
+					style={{
 						position: 'absolute',
 						left: 0,
 						right: 0,
