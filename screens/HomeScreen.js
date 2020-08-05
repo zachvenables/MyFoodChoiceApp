@@ -1,54 +1,55 @@
 import * as React from 'react';
-import { ActivityIndicator, Image, Alert, Text, StyleSheet, View} from 'react-native';
+import { ActivityIndicator, Image, Alert, Text, StyleSheet, View } from 'react-native';
 import { decode, encode } from 'base-64';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Location from 'expo-location';
 import OSUButton from '../components/Button.js';
 import User from '../User.js';
 import * as firebase from 'firebase';
+import Colors from '../constants/Colors';
 
 const haversine = require('haversine');
 
 class HomeScreen extends React.Component {
 
-    state = {
+	state = {
 		animate: false,
-        location: null,
-        pos: null
-    };
+		location: null,
+		pos: null
+	};
 
-    constructor(props){
-        super (props);
-     
+	constructor(props) {
+		super(props);
+
 		this.SaveUserData = this.SaveUserData.bind(this);
-        this.getClosestLocation = this.getClosestLocation.bind(this);
-    }
+		this.getClosestLocation = this.getClosestLocation.bind(this);
+	}
 
-    //calculates distances to all of the dining locations to the user and then sorts them in order of shortest distance.
+	//calculates distances to all of the dining locations to the user and then sorts them in order of shortest distance.
 	//-Venables
-	getClosestLocation(){
-			var userLocation = {latitude: this.state.pos.coords.latitude, longitude: this.state.pos.coords.longitude};
+	getClosestLocation() {
+		var userLocation = { latitude: this.state.pos.coords.latitude, longitude: this.state.pos.coords.longitude };
 
-			var locations = [{name: 'restaraunt_a1', latitude: 39.996768, longitude: -83.013802, distance: haversine(userLocation, {latitude: 39.996768, longitude: -83.013802})}, 
-				{name: 'restaraunt_a3', latitude: 40.004874, longitude: -83.013215, distance: haversine(userLocation, {latitude: 40.004874, longitude: -83.013215})}, 
-				{name: 'restaraunt_a4', latitude: 40.004307, longitude: -83.010929, distance: haversine(userLocation, {latitude: 40.004307, longitude: -83.010929})}, 
-				{name: 'restaraunt_a7', latitude: 39.997536, longitude: -83.014577, distance: haversine(userLocation, {latitude: 39.997536, longitude: -83.014577})}, 
-				{name: 'restaraunt_a8', latitude: 39.999948, longitude: -83.021801, distance: haversine(userLocation, {latitude: 39.999948, longitude: -83.021801})}, 
-				{name: 'restaraunt_a10', latitude: 40.002565, longitude: -83.016633, distance: haversine(userLocation, {latitude: 40.002565, longitude: -83.016633})}, 
-				{name: 'restaraunt_a11', latitude: 40.002834, longitude: -83.016698, distance: haversine(userLocation, {latitude: 40.002834, longitude: -83.016698})}, 
-				{name: 'restaraunt_a12', latitude: 40.007038, longitude: -83.018217, distance: haversine(userLocation, {latitude: 40.007038, longitude: -83.018217})}, 
-				{name: 'restaraunt_a14', latitude: 40.000792, longitude: -83.015056, distance: haversine(userLocation, {latitude: 40.000792, longitude: -83.015056})}
-			];
+		var locations = [{ name: 'restaraunt_a1', latitude: 39.996768, longitude: -83.013802, distance: haversine(userLocation, { latitude: 39.996768, longitude: -83.013802 }) },
+		{ name: 'restaraunt_a3', latitude: 40.004874, longitude: -83.013215, distance: haversine(userLocation, { latitude: 40.004874, longitude: -83.013215 }) },
+		{ name: 'restaraunt_a4', latitude: 40.004307, longitude: -83.010929, distance: haversine(userLocation, { latitude: 40.004307, longitude: -83.010929 }) },
+		{ name: 'restaraunt_a7', latitude: 39.997536, longitude: -83.014577, distance: haversine(userLocation, { latitude: 39.997536, longitude: -83.014577 }) },
+		{ name: 'restaraunt_a8', latitude: 39.999948, longitude: -83.021801, distance: haversine(userLocation, { latitude: 39.999948, longitude: -83.021801 }) },
+		{ name: 'restaraunt_a10', latitude: 40.002565, longitude: -83.016633, distance: haversine(userLocation, { latitude: 40.002565, longitude: -83.016633 }) },
+		{ name: 'restaraunt_a11', latitude: 40.002834, longitude: -83.016698, distance: haversine(userLocation, { latitude: 40.002834, longitude: -83.016698 }) },
+		{ name: 'restaraunt_a12', latitude: 40.007038, longitude: -83.018217, distance: haversine(userLocation, { latitude: 40.007038, longitude: -83.018217 }) },
+		{ name: 'restaraunt_a14', latitude: 40.000792, longitude: -83.015056, distance: haversine(userLocation, { latitude: 40.000792, longitude: -83.015056 }) }
+		];
 
-		locations = locations.sort(function (a, b){
-			return a.distance > b.distance;	
+		locations = locations.sort(function (a, b) {
+			return a.distance > b.distance;
 
 		});
 
 		this.location = locations[0];
-		global.locationStack = locations;		
+		global.locationStack = locations;
 	}
-    
+
 	//saves the users data, accesses the firebase, navigates to the next screen
 	//-Venables
 	async SaveUserData(user) {
@@ -76,7 +77,7 @@ class HomeScreen extends React.Component {
 		var location = "";
 		var restaurantLocation = this.location;
 		var nextState = [];
-		
+
 		//Queries the firestore for the first location name ***UPDATE WHEN WE ADD GEOLOCATION***
 		//-Venables
 		const snapshota = await database.collection('location').doc(restaurantLocation.name).get();
@@ -105,7 +106,7 @@ class HomeScreen extends React.Component {
 		if (user.restrictions.TreeNuts) {
 			snapshot = snapshot.where("restriction_treenut_free", "==", user.restrictions.TreeNuts);
 		}
-		if(user.restrictions.Wheat){
+		if (user.restrictions.Wheat) {
 			snapshot = snapshot.where("restriction_wheat_free", "==", user.restrictions.Wheat);
 		}
 		if (user.restrictions.Vegan) {
@@ -125,21 +126,21 @@ class HomeScreen extends React.Component {
 		await setTimeout(() => { this.setState({ animate: false }), this.props.navigation.navigate('NearestFoodScreen', { user, location, nextState, restaurantLocation });; }, 1500);
 	}
 
-  //If user data exists, give option to edit data or continue.
-  //If no data exists, continue with user input process.  
+	//If user data exists, give option to edit data or continue.
+	//If no data exists, continue with user input process.  
 	async checkUserData() {
 
 		var user = new User();
 		try {
 			const jsonUser = await AsyncStorage.getItem('userInfo');
-			if (jsonUser == null){
-				
+			if (jsonUser != null) {
+
 				user = JSON.parse(jsonUser);
 				this.SaveUserData(user);
 			}
 			else {
-			this.setState({animate: false});
-			this.props.navigation.navigate('UserInputGoals', { user })
+				this.setState({ animate: false });
+				this.props.navigation.navigate('UserInputGoals', { user })
 			}
 		} catch (e) {
 			console.log(e);
@@ -147,41 +148,41 @@ class HomeScreen extends React.Component {
 	}
 
 
-  render(){ 
-	const animate = this.state.animate;
-    
-    //Gets the user's location from their device and stores it as a global variable
-    if(this.state.location == null || this.state.pos == null){
-        navigator.geolocation.getCurrentPosition(
-			position => {
-				const location = JSON.stringify(position);
+	render() {
+		const animate = this.state.animate;
 
-				this.setState({ location });
-                this.setState({pos: position});
+		//Gets the user's location from their device and stores it as a global variable
+		if (this.state.location == null || this.state.pos == null) {
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					const location = JSON.stringify(position);
 
-			},
-			error => Alert.alert(error.message),
-			{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-	    );
-        }
-	 
+					this.setState({ location });
+					this.setState({ pos: position });
 
-    global.Location = this.state.location;
-    
-    return (
-        <View style={{backgroundColor: 'white', paddingBottom: 400}}>
-            <View style={{paddingTop: '40%', alignItems: 'center'}}>
-                <Image style={{ width: 150, height: 150}}source = {require('../assets/images/Logo.jpg')}/>
-            </View>
-            <View style = {{paddingTop: '5%', paddingBottom: '7%', alignItems: 'center', justifyContent: 'center'}}>
-                <Text style = {styles.text}> OSU MyFoodChoice</Text>
-            </View>
-            <OSUButton onPress={e => {e.preventDefault(), this.setState({animate: true}),this.getClosestLocation(), this.checkUserData()}} title="Begin" />
-			<ActivityIndicator
+				},
+				error => Alert.alert(error.message),
+				{ enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+			);
+		}
+
+
+		global.Location = this.state.location;
+
+		return (
+			<View style={{ backgroundColor: 'white', paddingBottom: 400 }}>
+				<View style={{ paddingTop: '40%', alignItems: 'center' }}>
+					<Image style={{ width: 150, height: 150 }} source={require('../assets/images/Logo.jpg')} />
+				</View>
+				<View style={{ paddingTop: '5%', paddingBottom: '7%', alignItems: 'center', justifyContent: 'center' }}>
+					<Text style={styles.text}> OSU MyFoodChoice</Text>
+				</View>
+				<OSUButton onPress={e => { e.preventDefault(), this.setState({ animate: true }), this.getClosestLocation(), this.checkUserData() }} title="Begin" />
+				<ActivityIndicator
 					animating={animate}
 					size="large"
-					color = 'grey'
-					style = {{
+					color={Colors.tOSUgray}
+					style={{
 						position: 'absolute',
 						left: 0,
 						right: 0,
@@ -190,23 +191,23 @@ class HomeScreen extends React.Component {
 						alignItems: 'center',
 						justifyContent: 'center'
 					}}
-			/>
-        </View>
-  );
-  }
+				/>
+			</View>
+		);
+	}
 }
 
 
 const styles = StyleSheet.create({
 
-  
-  text: {
-    fontWeight: "bold",
-    fontSize: 24,
-    paddingBottom: 5,
-     paddingLeft: 20
-  }
-  
+
+	text: {
+		fontWeight: "bold",
+		fontSize: 24,
+		paddingBottom: 5,
+		paddingLeft: 20
+	}
+
 });
 
 export default HomeScreen;

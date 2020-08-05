@@ -13,6 +13,6 @@ export default {
   noticeText: '#fff',
   tOSUscarlet: '#bb0000',
   tOSUgray: '#666666',
-  tOSUwhite: '#ffffff', 
+  tOSUwhite: '#ffffff',
   tOSUblack: '#000000'
 };

@@ -51,18 +51,18 @@ class UserInputGoals extends React.Component {
 	//input validation for text boxes
 	//-Venables
 	validCheck(user) {
-		if (isNaN(user.age)) {
-			alert('Error! Please enter a whole number for age.');
+		if (isNaN(user.age) || user.age < 0 || user.age > 120) {
+			alert('Error! Please enter a reasonable whole number for age.');
 			this.setState({ animate: false });
 			return;
 		}
-		else if (isNaN(user.height)) {
-			alert('Error! Please enter a whole number for height.');
+		else if (isNaN(user.height) || user.height < 0) {
+			alert('Error! Please enter a positive whole number for height.');
 			this.setState({ animate: false });
 			return;
 		}
-		else if (isNaN(user.weight)) {
-			alert('Error! Please enter a whole number for weight.');
+		else if (isNaN(user.weight) || user.weight < 0) {
+			alert('Error! Please enter a positive whole number for weight.');
 			this.setState({ animate: false });
 			return;
 		}
@@ -192,7 +192,7 @@ class UserInputGoals extends React.Component {
 		if (user.restrictions.TreeNuts) {
 			snapshot = snapshot.where("restriction_treenut_free", "==", user.restrictions.TreeNuts);
 		}
-		if(user.restrictions.Wheat){
+		if (user.restrictions.Wheat) {
 			snapshot = snapshot.where("restriction_wheat_free", "==", user.restrictions.Wheat);
 		}
 		if (user.restrictions.Vegan) {
@@ -319,6 +319,7 @@ class UserInputGoals extends React.Component {
 			+ 'Soy: ' + (user.restrictions.Soy ? "Yes" : "No") + '\n'
 			+ 'TreeNuts: ' + (user.restrictions.TreeNuts ? "Yes" : "No") + '\n'
 			+ 'Dairy: ' + (user.restrictions.Dairy ? "Yes" : "No") + '\n'
+			+ 'Wheat: ' + (user.restrictions.Wheat ? "Yes" : "No") + '\n'
 			+ 'Vegetarian: ' + (user.restrictions.Vegetarian ? "Yes" : "No") + '\n'
 			+ 'Vegan: ' + (user.restrictions.Vegan ? "Yes" : "No") + '\n'
 			+ 'Age: ' + user.age + '\n'
@@ -335,7 +336,7 @@ class UserInputGoals extends React.Component {
 				<View style={{ justifyContent: "center", alignItems: "center" }}>
 					<Modal animationType='Slide' visible={restrictionsVisible} transparent={true}>
 
-						<ScrollView style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50 }}>
+						<ScrollView style={{ borderRadius: 20, borderWidth: 2, borderColor: Colors.tOSUscarlet, backgroundColor: Colors.tOSUwhite, margin: 50, marginHorizontal: 70 }}>
 							<OSUPrompt prompt='Restrictions:' />
 							<OSUCheckbox
 								option='Dairy'
@@ -410,16 +411,19 @@ class UserInputGoals extends React.Component {
 					<OSUTextBox
 						prompt='Age'
 						keyboardType="numeric"
+						defaultValue={user.age.toString()}
 						onChangeText={value => { user.age = value }}
 					/>
 					<OSUTextBox
 						prompt='Weight (pounds)'
 						keyboardType="numeric"
+						defaultValue={user.weight.toString()}
 						onChangeText={value => { user.weight = value }}
 					/>
 					<OSUTextBox
 						prompt='Height (inches)'
 						keyboardType="numeric"
+						defaultValue={user.height.toString()}
 						onChangeText={value => { user.height = value }}
 					/>
 				</View>
@@ -474,7 +478,7 @@ class UserInputGoals extends React.Component {
 				<OSUButton
 					onPress={() => {
 						this.initialRestrictions(user),
-						this.restrictionsModalHandler(true);
+							this.restrictionsModalHandler(true);
 					}}
 					title='Select Restrictions'
 				/>

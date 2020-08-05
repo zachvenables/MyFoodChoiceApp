@@ -66,7 +66,7 @@ const buttons = StyleSheet.create({
     checkBoxes = StyleSheet.create({
         container: {
             flexDirection: 'row',
-            padding: 8,
+            padding: 5,
             paddingLeft: 60
         },
         text: {

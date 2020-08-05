@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
@@ -16,13 +16,13 @@ import OSUPrompt from '../components/Prompt.js';
 const GOOGLE_API_KEY = 'AIzaSyD-SLZuE9347jsoS7P8LKKffy0xFg1YEXw';
 
 class DirectionScreen extends React.Component {
-	
-	state = { ModeButton: "Walking", Mode: "WALKING", UserLocation: JSON.parse(global.Location).coords};
-	constructor(props){
+
+	state = { ModeButton: "Walking", Mode: "WALKING", UserLocation: JSON.parse(global.Location).coords };
+	constructor(props) {
 		super(props);
 
 		//changes the header
-		this.props.navigation.setOptions({title: global.DirectionName});
+		this.props.navigation.setOptions({ title: global.DirectionName });
 
 		this.changeDirectionState = this.changeDirectionState.bind(this);
 	}
@@ -30,13 +30,13 @@ class DirectionScreen extends React.Component {
 
 	//Used to change the mode of direction if the user has a bike
 	//-Venables
-	changeDirectionState(){
-		if(this.state.Mode == "WALKING"){
+	changeDirectionState() {
+		if (this.state.Mode == "WALKING") {
 			this.setState({
 				Mode: "BICYCLING",
 				ModeButton: "Cycling"
 			});
-		}else{
+		} else {
 			this.setState({
 				Mode: "WALKING",
 				ModeButton: "Walking"
@@ -44,25 +44,25 @@ class DirectionScreen extends React.Component {
 		}
 	}
 
-	render(){
+	render() {
 		var { restaurantLocation } = this.props.route.params;
 
 		var mode = this.state.Mode;
 		var modeButton = this.state.ModeButton;
 
-		return(
+		return (
 			<View>
 				<MapView
-					initialRegion={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude, latitudeDelta: Math.abs(restaurantLocation.latitude - this.state.UserLocation.latitude), longitudeDelta: Math.abs(restaurantLocation.longitude - this.state.UserLocation.longitude)}}
-					style = {{height: 400, marginTop: 80}}
-					showsUserLocation = {true}
-					followUserLocation = {true}
-					zoomEnabled = {true}
+					initialRegion={{ latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude, latitudeDelta: Math.abs(restaurantLocation.latitude - this.state.UserLocation.latitude), longitudeDelta: Math.abs(restaurantLocation.longitude - this.state.UserLocation.longitude) }}
+					style={{ height: 400, marginTop: 80 }}
+					showsUserLocation={true}
+					followUserLocation={true}
+					zoomEnabled={true}
 				>
-					<MapView.Marker coordinate={{latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude}} />
+					<MapView.Marker coordinate={{ latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude }} />
 					<MapViewDirections
-						origin={{latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude}}
-						destination={{latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude}}
+						origin={{ latitude: this.state.UserLocation.latitude, longitude: this.state.UserLocation.longitude }}
+						destination={{ latitude: restaurantLocation.latitude, longitude: restaurantLocation.longitude }}
 						mode={mode}
 						apikey={GOOGLE_API_KEY}//MUST ENTER IN ORDER TO USE
 						strokeWidth={3}
@@ -76,14 +76,14 @@ class DirectionScreen extends React.Component {
 						alignSelf: 'flex-end' //for align to right
 					}}
 				>
-					<OSUButton 
+					<OSUButton
 						title={modeButton}
-						onPress={e =>{e.preventDefault(), this.changeDirectionState()}}
+						onPress={e => { e.preventDefault(), this.changeDirectionState() }}
 					/>
 				</View>
-			
+
 			</View>
-			
+
 		);
 	}
 
